@@ -1,0 +1,56 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# AutoScript
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Automated clinical research manuscript workflows.
+
+## Installation
+
+You can install the development version of AutoScript from [GitHub](https://github.com/) with:
+
+```r
+remotes::install_github("hongconsulting/AutoScript")
+```
+
+## Example: baseline characteristics table
+
+```{r}
+library(AutoScript)
+library(survival)
+data <- survival::veteran
+table1 <- AS.basetable.create(group = data$trt - 1, name = c("Control", "Experimental"))
+table1 <- AS.basetable.linear("Age (years), mean \u00B1 SD", data$age, table1, digits.fixed = 1)
+table1 <- AS.basetable.blank("Histology:", table1)
+table1 <- AS.basetable.binary("- Non-small cell, n (%)", data$celltype != "smallcell", table1)
+table1 <- AS.basetable.binary("  - Adenocarcinoma, n (%)", data$celltype == "adeno", table1, subset.mask = data$celltype != "smallcell")
+table1 <- AS.basetable.binary("  - Squamous, n (%)", data$celltype == "squamous", table1, subset.mask = data$celltype != "smallcell")
+table1 <- AS.basetable.binary("  - Large cell, n (%)", data$celltype == "large", table1, subset.mask = data$celltype != "smallcell")
+table1 <- AS.basetable.binary("- Small cell, n (%)", data$celltype == "smallcell", table1, p.values = F)
+print(table1$table)
+```
+
+## Example: Cox regression table
+```{r}
+library(AutoScript)
+library(survival)
+data <- survival::veteran
+fit <- coxph(Surv(data$time, data$status) ~ as.factor(data$trt))
+table2 <- AS.format(fit, name = "Treatment")
+print(table2)
+```

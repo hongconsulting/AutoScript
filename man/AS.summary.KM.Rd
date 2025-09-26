@@ -2,7 +2,7 @@
 % Please edit documentation in R/AutoScript.R
 \name{AS.summary.KM}
 \alias{AS.summary.KM}
-\title{Summarize survival outcome}
+\title{Summarize Kaplan\eqn{-}Meier time-to-event outcome}
 \usage{
 AS.summary.KM(time, status, digits.fixed = 2)
 }

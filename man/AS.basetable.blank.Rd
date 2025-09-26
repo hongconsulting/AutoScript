@@ -15,8 +15,7 @@ assignments and current table structure.}
 \description{
 See Details.
 }
-\section{Details}{
-
+\details{
 \itemize{
 \item \code{AS.basetable.create}: creates a template table structure
 with headers, group sample sizes, and p-value columns for 1, 2, or 3 groups.
@@ -39,4 +38,17 @@ With 3 groups, seven possible comparisons are provided:
 \item A global likelihood-ratio test.
 }
 }
-
+\examples{
+library(AutoScript)
+library(survival)
+data <- survival::veteran
+table1 <- AS.basetable.create(group = data$trt - 1, name = c("Control", "Experimental"))
+table1 <- AS.basetable.linear("Age (years), mean \u00B1 SD", data$age, table1, digits.fixed = 1)
+table1 <- AS.basetable.blank("Histology:", table1)
+table1 <- AS.basetable.binary("- Non-small cell, n (\%)", data$celltype != "smallcell", table1)
+table1 <- AS.basetable.binary("  - Adenocarcinoma, n (\%)", data$celltype == "adeno", table1, subset.mask = data$celltype != "smallcell")
+table1 <- AS.basetable.binary("  - Squamous, n (\%)", data$celltype == "squamous", table1, subset.mask = data$celltype != "smallcell")
+table1 <- AS.basetable.binary("  - Large cell, n (\%)", data$celltype == "large", table1, subset.mask = data$celltype != "smallcell")
+table1 <- AS.basetable.binary("- Small cell, n (\%)", data$celltype == "smallcell", table1, p.values = F)
+print(table1$table)
+}

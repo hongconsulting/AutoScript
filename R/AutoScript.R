@@ -41,7 +41,6 @@ AS.rowmax <- function(input) {
 #' Converts a numeric value to a string with the specified number of
 #' significant figures, including trailing zeros. Values smaller than
 #' `threshold` are displayed as `"< threshold"`.
-#'
 #' @param x A numeric value.
 #' @param digits Number of significant figures. Default = 2.
 #' @param threshold Lower bound below which values are displayed as
@@ -106,7 +105,7 @@ AS.summary.linear <- function(x, digits.fixed = 2) {
   return(output)
 }
 
-#' Summarize survival outcome
+#' Summarize Kaplan\eqn{-}Meier time-to-event outcome
 #'
 #'Computes a string with the Kaplan\eqn{-}Meier median survival time and a 95%
 #'confidence interval based on Greenwood's variance with a log transformation.
@@ -140,39 +139,13 @@ AS.write.csv <- function(data, path) {
 
 ################################################################################
 
-#' Baseline characteristics table functions - Overview
-#'
-#' @section Details:
-#' \itemize{
-#'   \item \code{AS.basetable.create}: creates a template table structure
-#'     with headers, group sample sizes, and p-value columns for 1, 2, or 3 groups.
-#'   \item \code{AS.basetable.binary}: adds a row for a binary variable with
-#'     counts and percentages. P-values are obtained from logistic regression.
-#'   \item \code{AS.basetable.blank}: adds a blank row with a label, for separating sections.
-#'   \item \code{AS.basetable.linear}: adds a row for a continuous variable
-#'     with mean \eqn{\pm} SD. P-values are obtained from linear regression.
-#'   \item \code{AS.basetable.TTE}: adds a row for a time-to-event variable,
-#'     with Kaplan\eqn{-}Meier median and 95% confidence interval. P-values are obtained
-#'     from Cox regression.
-#' }
-#' The resulting table includes total and group-specific summaries.
-#' P-values are provided but are not always appropriate to report.
-#' With 3 groups, seven possible comparisons are provided:
-#' \itemize{
-#'   \item Each pairwise comparison: group 0 versus 1, 0 versus 2, and 1 versus 2.
-#'   \item Each group against the combination of the other two: group 0 versus 1 & 2,
-#'   1 versus 0 & 2, 2 versus 0 & 1
-#'   \item A global likelihood-ratio test.
-#' }
-#' @name AS.basetable.overview
-NULL
-
-#' Baseline characteristics table functions - Add row
+#' Baseline characteristics table functions
 #'
 #' @param basetable A list created by \code{AS.basetable.create}, containing the group
 #'   assignments and current table structure.
 #' @param subset.mask Optional logical vector used to restrict
 #'   the analysis to a subset of observations.
+#' @param p.values Logical value indicating whether to display p-values in the added row.
 #' @param digits.fixed Number of decimal places for percentages in summaries.
 #'   Default = 2.
 #' @param digits.sig Number of significant figures for p-values. Default = 2.
@@ -181,7 +154,7 @@ NULL
 #' @section Value:
 #' An updated baseline table list with a new row summarizing the added variable.
 #' The table itself can be accessed with \code{$table}.
-#' @name AS.basetable.addrow
+#' @name AS.basetable
 NULL
 
 #' Baseline characteristics table functions
@@ -195,7 +168,7 @@ NULL
 #'   \item \code{table}: a character matrix containing column headers and
 #'     sample sizes
 #' }
-#' @inheritSection AS.basetable.overview Details
+#' @template AS.basetable_common
 #' @export
 AS.basetable.create <- function(group, name = c("Group 0", "Group 1", "Group 2")) {
   output <- list()
@@ -244,15 +217,15 @@ AS.basetable.create <- function(group, name = c("Group 0", "Group 1", "Group 2")
 #' See Details.
 #' @param name A string giving the variable name to display in the first column.
 #' @param outcome Binary vector (0/1 or logical) of outcome values.
-#' @inheritParams AS.basetable.addrow
-#' @inheritSection AS.basetable.addrow Value
-#' @inheritSection AS.basetable.overview Details
+#' @inheritParams AS.basetable
+#' @inheritSection AS.basetable Value
+#' @template AS.basetable_common
 #' @export
-AS.basetable.binary <- function(name, outcome, basetable, subset.mask = NA,
+AS.basetable.binary <- function(name, outcome, basetable, subset.mask = NULL, p.values = T,
                                 digits.fixed = 2, digits.sig = 2, sig.thresh = 0.001) {
   X <- basetable$group
   y <- outcome
-  if (!setequal(subset.mask, NA)) {
+  if (!is.null(subset.mask)) {
     X <- X[subset.mask]
     y <- outcome[subset.mask]
   }
@@ -269,30 +242,34 @@ AS.basetable.binary <- function(name, outcome, basetable, subset.mask = NA,
     output$table[r, 2] <- AS.summary.binary(y, digits.fixed)
     output$table[r, 3] <- AS.summary.binary(y[X == 0], digits.fixed)
     output$table[r, 4] <- AS.summary.binary(y[X == 1], digits.fixed)
-    fit <- glm(outcome ~ as.factor(X), family = binomial)
-    output$table[r, 5] <- AS.signif(summary(fit)$coefficients[2, 4], digits.sig, sig.thresh)
+    if (p.values) {
+      fit <- glm(y ~ as.factor(X), family = binomial)
+      output$table[r, 5] <- AS.signif(summary(fit)$coefficients[2, 4], digits.sig, sig.thresh)
+    }
   } else if (max(basetable$group) == 2) {
     output$table[r, 1] <- name
     output$table[r, 2] <- AS.summary.binary(y, digits.fixed)
     output$table[r, 3] <- AS.summary.binary(y[X == 0], digits.fixed)
     output$table[r, 4] <- AS.summary.binary(y[X == 1], digits.fixed)
     output$table[r, 5] <- AS.summary.binary(y[X == 2], digits.fixed)
-    # 0 vs 1, 0 vs 2, 1 vs 2
-    fit0 <- glm(y ~ as.factor(X), family = binomial)
-    fit1 <- glm(y ~ relevel(as.factor(X), ref = "1"), family = binomial)
-    output$table[r, 6] <- AS.signif(summary(fit0)$coefficients[2, 4], digits.sig, sig.thresh)
-    output$table[r, 7] <- AS.signif(summary(fit0)$coefficients[3, 4], digits.sig, sig.thresh)
-    output$table[r, 8] <- AS.signif(summary(fit1)$coefficients[3, 4], digits.sig, sig.thresh)
-    # 0 vs 12, 1 vs 02, 2 vs 01
-    fit0x <- glm(y ~ X != 0, family = binomial)
-    fit1x <- glm(y ~ X != 1, family = binomial)
-    fit2x <- glm(y ~ X != 2, family = binomial)
-    output$table[r, 9] <- AS.signif(summary(fit0x)$coefficients[2, 4], digits.sig, sig.thresh)
-    output$table[r, 10] <- AS.signif(summary(fit1x)$coefficients[2, 4], digits.sig, sig.thresh)
-    output$table[r, 11] <- AS.signif(summary(fit2x)$coefficients[2, 4], digits.sig, sig.thresh)
-    # LR
-    fitnull <- glm(y ~ 1, family = binomial)
-    output$table[r, 12] <- AS.signif(anova(fitnull, fit0, test = "LRT")[2, 5], digits.sig, sig.thresh)
+    if (p.values) {
+      # 0 vs 1, 0 vs 2, 1 vs 2
+      fit0 <- glm(y ~ as.factor(X), family = binomial)
+      fit1 <- glm(y ~ relevel(as.factor(X), ref = "1"), family = binomial)
+      output$table[r, 6] <- AS.signif(summary(fit0)$coefficients[2, 4], digits.sig, sig.thresh)
+      output$table[r, 7] <- AS.signif(summary(fit0)$coefficients[3, 4], digits.sig, sig.thresh)
+      output$table[r, 8] <- AS.signif(summary(fit1)$coefficients[3, 4], digits.sig, sig.thresh)
+      # 0 vs 12, 1 vs 02, 2 vs 01
+      fit0x <- glm(y ~ X != 0, family = binomial)
+      fit1x <- glm(y ~ X != 1, family = binomial)
+      fit2x <- glm(y ~ X != 2, family = binomial)
+      output$table[r, 9] <- AS.signif(summary(fit0x)$coefficients[2, 4], digits.sig, sig.thresh)
+      output$table[r, 10] <- AS.signif(summary(fit1x)$coefficients[2, 4], digits.sig, sig.thresh)
+      output$table[r, 11] <- AS.signif(summary(fit2x)$coefficients[2, 4], digits.sig, sig.thresh)
+      # LR
+      fitnull <- glm(y ~ 1, family = binomial)
+      output$table[r, 12] <- AS.signif(anova(fitnull, fit0, test = "LRT")[2, 5], digits.sig, sig.thresh)
+    }
   } else {stop("[AS.basetable.binary] must have 1, 2, or 3 groups")}
   return(output)
 }
@@ -303,7 +280,7 @@ AS.basetable.binary <- function(name, outcome, basetable, subset.mask = NA,
 #' @param text A string giving the custom text to display in the first column.
 #' @param basetable A list created by \code{AS.basetable.create}, containing the group
 #'   assignments and current table structure.
-#' @inheritSection AS.basetable.overview Details
+#' @template AS.basetable_common
 #' @export
 AS.basetable.blank <- function(text, basetable) {
   X <- basetable$group
@@ -319,15 +296,15 @@ AS.basetable.blank <- function(text, basetable) {
 #' See Details.
 #' @param name A string giving the variable name to display in the first column.
 #' @param outcome Numeric vector of continuous outcome values.
-#' @inheritParams AS.basetable.addrow
-#' @inheritSection AS.basetable.addrow Value
-#' @inheritSection AS.basetable.overview Details
+#' @inheritParams AS.basetable
+#' @inheritSection AS.basetable Value
+#' @template AS.basetable_common
 #' @export
-AS.basetable.linear <- function(name, outcome, basetable, subset.mask = NA,
+AS.basetable.linear <- function(name, outcome, basetable, subset.mask = NULL, p.values = T,
                                 digits.fixed = 2, digits.sig = 2, sig.thresh = 0.001) {
   X <- basetable$group
   y <- outcome
-  if (!setequal(subset.mask, NA)) {
+  if (!is.null(subset.mask)) {
     X <- X[subset.mask]
     y <- y[subset.mask]
   }
@@ -344,30 +321,34 @@ AS.basetable.linear <- function(name, outcome, basetable, subset.mask = NA,
     output$table[r, 2] <- AS.summary.linear(y, digits.fixed)
     output$table[r, 3] <- AS.summary.linear(y[X == 0], digits.fixed)
     output$table[r, 4] <- AS.summary.linear(y[X == 1], digits.fixed)
-    fit <- glm(y ~ as.factor(X))
-    output$table[r, 5] <- AS.signif(summary(fit)$coefficients[2, 4], digits.sig, sig.thresh)
+    if (p.values) {
+      fit <- glm(y ~ as.factor(X))
+      output$table[r, 5] <- AS.signif(summary(fit)$coefficients[2, 4], digits.sig, sig.thresh)
+    }
   } else if (max(basetable$group) == 2) {
     output$table[r, 1] <- name
     output$table[r, 2] <- AS.summary.linear(y, digits.fixed)
     output$table[r, 3] <- AS.summary.linear(y[X == 0], digits.fixed)
     output$table[r, 4] <- AS.summary.linear(y[X == 1], digits.fixed)
     output$table[r, 5] <- AS.summary.linear(y[X == 2], digits.fixed)
-    # 0 vs 1, 0 vs 2, 1 vs 2
-    fit0 <- glm(y ~ as.factor(X))
-    fit1 <- glm(y ~ relevel(as.factor(X), ref = "1"))
-    output$table[r, 6] <- AS.signif(summary(fit0)$coefficients[2, 4], digits.sig, sig.thresh)
-    output$table[r, 7] <- AS.signif(summary(fit0)$coefficients[3, 4], digits.sig, sig.thresh)
-    output$table[r, 8] <- AS.signif(summary(fit1)$coefficients[3, 4], digits.sig, sig.thresh)
-    # 0 vs 12, 1 vs 02, 2 vs 01
-    fit0x <- glm(y ~ X != 0)
-    fit1x <- glm(y ~ X != 1)
-    fit2x <- glm(y ~ X != 2)
-    output$table[r, 9] <- AS.signif(summary(fit0x)$coefficients[2, 4], digits.sig, sig.thresh)
-    output$table[r, 10] <- AS.signif(summary(fit1x)$coefficients[2, 4], digits.sig, sig.thresh)
-    output$table[r, 11] <- AS.signif(summary(fit2x)$coefficients[2, 4], digits.sig, sig.thresh)
-    # LR
-    fitnull <- glm(outcome ~ 1)
-    output$table[r, 12] <- AS.signif(anova(fitnull, fit0, test = "LRT")[2, 5], digits.sig, sig.thresh)
+    if (p.values) {
+      # 0 vs 1, 0 vs 2, 1 vs 2
+      fit0 <- glm(y ~ as.factor(X))
+      fit1 <- glm(y ~ relevel(as.factor(X), ref = "1"))
+      output$table[r, 6] <- AS.signif(summary(fit0)$coefficients[2, 4], digits.sig, sig.thresh)
+      output$table[r, 7] <- AS.signif(summary(fit0)$coefficients[3, 4], digits.sig, sig.thresh)
+      output$table[r, 8] <- AS.signif(summary(fit1)$coefficients[3, 4], digits.sig, sig.thresh)
+      # 0 vs 12, 1 vs 02, 2 vs 01
+      fit0x <- glm(y ~ X != 0)
+      fit1x <- glm(y ~ X != 1)
+      fit2x <- glm(y ~ X != 2)
+      output$table[r, 9] <- AS.signif(summary(fit0x)$coefficients[2, 4], digits.sig, sig.thresh)
+      output$table[r, 10] <- AS.signif(summary(fit1x)$coefficients[2, 4], digits.sig, sig.thresh)
+      output$table[r, 11] <- AS.signif(summary(fit2x)$coefficients[2, 4], digits.sig, sig.thresh)
+      # LR
+      fitnull <- glm(outcome ~ 1)
+      output$table[r, 12] <- AS.signif(anova(fitnull, fit0, test = "LRT")[2, 5], digits.sig, sig.thresh)
+    }
   } else {stop("[AS.basetable.linear] must have 1, 2, or 3 groups")}
   return(output)
 }
@@ -378,14 +359,14 @@ AS.basetable.linear <- function(name, outcome, basetable, subset.mask = NA,
 #' @param name A string giving the variable name to display in the first column.
 #' @param time Numeric vector of follow-up times.
 #' @param status Binary vector indicating event occurrence (1 = event, 0 = censored).
-#' @inheritParams AS.basetable.addrow
-#' @inheritSection AS.basetable.addrow Value
-#' @inheritSection AS.basetable.overview Details
+#' @inheritParams AS.basetable
+#' @inheritSection AS.basetable Value
+#' @template AS.basetable_common
 #' @export
-AS.basetable.TTE <- function(name, time, status, basetable, subset.mask = NA,
+AS.basetable.TTE <- function(name, time, status, basetable, subset.mask = NULL, p.values = T,
                              digits.fixed = 2, digits.sig = 2, sig.thresh = 0.001) {
   X <- basetable$group
-  if (!setequal(subset.mask, NA)) {
+  if (!is.null(subset.mask)) {
     X <- X[subset.mask]
     time <- time[subset.mask]
     status <- status[subset.mask]
@@ -401,19 +382,62 @@ AS.basetable.TTE <- function(name, time, status, basetable, subset.mask = NA,
     output$table[r, 1] <- name
     output$table[r, 2] <- AS.summary.KM(time, status, digits.fixed)
   } else if (max(basetable$group) == 1) {
-    stop("[AS.basetable.TTE] not implemented")
+    output$table[r, 1] <- name
+    output$table[r, 2] <- AS.summary.KM(time, status, digits.fixed)
+    output$table[r, 3] <- AS.summary.KM(time[X == 0], status[X == 0], digits.fixed)
+    output$table[r, 4] <- AS.summary.KM(time[X == 1], status[X == 1], digits.fixed)
+    if (p.values) {
+      fit <- coxph(Surv(time, status) ~ as.factor(X))
+      output$table[r, 5] <- AS.signif(summary(fit)$coefficients[5], digits.sig, sig.thresh)
+    }
   } else if (max(basetable$group) == 2) {
-    stop("[AS.basetable.TTE] not implemented")
+    output$table[r, 1] <- name
+    output$table[r, 2] <- AS.summary.KM(time, status, digits.fixed)
+    output$table[r, 3] <- AS.summary.KM(time[X == 0], status[X == 0], digits.fixed)
+    output$table[r, 4] <- AS.summary.KM(time[X == 1], status[X == 1], digits.fixed)
+    output$table[r, 5] <- AS.summary.KM(time[X == 2], status[X == 2], digits.fixed)
+    if (p.values) {
+      # 0 vs 1, 0 vs 2, 1 vs 2
+      fit0 <- coxph(Surv(time, status) ~ as.factor(X))
+      fit1 <- coxph(Surv(time, status) ~ relevel(as.factor(X), ref = "1"))
+      output$table[r, 6] <- AS.signif(summary(fit0)$coefficients[1, 5], digits.sig, sig.thresh)
+      output$table[r, 7] <- AS.signif(summary(fit0)$coefficients[2, 5], digits.sig, sig.thresh)
+      output$table[r, 8] <- AS.signif(summary(fit1)$coefficients[2, 5], digits.sig, sig.thresh)
+      # 0 vs 12, 1 vs 02, 2 vs 01
+      fit0x <- coxph(Surv(time, status) ~ X != 0)
+      fit1x <- coxph(Surv(time, status) ~ X != 1)
+      fit2x <- coxph(Surv(time, status) ~ X != 2)
+      output$table[r, 9] <- AS.signif(summary(fit0x)$coefficients[5], digits.sig, sig.thresh)
+      output$table[r, 10] <- AS.signif(summary(fit1x)$coefficients[5], digits.sig, sig.thresh)
+      output$table[r, 11] <- AS.signif(summary(fit2x)$coefficients[5], digits.sig, sig.thresh)
+      # LR
+      fitnull <- coxph(Surv(time, status) ~ 1)
+      output$table[r, 12] <- AS.signif(anova(fitnull, fit0, test = "LRT")[2, 4], digits.sig, sig.thresh)
+    }
   } else {stop("[AS.basetable.TTE] must have 1, 2, or 3 groups")}
   return(output)
 }
 
 ################################################################################
 
-AS.format <- function(fit) {
+#' Format regression results into manuscript-ready tables
+#'
+#' @param fit A fitted object of class \code{coxph}, \code{glm} (not yet implemented),
+#' or \code{lm} (not yet implemented).
+#' @param name Optional string vector of variable names.
+#' @return A character matrix representing a manuscript-ready table.
+#' @examples
+#' library(AutoScript)
+#' library(survival)
+#' data <- survival::veteran
+#' fit <- coxph(Surv(data$time, data$status) ~ as.factor(data$trt))
+#' table2 <- AS.format(fit, name = "Treatment")
+#' print(table2)
+#' @export
+AS.format <- function(fit, name = NULL) {
   if (inherits(fit, "coxph")) {
     summ <- summary(fit)$coefficients
-    names <- rownames(summary(fit)$coefficients)
+    if (is.null(name)) name <- rownames(summary(fit)$coefficients)
     beta <- summ[, 1]
     SE <- summ[, 3]
     p <- summ[, 5]
@@ -423,7 +447,7 @@ AS.format <- function(fit) {
     output[1, 2] <- "HR (95%CI)"
     output[1, 3] <- "p"
     for (i in 1:length(beta)) {
-      output[1 + i, 1] <- names[i]
+      output[1 + i, 1] <- name[i]
       output[1 + i, 2] <- paste0(AS.fixdec(exp(beta[i])), " (", AS.fixdec(exp(LL[i])),  " to ", AS.fixdec(exp(UL[i])), ")")
       output[1 + i, 3] <- AS.signif(p[i])
     }

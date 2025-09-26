@@ -8,7 +8,8 @@ AS.basetable.linear(
   name,
   outcome,
   basetable,
-  subset.mask = NA,
+  subset.mask = NULL,
+  p.values = T,
   digits.fixed = 2,
   digits.sig = 2,
   sig.thresh = 0.001
@@ -25,6 +26,8 @@ assignments and current table structure.}
 \item{subset.mask}{Optional logical vector used to restrict
 the analysis to a subset of observations.}
 
+\item{p.values}{Logical value indicating whether to display p-values in the added row.}
+
 \item{digits.fixed}{Number of decimal places for percentages in summaries.
 Default = 2.}
 
@@ -36,14 +39,7 @@ Default = 2.}
 \description{
 See Details.
 }
-\section{Value}{
-
-An updated baseline table list with a new row summarizing the added variable.
-The table itself can be accessed with \code{$table}.
-}
-
-\section{Details}{
-
+\details{
 \itemize{
 \item \code{AS.basetable.create}: creates a template table structure
 with headers, group sample sizes, and p-value columns for 1, 2, or 3 groups.
@@ -66,4 +62,23 @@ With 3 groups, seven possible comparisons are provided:
 \item A global likelihood-ratio test.
 }
 }
+\section{Value}{
 
+An updated baseline table list with a new row summarizing the added variable.
+The table itself can be accessed with \code{$table}.
+}
+
+\examples{
+library(AutoScript)
+library(survival)
+data <- survival::veteran
+table1 <- AS.basetable.create(group = data$trt - 1, name = c("Control", "Experimental"))
+table1 <- AS.basetable.linear("Age (years), mean \u00B1 SD", data$age, table1, digits.fixed = 1)
+table1 <- AS.basetable.blank("Histology:", table1)
+table1 <- AS.basetable.binary("- Non-small cell, n (\%)", data$celltype != "smallcell", table1)
+table1 <- AS.basetable.binary("  - Adenocarcinoma, n (\%)", data$celltype == "adeno", table1, subset.mask = data$celltype != "smallcell")
+table1 <- AS.basetable.binary("  - Squamous, n (\%)", data$celltype == "squamous", table1, subset.mask = data$celltype != "smallcell")
+table1 <- AS.basetable.binary("  - Large cell, n (\%)", data$celltype == "large", table1, subset.mask = data$celltype != "smallcell")
+table1 <- AS.basetable.binary("- Small cell, n (\%)", data$celltype == "smallcell", table1, p.values = F)
+print(table1$table)
+}
