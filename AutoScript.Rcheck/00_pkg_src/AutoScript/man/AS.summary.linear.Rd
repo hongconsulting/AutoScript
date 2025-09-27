@@ -12,9 +12,9 @@ AS.summary.linear(x, digits.fixed = 2)
 \item{digits.fixed}{Number of decimal places. Default = 2.}
 }
 \value{
-A string of the form \verb{"}mean \eqn{\pm} SD\verb{"}.
+A string of the form \verb{"}mean \eqn{\pm} sd\verb{"}.
 }
 \description{
 Computes a string with the mean and standard deviation in the form
-\verb{"}mean \eqn{\pm} SD\verb{"}.
+\verb{"}mean \eqn{\pm} sd\verb{"}.
 }

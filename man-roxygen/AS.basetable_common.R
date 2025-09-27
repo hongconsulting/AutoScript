@@ -9,6 +9,9 @@
 #'   \item \code{AS.basetable.blank}: adds a blank row with a label, for separating sections.
 #'   \item \code{AS.basetable.linear}: adds a row for a continuous variable
 #'     with mean \eqn{\pm} SD. P-values are obtained from linear regression.
+#'   \item \code{AS.basetable.loglinear}: adds a row for a log-transformed continuous variable
+#'     with geometric mean \eqn{\pm} geometric SD. P-values are obtained from linear
+#'     regression on the log-transformed outcome.
 #'   \item \code{AS.basetable.TTE}: adds a row for a time-to-event variable,
 #'     with Kaplan\eqn{-}Meier median and 95% confidence interval. P-values are obtained
 #'     from Cox regression.
@@ -26,12 +29,25 @@
 #' library(AutoScript)
 #' library(survival)
 #' data <- survival::veteran
-#' table1 <- AS.basetable.create(group = data$trt - 1, name = c("Control", "Experimental"))
-#' table1 <- AS.basetable.linear("Age (years), mean \u00B1 SD", data$age, table1, digits.fixed = 1)
+#' table1 <- AS.basetable.create(group = data$trt - 1,
+#'                               name = c("Control", "Experimental"))
+#' table1 <- AS.basetable.linear("Age (years), mean \u00B1 SD", data$age,
+#'                               table1, digits.fixed = 1)
+#' table1 <- AS.basetable.loglinear("Time from diagnosis (months), mean \u00B1 SD",
+#'                                  data$diagtime, table1)
 #' table1 <- AS.basetable.blank("Histology:", table1)
-#' table1 <- AS.basetable.binary("- Non-small cell, n (%)", data$celltype != "smallcell", table1)
-#' table1 <- AS.basetable.binary("  - Adenocarcinoma, n (%)", data$celltype == "adeno", table1, subset.mask = data$celltype != "smallcell")
-#' table1 <- AS.basetable.binary("  - Squamous, n (%)", data$celltype == "squamous", table1, subset.mask = data$celltype != "smallcell")
-#' table1 <- AS.basetable.binary("  - Large cell, n (%)", data$celltype == "large", table1, subset.mask = data$celltype != "smallcell")
-#' table1 <- AS.basetable.binary("- Small cell, n (%)", data$celltype == "smallcell", table1, p.values = F)
+#' table1 <- AS.basetable.binary("- Non-small cell, n (%)",
+#'                               data$celltype != "smallcell", table1)
+#' table1 <- AS.basetable.binary("  - Adenocarcinoma, n (%)",
+#'                               data$celltype == "adeno", table1,
+#'                               subset.mask = data$celltype != "smallcell")
+#' table1 <- AS.basetable.binary("  - Squamous, n (%)",
+#'                               data$celltype == "squamous", table1,
+#'                               subset.mask = data$celltype != "smallcell")
+#' table1 <- AS.basetable.binary("  - Large cell, n (%)",
+#'                               data$celltype == "large", table1,
+#'                               subset.mask = data$celltype != "smallcell")
+#' table1 <- AS.basetable.binary("- Small cell, n (%)",
+#'                               data$celltype == "smallcell", table1,
+#'                               p.values = FALSE)
 #' print(table1$table)

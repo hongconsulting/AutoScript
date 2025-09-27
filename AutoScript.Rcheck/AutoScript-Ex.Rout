@@ -1,0 +1,61 @@
+
+R version 4.5.0 (2025-04-11) -- "How About a Twenty-Six"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "AutoScript"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('AutoScript')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("AS.basetable.TTE")
+> ### * AS.basetable.TTE
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: AS.basetable.TTE
+> ### Title: Baseline characteristics table functions
+> ### Aliases: AS.basetable.TTE
+> 
+> ### ** Examples
+> 
+> library(AutoScript)
+> library(survival)
+> data <- survival::veteran
+> table1 <- AS.basetable.create(group = data$trt - 1,
++                               name = c("Control", "Experimental"))
+> table1 <- AS.basetable.linear("Age (years), mean \u00B1 SD", data$age,
++                               table1, digits.fixed = 1)
+> table1 <- AS.basetable.blank("Histology:", table1)
+> table1 <- AS.basetable.binary("- Non-small cell, n (%)",
++                               data$celltype != "smallcell", table1)
+> table1 <- AS.basetable.binary("  - Adenocarcinoma, n (%)",
++                               data$celltype == "adeno", table1,
++                               subset.mask = data$celltype != "smallcell")
+> table1 <- AS.basetable.binary("  - Squamous, n (%)",
++                               data$celltype == "squamous", table1,
++                               subset.mask = data$celltype != "smallcell")
+> table1 <- AS.basetable.binary("  - Large cell, n (%)",
++                               data$celltype == "large", table1,
++                               subset.mask = data$celltype != "smallcell")
+> table1 <- AS.basetable.binary("- Small cell, n (%)",
++                               data$celltype == "smallcell", table1,
++                               p.values = F)
+Error in AS.basetable.binary("- Small cell, n (%)", data$celltype == "smallcell",  : 
+  F used instead of FALSE
+Execution halted
