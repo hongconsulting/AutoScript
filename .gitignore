@@ -4,5 +4,6 @@
 .httr-oauth
 .DS_Store
 .quarto
-*.Rproj
 *.html
+*.Rproj
+*.tar.gz
