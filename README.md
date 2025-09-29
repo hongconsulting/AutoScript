@@ -80,7 +80,7 @@ data <- survival::veteran
 data$landmark <- NA
 data$landmark[data$time <= 183 & data$status == 1] <- 0
 data$landmark[data$time > 183] <- 1
-fit <- glm(data$landmark ~ as.factor(data$trt), family="binomial")
+fit <- glm(data$landmark ~ as.factor(data$trt), family = "binomial")
 table2 <- AS.format(fit, name = c("(Intercept)", "Treatment"))
 print(table2)
 #>      [,1]          [,2]                  [,3]     
