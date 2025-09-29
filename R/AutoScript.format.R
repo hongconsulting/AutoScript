@@ -18,16 +18,8 @@ AS.format <- function(fit, name = NULL) {
     beta <- summ[, 1]
     SE <- summ[, 3]
     p <- summ[, 5]
-    LL <- beta - stats::qnorm(0.975) * SE
-    UL <- beta + stats::qnorm(0.975) * SE
-    output <- matrix("", ncol = 3, nrow = length(beta) + 1)
-    output[1, 2] <- "HR (95%CI)"
-    output[1, 3] <- "p"
-    for (i in 1:length(beta)) {
-      output[1 + i, 1] <- name[i]
-      output[1 + i, 2] <- paste0(AS.fixdec(exp(beta[i])), " (", AS.fixdec(exp(LL[i])),  " to ", AS.fixdec(exp(UL[i])), ")")
-      output[1 + i, 3] <- AS.signif(p[i])
-    }
+    b.title <- "HR (95%CI)"
+    f <- exp
   } else if (inherits(fit, "glm")) {
     if (stats::family(fit)$family == "binomial" & stats::family(fit)$link == "logit") {
       # logistic regression
@@ -36,16 +28,8 @@ AS.format <- function(fit, name = NULL) {
       beta <- summ[, 1]
       SE <- summ[, 2]
       p <- summ[, 4]
-      LL <- beta - stats::qnorm(0.975) * SE
-      UL <- beta + stats::qnorm(0.975) * SE
-      output <- matrix("", ncol = 3, nrow = length(beta) + 1)
-      output[1, 2] <- "OR (95%CI)"
-      output[1, 3] <- "p"
-      for (i in 1:length(beta)) {
-        output[1 + i, 1] <- name[i]
-        output[1 + i, 2] <- paste0(AS.fixdec(exp(beta[i])), " (", AS.fixdec(exp(LL[i])),  " to ", AS.fixdec(exp(UL[i])), ")")
-        output[1 + i, 3] <- AS.signif(p[i])
-      }
+      b.title <- "OR (95%CI)"
+      f <- exp
     } else if (stats::family(fit)$family == "gaussian" & stats::family(fit)$link == "identity") {
       # linear regression
       summ <- summary(fit)$coefficients
@@ -53,22 +37,24 @@ AS.format <- function(fit, name = NULL) {
       beta <- summ[, 1]
       SE <- summ[, 2]
       p <- summ[, 4]
-      LL <- beta - stats::qnorm(0.975) * SE
-      UL <- beta + stats::qnorm(0.975) * SE
-      output <- matrix("", ncol = 3, nrow = length(beta) + 1)
-      output[1, 2] <- "b (95%CI)"
-      output[1, 3] <- "p"
-      for (i in 1:length(beta)) {
-        output[1 + i, 1] <- name[i]
-        output[1 + i, 2] <- paste0(AS.fixdec(beta[i]), " (", AS.fixdec(LL[i]),  " to ", AS.fixdec(UL[i]), ")")
-        output[1 + i, 3] <- AS.signif(p[i])
-      }
+      b.title <- "b (95%CI)"
+      f <- function(x) x
     } else {
       stop(paste0("[AS.format] family ", stats::family(fit)$family, " with link ",
                   stats::family(fit)$link," not implemented"))
     }
   } else {
     stop(paste0("[AS.format] class ", paste0(class(fit), collapse = " ")," not implemented"))
+  }
+  LL <- beta - stats::qnorm(0.975) * SE
+  UL <- beta + stats::qnorm(0.975) * SE
+  output <- matrix("", ncol = 3, nrow = length(beta) + 1)
+  output[1, 2] <- b.title
+  output[1, 3] <- "p"
+  for (i in 1:length(beta)) {
+    output[1 + i, 1] <- name[i]
+    output[1 + i, 2] <- paste0(AS.fixdec(f(beta[i])), " (", AS.fixdec(f(LL[i])),  " to ", AS.fixdec(exp(UL[i])), ")")
+    output[1 + i, 3] <- AS.signif(p[i])
   }
   return(output)
 }
