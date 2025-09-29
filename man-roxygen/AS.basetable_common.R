@@ -3,10 +3,13 @@
 #' @details
 #' \itemize{
 #'   \item \code{AS.basetable.create}: creates a template table structure
-#'     with headers, group sample sizes, and p-value columns for 1, 2, or 3 groups.
+#'     with headers, group sample sizes, and p-value columns for 1, 2, 3, or 4 groups.
 #'   \item \code{AS.basetable.binary}: adds a row for a binary variable with
 #'     counts and percentages. P-values are obtained from logistic regression.
 #'   \item \code{AS.basetable.blank}: adds a blank row with a label, for separating sections.
+#'   \item \code{AS.basetable.HHMM}: adds a row for a time-of-day variable in
+#'   "HH:MM" string format with circular mean \eqn{\pm} circular SD. P-values are
+#'   obtained from circular-linear regression.
 #'   \item \code{AS.basetable.linear}: adds a row for a continuous variable
 #'     with mean \eqn{\pm} SD. P-values are obtained from linear regression.
 #'   \item \code{AS.basetable.loglinear}: adds a row for a log-transformed continuous variable
@@ -25,6 +28,7 @@
 #'   1 versus 0 & 2, 2 versus 0 & 1
 #'   \item A global likelihood-ratio test.
 #' }
+#' With 4 groups, only the likelihood-ratio test is provided.
 #' @examples
 #' library(AutoScript)
 #' library(survival)

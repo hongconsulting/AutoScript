@@ -55,3 +55,16 @@ fit <- coxph(Surv(data$time, data$status) ~ as.factor(data$trt))
 table2 <- AS.format(fit, name = "Treatment")
 print(table2)
 ```
+
+## Example: Logistic regression table
+```{r}
+library(AutoScript)
+library(survival)
+data <- survival::veteran
+data$landmark <- NA
+data$landmark[data$time <= 183 & data$status == 1] <- 0
+data$landmark[data$time > 183] <- 1
+fit <- glm(data$landmark ~ as.factor(data$trt), family="binomial")
+table2 <- AS.format(fit, name = c("(Intercept)", "Treatment"))
+print(table2)
+```
