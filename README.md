@@ -6,7 +6,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-Automated clinical research manuscript workflows.
+Automated clinical research manuscript tables.
 
 ## Installation
 
