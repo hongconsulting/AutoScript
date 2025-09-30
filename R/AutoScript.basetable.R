@@ -231,7 +231,7 @@ AS.basetable.HHMM <- function(name, outcome, basetable, subset.mask = NULL, p.va
       output$table[r, 10] <- AS.signif(fit1x[2, "p"], digits.sig, sig.thresh)
       output$table[r, 11] <- AS.signif(fit2x[2, "p"], digits.sig, sig.thresh)
       # LR
-      output$table[r, 12] <- AS.signif(HHMM::HHMM.lm.LRtest(y, stats::model.matrix(~ as.factor(X))[, -1]), digits.sig, sig.thresh)
+      output$table[r, 12] <- AS.signif(circular::aov.circular(x = HHMM::HHMM.to.rad(y), group = basetable$group, method = "LRT")$p.value, digits.sig, sig.thresh)
     }
   } else if (max(basetable$group) == 3) {
     output$table[r, 1] <- name
@@ -241,7 +241,7 @@ AS.basetable.HHMM <- function(name, outcome, basetable, subset.mask = NULL, p.va
     output$table[r, 5] <- AS.summary.HHMM(y[X == 2])
     output$table[r, 6] <- AS.summary.HHMM(y[X == 3])
     if (p.values) {
-      output$table[r, 7] <- AS.signif(HHMM::HHMM.lm.LRtest(y, stats::model.matrix(~ as.factor(X))[, -1]), digits.sig, sig.thresh)
+      output$table[r, 7] <- AS.signif(circular::aov.circular(x = HHMM::HHMM.to.rad(y), group = basetable$group, method = "LRT")$p.value, digits.sig, sig.thresh)
     }
   } else {stop("[AS.basetable.HHMM] must have 1, 2, 3, or 4 groups")}
   return(output)
@@ -476,7 +476,7 @@ AS.basetable.TTE <- function(name, time, status, basetable, subset.mask = NULL, 
 #   group <- sample(0:(n.group - 1), n, T)
 #   outcome1 <- sample(0:1, n, T)
 #   outcome2 <- stats::rnorm(n)
-#   outcome3 <- rad.to.HHMM(stats::rnorm(n))
+#   outcome3 <- HHMM::rad.to.HHMM(stats::runif(n, -pi, pi))
 #   test <- AS.basetable.create(group)
 #   test <- AS.basetable.binary("Outcome 1", outcome1, test)
 #   test <- AS.basetable.linear("Outcome 2", outcome2, test)
