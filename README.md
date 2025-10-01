@@ -25,7 +25,7 @@ library(survival)
 data <- survival::veteran
 table1 <- AS.basetable.create(group = data$trt - 1, name = c("Control", "Experimental"))
 table1 <- AS.basetable.linear("Age (years), mean \u00B1 SD", data$age, table1, digits.fixed = 1)
-table1 <- AS.basetable.loglinear("Time from diagnosis", data$diagtime, table1)
+table1 <- AS.basetable.loglinear("Time from diagnosis", data$diagtime, table1, digits.fixed = 1)
 table1 <- AS.basetable.blank("(months), mean \u00B1 SD", table1)
 table1 <- AS.basetable.blank("Histology:", table1)
 table1 <- AS.basetable.binary("- Non-small cell, n (%)", data$celltype != "smallcell", table1)
@@ -38,14 +38,14 @@ print(table1$table)
 #>  [1,] "Name"                      "Total"       "Control"     "Experimental" "p"    
 #>  [2,] ""                          "n = 137"     "n = 69"      "n = 68"       ""     
 #>  [3,] "Age (years), mean ± SD"    "58.3 ± 10.5" "57.5 ± 10.8" "59.1 ± 10.3"  "0.37" 
-#>  [4,] "Time from diagnosis"       "5.77 ± 2.41" "6.07 ± 2.31" "5.48 ± 2.53"  "0.50" 
+#>  [4,] "Time from diagnosis"       "5.8 ± 2.4"   "6.1 ± 2.3"   "5.5 ± 2.5"    "0.50" 
 #>  [5,] "(months), mean ± SD"       ""            ""            ""             ""     
 #>  [6,] "Histology:"                ""            ""            ""             ""     
-#>  [7,] "- Non-small cell, n (%)"   "89 (65.0%)"  "39 (56.5%)"  "50 (73.5%)"   "0.038"
-#>  [8,] "  - Adenocarcinoma, n (%)" "27 (30.3%)"  "9 (23.1%)"   "18 (36.0%)"   "0.19" 
-#>  [9,] "  - Squamous, n (%)"       "35 (39.3%)"  "15 (38.5%)"  "20 (40.0%)"   "0.88" 
-#> [10,] "  - Large cell, n (%)"     "27 (30.3%)"  "15 (38.5%)"  "12 (24.0%)"   "0.14" 
-#> [11,] "- Small cell, n (%)"       "48 (35.0%)"  "30 (43.5%)"  "18 (26.5%)"   ""
+#>  [7,] "- Non-small cell, n (%)"   "89 (65%)"    "39 (57%)"    "50 (74%)"     "0.038"
+#>  [8,] "  - Adenocarcinoma, n (%)" "27 (30%)"    "9 (23%)"     "18 (36%)"     "0.19" 
+#>  [9,] "  - Squamous, n (%)"       "35 (39%)"    "15 (38%)"    "20 (40%)"     "0.88" 
+#> [10,] "  - Large cell, n (%)"     "27 (30%)"    "15 (38%)"    "12 (24%)"     "0.14" 
+#> [11,] "- Small cell, n (%)"       "48 (35%)"    "30 (43%)"    "18 (26%)"     ""
 ```
 
 ## Example: Cox regression table

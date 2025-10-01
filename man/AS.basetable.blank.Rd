@@ -2,7 +2,7 @@
 % Please edit documentation in R/AutoScript.basetable.R
 \name{AS.basetable.blank}
 \alias{AS.basetable.blank}
-\title{Baseline characteristics table functions}
+\title{Baseline characteristics table functions: add blank row}
 \usage{
 AS.basetable.blank(text, basetable)
 }
@@ -12,31 +12,35 @@ AS.basetable.blank(text, basetable)
 \item{basetable}{A list created by \code{AS.basetable.create}, containing the group
 assignments and current table structure.}
 }
+\value{
+An updated baseline table list with a new row summarizing the added variable.
+The table itself can be accessed with \code{$table}.
+}
 \description{
 See Details.
 }
 \details{
 \itemize{
 \item \code{AS.basetable.create}: creates a template table structure
-with headers, group sample sizes, and p-value columns for 1, 2, 3, or 4 groups.
+with headers, group sample sizes, and \emph{p}-value columns for 1, 2, 3, or 4 groups.
 \item \code{AS.basetable.binary}: adds a row for a binary variable with
-counts and percentages. P-values are obtained from logistic regression.
+counts and percentages. \emph{P}-values are obtained from logistic regression.
 \item \code{AS.basetable.blank}: adds a blank row with a label, for separating sections.
 \item \code{AS.basetable.HHMM}: adds a row for a time-of-day variable in
-"HH:MM" string format with circular mean \eqn{\pm} circular SD. P-values are
+"HH:MM" string format with circular mean \eqn{\pm} circular SD. \emph{P}-values are
 obtained from circular-linear regression\eqn{^{1}}. Likelihood-ratio tests are performed
 using the Cordeiro\eqn{-}Paula\eqn{-}Botter method\eqn{^{2}}.
 \item \code{AS.basetable.linear}: adds a row for a continuous variable
-with mean \eqn{\pm} SD. P-values are obtained from linear regression.
+with mean \eqn{\pm} SD. \emph{P}-values are obtained from linear regression.
 \item \code{AS.basetable.loglinear}: adds a row for a log-transformed continuous variable
-with geometric mean \eqn{\pm} geometric SD. P-values are obtained from linear
+with geometric mean \eqn{\pm} geometric SD. \emph{P}-values are obtained from linear
 regression on the log-transformed outcome.
 \item \code{AS.basetable.TTE}: adds a row for a time-to-event variable,
-with Kaplan\eqn{-}Meier median and 95\% confidence interval. P-values are obtained
+with Kaplan\eqn{-}Meier median and 95\% confidence interval. \emph{P}-values are obtained
 from Cox regression.
 }
 The resulting table includes total and group-specific summaries.
-P-values are provided but are not always appropriate to report.
+\emph{P}-values are provided but are not always appropriate to report.
 With 3 groups, seven possible comparisons are provided:
 \itemize{
 \item Each pairwise comparison: group 0 versus 1, 0 versus 2, and 1 versus 2.
@@ -58,26 +62,19 @@ ratio tests for dispersion models. \emph{International Statistical Review}, pp. 
 library(AutoScript)
 library(survival)
 data <- survival::veteran
-table1 <- AS.basetable.create(group = data$trt - 1,
-                              name = c("Control", "Experimental"))
-table1 <- AS.basetable.linear("Age (years), mean \u00B1 SD", data$age,
-                              table1, digits.fixed = 1)
-table1 <- AS.basetable.loglinear("Time from diagnosis (months), mean \u00B1 SD",
-                                 data$diagtime, table1)
+table1 <- AS.basetable.create(group = data$trt - 1, name = c("Control", "Experimental"))
+table1 <- AS.basetable.linear("Age (years), mean \u00B1 SD", data$age, table1, digits.fixed = 1)
+table1 <- AS.basetable.loglinear("Time from diagnosis", data$diagtime, table1, digits.fixed = 1)
+table1 <- AS.basetable.blank("(months), mean \u00B1 SD", table1)
 table1 <- AS.basetable.blank("Histology:", table1)
-table1 <- AS.basetable.binary("- Non-small cell, n (\%)",
-                              data$celltype != "smallcell", table1)
-table1 <- AS.basetable.binary("  - Adenocarcinoma, n (\%)",
-                              data$celltype == "adeno", table1,
+table1 <- AS.basetable.binary("- Non-small cell, n (\%)", data$celltype != "smallcell", table1)
+table1 <- AS.basetable.binary("  - Adenocarcinoma, n (\%)", data$celltype == "adeno", table1,
                               subset.mask = data$celltype != "smallcell")
-table1 <- AS.basetable.binary("  - Squamous, n (\%)",
-                              data$celltype == "squamous", table1,
+table1 <- AS.basetable.binary("  - Squamous, n (\%)", data$celltype == "squamous", table1,
                               subset.mask = data$celltype != "smallcell")
-table1 <- AS.basetable.binary("  - Large cell, n (\%)",
-                              data$celltype == "large", table1,
+table1 <- AS.basetable.binary("  - Large cell, n (\%)", data$celltype == "large", table1,
                               subset.mask = data$celltype != "smallcell")
-table1 <- AS.basetable.binary("- Small cell, n (\%)",
-                              data$celltype == "smallcell", table1,
+table1 <- AS.basetable.binary("- Small cell, n (\%)", data$celltype == "smallcell", table1,
                               p.values = FALSE)
 print(table1$table)
 }

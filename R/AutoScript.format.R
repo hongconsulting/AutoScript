@@ -1,5 +1,6 @@
-#' Format regression results into manuscript-ready tables
+#' Auto-format
 #'
+#' Format regression results into manuscript-ready tables.
 #' @param fit A fitted object of class \code{coxph}, \code{glm}, \code{glmerMod},
 #' \code{lm}, or \code{lmerModLmerTest}.
 #' @param name Optional string vector of variable names.
@@ -11,7 +12,6 @@
 #' \strong{References:}
 #' 1. Kenward, M.G. and Roger, J.H., 1997. Small sample inference for fixed effects
 #' from restricted maximum likelihood. \emph{Biometrics}, pp. 983\eqn{-}997.
-
 #'
 #' @examples
 #' library(AutoScript)

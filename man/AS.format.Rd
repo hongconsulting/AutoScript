@@ -2,7 +2,7 @@
 % Please edit documentation in R/AutoScript.format.R
 \name{AS.format}
 \alias{AS.format}
-\title{Format regression results into manuscript-ready tables}
+\title{Auto-format}
 \usage{
 AS.format(fit, name = NULL)
 }
@@ -16,7 +16,7 @@ AS.format(fit, name = NULL)
 A character matrix representing a manuscript-ready table.
 }
 \description{
-Format regression results into manuscript-ready tables
+Format regression results into manuscript-ready tables.
 }
 \details{
 \emph{P}-values for \code{lmerModLmerTest} objects are calculated using the

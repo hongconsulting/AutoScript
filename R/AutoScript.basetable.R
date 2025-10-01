@@ -1,22 +1,4 @@
-#' Baseline characteristics table functions
-#'
-#' @param basetable A list created by \code{AS.basetable.create}, containing the group
-#'   assignments and current table structure.
-#' @param subset.mask Optional logical vector used to restrict
-#'   the analysis to a subset of observations.
-#' @param p.values Logical value indicating whether to display p-values in the added row.
-#' @param digits.fixed Number of decimal places for percentages in summaries.
-#'   Default = 2.
-#' @param digits.sig Number of significant figures for p-values. Default = 2.
-#' @param sig.thresh Threshold below which p-values are displayed as
-#'   \code{"< threshold"}. Default = 0.001.
-#' @section Value:
-#' An updated baseline table list with a new row summarizing the added variable.
-#' The table itself can be accessed with \code{$table}.
-#' @name AS.basetable
-NULL
-
-#' Baseline characteristics table functions
+#' Baseline characteristics table functions: create
 #'
 #' See Details.
 #' @param group Integer vector of group assignments, coded as 0, 1, 2, or 3.
@@ -27,7 +9,7 @@ NULL
 #'   \item \code{table}: a character matrix containing column headers and
 #'     sample sizes
 #' }
-#' @template AS.basetable_common
+#' @template AS.basetable_details
 #' @export
 AS.basetable.create <- function(group, name = c("Group 0", "Group 1", "Group 2", "Group 3")) {
   output <- list()
@@ -85,17 +67,17 @@ AS.basetable.create <- function(group, name = c("Group 0", "Group 1", "Group 2",
 
 ################################################################################
 
-#' Baseline characteristics table functions
+#' Baseline characteristics table functions: add binary variable
 #'
 #' See Details.
 #' @param name A string giving the variable name to display in the first column.
 #' @param outcome Binary vector (0:1 or logical) of outcome values.
-#' @inheritParams AS.basetable
-#' @inheritSection AS.basetable Value
-#' @template AS.basetable_common
+#' @template AS.basetable_param_0_digits.fixed
+#' @template AS.basetable_return
+#' @template AS.basetable_details
 #' @export
 AS.basetable.binary <- function(name, outcome, basetable, subset.mask = NULL, p.values = TRUE,
-                                digits.fixed = 2, digits.sig = 2, sig.thresh = 0.001) {
+                                digits.fixed = 0, digits.sig = 2, sig.thresh = 0.001) {
   X <- basetable$group
   y <- outcome
   if (!is.null(subset.mask)) {
@@ -159,13 +141,14 @@ AS.basetable.binary <- function(name, outcome, basetable, subset.mask = NULL, p.
   return(output)
 }
 
-#' Baseline characteristics table functions
+#' Baseline characteristics table functions: add blank row
 #'
 #' See Details.
 #' @param text A string giving the custom text to display in the first column.
 #' @param basetable A list created by \code{AS.basetable.create}, containing the group
-#'   assignments and current table structure.
-#' @template AS.basetable_common
+#' assignments and current table structure.
+#' @template AS.basetable_return
+#' @template AS.basetable_details
 #' @export
 AS.basetable.blank <- function(text, basetable) {
   X <- basetable$group
@@ -176,14 +159,14 @@ AS.basetable.blank <- function(text, basetable) {
   return(output)
 }
 
-#' Baseline characteristics table functions
+#' Baseline characteristics table functions: add "HH:MM" variable
 #'
 #' See Details.
 #' @param name A string giving the variable name to display in the first column.
 #' @param outcome Numeric vector of continuous outcome values.
-#' @inheritParams AS.basetable
-#' @inheritSection AS.basetable Value
-#' @template AS.basetable_common
+#' @template AS.basetable_param_no_digits.fixed
+#' @template AS.basetable_return
+#' @template AS.basetable_details
 #' @export
 AS.basetable.HHMM <- function(name, outcome, basetable, subset.mask = NULL, p.values = TRUE,
                               digits.sig = 2, sig.thresh = 0.001) {
@@ -247,14 +230,14 @@ AS.basetable.HHMM <- function(name, outcome, basetable, subset.mask = NULL, p.va
   return(output)
 }
 
-#' Baseline characteristics table functions
+#' Baseline characteristics table functions: add linear variable
 #'
 #' See Details.
 #' @param name A string giving the variable name to display in the first column.
 #' @param outcome Numeric vector of continuous outcome values.
-#' @inheritParams AS.basetable
-#' @inheritSection AS.basetable Value
-#' @template AS.basetable_common
+#' @template AS.basetable_param
+#' @template AS.basetable_return
+#' @template AS.basetable_details
 #' @export
 AS.basetable.linear <- function(name, outcome, basetable, subset.mask = NULL, p.values = TRUE,
                                 digits.fixed = 2, digits.sig = 2, sig.thresh = 0.001) {
@@ -321,14 +304,14 @@ AS.basetable.linear <- function(name, outcome, basetable, subset.mask = NULL, p.
   return(output)
 }
 
-#' Baseline characteristics table functions
+#' Baseline characteristics table functions: add log-linear variable
 #'
 #' See Details.
 #' @param name A string giving the variable name to display in the first column.
 #' @param outcome Numeric vector of continuous outcome values.
-#' @inheritParams AS.basetable
-#' @inheritSection AS.basetable Value
-#' @template AS.basetable_common
+#' @template AS.basetable_param
+#' @template AS.basetable_return
+#' @template AS.basetable_details
 #' @export
 AS.basetable.loglinear <- function(name, outcome, basetable, subset.mask = NULL, p.values = TRUE,
                                    digits.fixed = 2, digits.sig = 2, sig.thresh = 0.001) {
@@ -395,15 +378,15 @@ AS.basetable.loglinear <- function(name, outcome, basetable, subset.mask = NULL,
   return(output)
 }
 
-#' Baseline characteristics table functions
+#' Baseline characteristics table functions: add time-to-event
 #'
 #' See Details.
 #' @param name A string giving the variable name to display in the first column.
 #' @param time Numeric vector of follow-up times.
 #' @param status Binary vector indicating event occurrence (1 = event, 0 = censored).
-#' @inheritParams AS.basetable
-#' @inheritSection AS.basetable Value
-#' @template AS.basetable_common
+#' @template AS.basetable_param
+#' @template AS.basetable_return
+#' @template AS.basetable_details
 #' @export
 AS.basetable.TTE <- function(name, time, status, basetable, subset.mask = NULL, p.values = TRUE,
                              digits.fixed = 2, digits.sig = 2, sig.thresh = 0.001) {
