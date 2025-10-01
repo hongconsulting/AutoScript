@@ -57,7 +57,7 @@ table2 <- AS.format(fit, name = "Treatment")
 print(table2)
 ```
 
-## Example: Linear mixed-effects regression table
+## Example: linear mixed-effects regression table
 ```{r}
 library(AutoScript)
 library(lme4)
@@ -68,7 +68,7 @@ table3 <- AS.format(fit, name = c("(Intercept)", "Days"))
 print(table3)
 ```
 
-## Example: Logistic regression table
+## Example: logistic regression table
 ```{r}
 library(AutoScript)
 library(survival)

@@ -62,7 +62,7 @@ print(table2)
 #> [2,] "Treatment" "1.02 (0.71 to 1.45)" "0.92"
 ```
 
-## Example: Linear mixed-effects regression table
+## Example: linear mixed-effects regression table
 
 ``` r
 library(AutoScript)
@@ -78,7 +78,7 @@ print(table3)
 #> [3,] "Days"        "10.47 (7.44 to 13.50)"     "< 0.001"
 ```
 
-## Example: Logistic regression table
+## Example: logistic regression table
 
 ``` r
 library(AutoScript)
