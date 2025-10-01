@@ -70,7 +70,7 @@ library(lme4)
 library(lmerTest)
 data <- lme4::sleepstudy
 fit <- lmer(Reaction ~ Days + (Days | Subject), data = data)
-table3 <- AS.format(fit, name = c("(Intercept)", "Days"))
+table3 <- AS.format(fit)
 print(table3)
 #>      [,1]          [,2]                        [,3]     
 #> [1,] ""            "Beta (95%CI)"              "p"      
