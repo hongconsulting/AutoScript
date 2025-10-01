@@ -7,7 +7,8 @@
 AS.format(fit, name = NULL)
 }
 \arguments{
-\item{fit}{A fitted object of class \code{coxph} or \code{glm}.}
+\item{fit}{A fitted object of class \code{coxph}, \code{glm}, \code{glmerMod},
+\code{lm}, or \code{lmerModLmerTest}.}
 
 \item{name}{Optional string vector of variable names.}
 }
@@ -16,6 +17,16 @@ A character matrix representing a manuscript-ready table.
 }
 \description{
 Format regression results into manuscript-ready tables
+}
+\details{
+\emph{P}-values for \code{lmerModLmerTest} objects are calculated using the
+Kenward\eqn{-}Roger method\eqn{^{1}}.
+
+\strong{References:}
+\enumerate{
+\item Kenward, M.G. and Roger, J.H., 1997. Small sample inference for fixed effects
+from restricted maximum likelihood. \emph{Biometrics}, pp. 983\eqn{-}997.
+}
 }
 \examples{
 library(AutoScript)

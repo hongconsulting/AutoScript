@@ -18,7 +18,7 @@ AS.basetable.binary(
 \arguments{
 \item{name}{A string giving the variable name to display in the first column.}
 
-\item{outcome}{Binary vector (0/1 or logical) of outcome values.}
+\item{outcome}{Binary vector (0:1 or logical) of outcome values.}
 
 \item{basetable}{A list created by \code{AS.basetable.create}, containing the group
 assignments and current table structure.}
@@ -48,7 +48,8 @@ counts and percentages. P-values are obtained from logistic regression.
 \item \code{AS.basetable.blank}: adds a blank row with a label, for separating sections.
 \item \code{AS.basetable.HHMM}: adds a row for a time-of-day variable in
 "HH:MM" string format with circular mean \eqn{\pm} circular SD. P-values are
-obtained from circular-linear regression.
+obtained from circular-linear regression\eqn{^{1}}. Likelihood-ratio tests are performed
+using the Cordeiro\eqn{-}Paula\eqn{-}Botter method\eqn{^{2}}.
 \item \code{AS.basetable.linear}: adds a row for a continuous variable
 with mean \eqn{\pm} SD. P-values are obtained from linear regression.
 \item \code{AS.basetable.loglinear}: adds a row for a log-transformed continuous variable
@@ -68,6 +69,14 @@ With 3 groups, seven possible comparisons are provided:
 \item A global likelihood-ratio test.
 }
 With 4 groups, only the likelihood-ratio test is provided.
+
+\strong{References:}
+\enumerate{
+\item Fisher, N.I. and Lee, A.J., 1992. Regression models for an angular response.
+\emph{Biometrics}, pp. 665\eqn{-}677.
+\item Cordeiro, G.M., Paula, G.A. and Botter, D.A., 1994. Improved likelihood
+ratio tests for dispersion models. \emph{International Statistical Review}, pp. 257\eqn{-}274.
+}
 }
 \section{Value}{
 

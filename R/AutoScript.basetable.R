@@ -89,7 +89,7 @@ AS.basetable.create <- function(group, name = c("Group 0", "Group 1", "Group 2",
 #'
 #' See Details.
 #' @param name A string giving the variable name to display in the first column.
-#' @param outcome Binary vector (0/1 or logical) of outcome values.
+#' @param outcome Binary vector (0:1 or logical) of outcome values.
 #' @inheritParams AS.basetable
 #' @inheritSection AS.basetable Value
 #' @template AS.basetable_common
