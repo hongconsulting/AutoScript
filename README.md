@@ -34,30 +34,18 @@ table1 <- AS.basetable.binary("  - Squamous, n (%)", data$celltype == "squamous"
 table1 <- AS.basetable.binary("  - Large cell, n (%)", data$celltype == "large", table1, subset.mask = data$celltype != "smallcell")
 table1 <- AS.basetable.binary("- Small cell, n (%)", data$celltype == "smallcell", table1, p.values = FALSE)
 print(table1$table)
-#>       [,1]                        [,2]          [,3]          [,4]          
-#>  [1,] "Name"                      "Total"       "Control"     "Experimental"
-#>  [2,] ""                          "n = 137"     "n = 69"      "n = 68"      
-#>  [3,] "Age (years), mean ± SD"    "58.3 ± 10.5" "57.5 ± 10.8" "59.1 ± 10.3" 
-#>  [4,] "Time from diagnosis"       "5.8 ± 2.4"   "6.1 ± 2.3"   "5.5 ± 2.5"   
-#>  [5,] "(months), mean ± SD"       ""            ""            ""            
-#>  [6,] "Histology:"                ""            ""            ""            
-#>  [7,] "- Non-small cell, n (%)"   "89 (65%)"    "39 (57%)"    "50 (74%)"    
-#>  [8,] "  - Adenocarcinoma, n (%)" "27 (30%)"    "9 (23%)"     "18 (36%)"    
-#>  [9,] "  - Squamous, n (%)"       "35 (39%)"    "15 (38%)"    "20 (40%)"    
-#> [10,] "  - Large cell, n (%)"     "27 (30%)"    "15 (38%)"    "12 (24%)"    
-#> [11,] "- Small cell, n (%)"       "48 (35%)"    "30 (43%)"    "18 (26%)"    
-#>       [,5]   
-#>  [1,] "p"    
-#>  [2,] ""     
-#>  [3,] "0.37" 
-#>  [4,] "0.50" 
-#>  [5,] ""     
-#>  [6,] ""     
-#>  [7,] "0.038"
-#>  [8,] "0.19" 
-#>  [9,] "0.88" 
-#> [10,] "0.14" 
-#> [11,] ""
+#>       [,1]                        [,2]          [,3]          [,4]           [,5]   
+#>  [1,] "Name"                      "Total"       "Control"     "Experimental" "p"    
+#>  [2,] ""                          "n = 137"     "n = 69"      "n = 68"       ""     
+#>  [3,] "Age (years), mean ± SD"    "58.3 ± 10.5" "57.5 ± 10.8" "59.1 ± 10.3"  "0.37" 
+#>  [4,] "Time from diagnosis"       "5.8 ± 2.4"   "6.1 ± 2.3"   "5.5 ± 2.5"    "0.50" 
+#>  [5,] "(months), mean ± SD"       ""            ""            ""             ""     
+#>  [6,] "Histology:"                ""            ""            ""             ""     
+#>  [7,] "- Non-small cell, n (%)"   "89 (65%)"    "39 (57%)"    "50 (74%)"     "0.038"
+#>  [8,] "  - Adenocarcinoma, n (%)" "27 (30%)"    "9 (23%)"     "18 (36%)"     "0.19" 
+#>  [9,] "  - Squamous, n (%)"       "35 (39%)"    "15 (38%)"    "20 (40%)"     "0.88" 
+#> [10,] "  - Large cell, n (%)"     "27 (30%)"    "15 (38%)"    "12 (24%)"     "0.14" 
+#> [11,] "- Small cell, n (%)"       "48 (35%)"    "30 (43%)"    "18 (26%)"     ""
 ```
 
 ## Example: Cox regression table
