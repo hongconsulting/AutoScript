@@ -17,7 +17,9 @@ AS.summary.binary <- function(x, digits.fixed = 0) {
 #' @return A string of the form `"`mean \eqn{\pm} SD`"`.
 #' @export
 AS.summary.HHMM <- function(x) {
-  output <- paste0(HHMM::HHMM.mean(x), " \u00b1 ", HHMM::HHMM.sd(x))
+  if (!requireNamespace("WHcircular", quietly = TRUE)) {stop("[AS.summary.HHMM] requires package 'WHcircular'")}
+  output <- paste0(WHcircular::HHMM.mean(x), " \u00b1 ",
+                   WHcircular::WH_rad_to_dHHMM(WHcircular::WH_rad_sd(WHcircular::WH_HHMM_to_rad(x))))
   output <- gsub("-", "\u2212", output)
   return(output)
 }

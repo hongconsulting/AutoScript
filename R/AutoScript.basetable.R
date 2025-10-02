@@ -170,6 +170,12 @@ AS.basetable.blank <- function(text, basetable) {
 #' @export
 AS.basetable.HHMM <- function(name, outcome, basetable, subset.mask = NULL, p.values = TRUE,
                               digits.sig = 2, sig.thresh = 0.001) {
+  if (!requireNamespace("WHcircular", quietly = TRUE)) {stop("[AS.basetable.HHMM] requires package 'WHcircular'")}
+  HHMM.lm.p <- function(y, X.formula) {
+    X <- as.matrix(stats::model.matrix(X.formula)[, -1])
+    fit <- WHcircular::WH_reg_circlinear(WHcircular::WH_HHMM_to_rad(y), X)
+    return(fit$p)
+  }
   X <- basetable$group
   y <- outcome
   if (!is.null(subset.mask)) {
@@ -190,8 +196,8 @@ AS.basetable.HHMM <- function(name, outcome, basetable, subset.mask = NULL, p.va
     output$table[r, 3] <- AS.summary.HHMM(y[X == 0])
     output$table[r, 4] <- AS.summary.HHMM(y[X == 1])
     if (p.values) {
-      fit <- HHMM::HHMM.lm(y, stats::model.matrix(~ as.factor(X))[, -1])
-      output$table[r, 5] <- AS.signif(fit[2, "p"], digits.sig, sig.thresh)
+      fit <- HHMM.lm.p(y, ~as.factor(X))
+      output$table[r, 5] <- AS.signif(fit[1], digits.sig, sig.thresh)
     }
   } else if (max(basetable$group) == 2) {
     output$table[r, 1] <- name
@@ -201,20 +207,20 @@ AS.basetable.HHMM <- function(name, outcome, basetable, subset.mask = NULL, p.va
     output$table[r, 5] <- AS.summary.HHMM(y[X == 2])
     if (p.values) {
       # 0 vs 1, 0 vs 2, 1 vs 2
-      fit0 <- HHMM::HHMM.lm(y, stats::model.matrix(~ as.factor(X))[, -1])
-      fit1 <- HHMM::HHMM.lm(y, stats::model.matrix(~ relevel(as.factor(X), ref = "1"))[, -1])
-      output$table[r, 6] <- AS.signif(fit0[2, "p"], digits.sig, sig.thresh)
-      output$table[r, 7] <- AS.signif(fit0[3, "p"], digits.sig, sig.thresh)
-      output$table[r, 8] <- AS.signif(fit1[3, "p"], digits.sig, sig.thresh)
+      fit0 <- HHMM.lm.p(y, ~as.factor(X))
+      fit1 <- HHMM.lm.p(y, ~relevel(as.factor(X), ref = "1"))
+      output$table[r, 6] <- AS.signif(fit0[1], digits.sig, sig.thresh)
+      output$table[r, 7] <- AS.signif(fit0[2], digits.sig, sig.thresh)
+      output$table[r, 8] <- AS.signif(fit1[2], digits.sig, sig.thresh)
       # 0 vs 12, 1 vs 02, 2 vs 01
-      fit0x <- HHMM::HHMM.lm(y, X != 0)
-      fit1x <- HHMM::HHMM.lm(y, X != 1)
-      fit2x <- HHMM::HHMM.lm(y, X != 2)
-      output$table[r, 9] <- AS.signif(fit0x[2, "p"], digits.sig, sig.thresh)
-      output$table[r, 10] <- AS.signif(fit1x[2, "p"], digits.sig, sig.thresh)
-      output$table[r, 11] <- AS.signif(fit2x[2, "p"], digits.sig, sig.thresh)
+      fit0x <- HHMM.lm.p(y, ~X != 0)
+      fit1x <- HHMM.lm.p(y, ~X != 1)
+      fit2x <- HHMM.lm.p(y, ~X != 2)
+      output$table[r, 9] <- AS.signif(fit0x[1], digits.sig, sig.thresh)
+      output$table[r, 10] <- AS.signif(fit1x[1], digits.sig, sig.thresh)
+      output$table[r, 11] <- AS.signif(fit2x[1], digits.sig, sig.thresh)
       # LR
-      output$table[r, 12] <- AS.signif(circular::aov.circular(x = HHMM::HHMM.to.rad(y), group = basetable$group, method = "LRT")$p.value, digits.sig, sig.thresh)
+      output$table[r, 12] <- AS.signif(WHcircular::WH_CordeiroPaulaBotter(WHcircular::WH_HHMM_to_rad(y), X), digits.sig, sig.thresh)
     }
   } else if (max(basetable$group) == 3) {
     output$table[r, 1] <- name
@@ -224,7 +230,7 @@ AS.basetable.HHMM <- function(name, outcome, basetable, subset.mask = NULL, p.va
     output$table[r, 5] <- AS.summary.HHMM(y[X == 2])
     output$table[r, 6] <- AS.summary.HHMM(y[X == 3])
     if (p.values) {
-      output$table[r, 7] <- AS.signif(circular::aov.circular(x = HHMM::HHMM.to.rad(y), group = basetable$group, method = "LRT")$p.value, digits.sig, sig.thresh)
+      output$table[r, 7] <- AS.signif(WHcircular::WH_CordeiroPaulaBotter(WHcircular::WH_HHMM_to_rad(y), X), digits.sig, sig.thresh)
     }
   } else {stop("[AS.basetable.HHMM] must have 1, 2, 3, or 4 groups")}
   return(output)
@@ -455,14 +461,14 @@ AS.basetable.TTE <- function(name, time, status, basetable, subset.mask = NULL, 
   return(output)
 }
 
-# AS.basetable.test <- function(n.group = 2, n = 100) {
-#   group <- sample(0:(n.group - 1), n, T)
-#   outcome1 <- sample(0:1, n, T)
-#   outcome2 <- stats::rnorm(n)
-#   outcome3 <- HHMM::rad.to.HHMM(stats::runif(n, -pi, pi))
-#   test <- AS.basetable.create(group)
-#   test <- AS.basetable.binary("Outcome 1", outcome1, test)
-#   test <- AS.basetable.linear("Outcome 2", outcome2, test)
-#   test <- AS.basetable.HHMM("Outcome 3", outcome3, test)
-#   return(test)
-# }
+AS.basetable.test <- function(n.group = 2, n = 100) {
+  group <- sample(0:(n.group - 1), n, T)
+  outcome1 <- sample(0:1, n, T)
+  outcome2 <- stats::rnorm(n)
+  outcome3 <- WHcircular::WH_rad_to_HHMM(stats::runif(n, -pi, pi))
+  test <- AS.basetable.create(group)
+  test <- AS.basetable.binary("Outcome 1", outcome1, test)
+  test <- AS.basetable.linear("Outcome 2", outcome2, test)
+  test <- AS.basetable.HHMM("Outcome 3", outcome3, test)
+  return(test)
+}

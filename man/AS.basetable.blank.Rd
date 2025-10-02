@@ -49,14 +49,6 @@ With 3 groups, seven possible comparisons are provided:
 \item A global likelihood-ratio test.
 }
 With 4 groups, only the likelihood-ratio test is provided.
-
-\strong{References:}
-\enumerate{
-\item Fisher, N.I. and Lee, A.J., 1992. Regression models for an angular response.
-\emph{Biometrics}, pp. 665\eqn{-}677.
-\item Cordeiro, G.M., Paula, G.A. and Botter, D.A., 1994. Improved likelihood
-ratio tests for dispersion models. \emph{International Statistical Review}, pp. 257\eqn{-}274.
-}
 }
 \examples{
 library(AutoScript)
@@ -77,4 +69,12 @@ table1 <- AS.basetable.binary("  - Large cell, n (\%)", data$celltype == "large"
 table1 <- AS.basetable.binary("- Small cell, n (\%)", data$celltype == "smallcell", table1,
                               p.values = FALSE)
 print(table1$table)
+}
+\references{
+\enumerate{
+\item Fisher, N.I. and Lee, A.J., 1992. Regression models for an angular response.
+\emph{Biometrics}, pp. 665\eqn{-}677.
+\item Cordeiro, G.M., Paula, G.A. and Botter, D.A., 1994. Improved likelihood
+ratio tests for dispersion models. \emph{International Statistical Review}, pp. 257\eqn{-}274.
+}
 }

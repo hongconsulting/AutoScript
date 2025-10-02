@@ -28,8 +28,7 @@
 #'   \item A global likelihood-ratio test.
 #' }
 #' With 4 groups, only the likelihood-ratio test is provided.
-#'
-#' \strong{References:}
+#' @references
 #' 1. Fisher, N.I. and Lee, A.J., 1992. Regression models for an angular response.
 #' \emph{Biometrics}, pp. 665\eqn{-}677.
 #' 2. Cordeiro, G.M., Paula, G.A. and Botter, D.A., 1994. Improved likelihood
