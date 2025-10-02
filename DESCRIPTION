@@ -11,6 +11,7 @@ RoxygenNote: 7.3.3
 Suggests:
 	lme4,
     lmerTest,
+    pbkrtest,
     survival,
     WHcircular
 URL: https://github.com/hongconsulting/AutoScript

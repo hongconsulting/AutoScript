@@ -60,6 +60,9 @@ AS.format <- function(fit, name = NULL) {
     stop(paste0("[AS.format] class ", paste0(class(fit), collapse = " ")," not implemented"))
   }
   if (inherits(fit, "lmerModLmerTest")) {
+    # if (!requireNamespace("pbkrtest", quietly = TRUE)) {
+    #   stop("[AS.format] lmerModLmerTest requires package 'pbkrtest'")
+    # }
     summ <- summary(fit, ddf = "Kenward-Roger")$coefficients
   } else {
     summ <- summary(fit)$coefficients

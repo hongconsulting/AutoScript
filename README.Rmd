@@ -65,8 +65,9 @@ print(table2)
 ## Example: linear mixed-effects regression table
 ```{r}
 library(AutoScript)
-library(lme4)
-library(lmerTest)
+library(lme4, quietly = TRUE)
+library(lmerTest, warn.conflicts = FALSE)
+library(pbkrtest)
 data <- lme4::sleepstudy
 fit <- lmer(Reaction ~ Days + (Days | Subject), data = data)
 table3 <- AS.format(fit)

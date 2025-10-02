@@ -70,17 +70,9 @@ print(table2)
 
 ``` r
 library(AutoScript)
-library(lme4)
-#> Loading required package: Matrix
-library(lmerTest)
-#> 
-#> Attaching package: 'lmerTest'
-#> The following object is masked from 'package:lme4':
-#> 
-#>     lmer
-#> The following object is masked from 'package:stats':
-#> 
-#>     step
+library(lme4, quietly = TRUE)
+library(lmerTest, warn.conflicts = FALSE)
+library(pbkrtest)
 data <- lme4::sleepstudy
 fit <- lmer(Reaction ~ Days + (Days | Subject), data = data)
 table3 <- AS.format(fit)
