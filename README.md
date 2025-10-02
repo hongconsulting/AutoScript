@@ -94,7 +94,7 @@ fit <- lmer(Reaction ~ Days + (Days | Subject), data = data)
 table3 <- AS.format(fit)
 print(table3)
 #>      [,1]          [,2]                        [,3]     
-#> [1,] ""            "Beta (95%CI)"              "p"      
+#> [1,] ""            "β (95%CI)"                 "p"      
 #> [2,] "(Intercept)" "251.41 (238.03 to 264.78)" "< 0.001"
 #> [3,] "Days"        "10.47 (7.44 to 13.50)"     "< 0.001"
 ```
