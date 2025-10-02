@@ -21,7 +21,7 @@
 #' @export
 AS.format <- function(fit, name = NULL) {
   # defaults
-  b.title <- "Beta (95%CI)"
+  b.title <- "\u03b2 (95%CI)"
   f <- function(x) x
   if (inherits(fit, "coxph")) {
     summ.col <- c(1, 3, 5)
