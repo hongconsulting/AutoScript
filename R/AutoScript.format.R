@@ -23,7 +23,7 @@
 #' table2 <- AS.format(fit, name = "Treatment")
 #' print(table2)
 #' @export
-AS.format <- function(fit, name = NULL, digits.fixed = 0, digits.sig = 2, sig.thresh = 0.001) {
+AS.format <- function(fit, name = NULL, digits.fixed = 2, digits.sig = 2, sig.thresh = 0.001) {
   # defaults
   b.title <- "\u03b2 (95%CI)"
   f <- function(x) x

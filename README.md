@@ -62,9 +62,9 @@ data <- survival::veteran
 fit <- coxph(Surv(time, status) ~ as.factor(trt), data = data)
 table2 <- AS.format(fit, name = "Treatment")
 print(table2)
-#>      [,1]        [,2]         [,3]  
-#> [1,] ""          "HR (95%CI)" "p"   
-#> [2,] "Treatment" "1 (1 to 1)" "0.92"
+#>      [,1]        [,2]                  [,3]  
+#> [1,] ""          "HR (95%CI)"          "p"   
+#> [2,] "Treatment" "1.02 (0.71 to 1.45)" "0.92"
 ```
 
 ## Example: linear mixed-effects regression table
@@ -96,8 +96,8 @@ data$landmark[data$time > 183] <- 1
 fit <- glm(landmark ~ as.factor(trt), family = "binomial", data = data)
 table4 <- AS.format(fit, name = c("(Intercept)", "Treatment"))
 print(table4)
-#>      [,1]          [,2]         [,3]     
-#> [1,] ""            "OR (95%CI)" "p"      
-#> [2,] "(Intercept)" "0 (0 to 0)" "< 0.001"
-#> [3,] "Treatment"   "1 (1 to 3)" "0.69"
+#>      [,1]          [,2]                  [,3]     
+#> [1,] ""            "OR (95%CI)"          "p"      
+#> [2,] "(Intercept)" "0.23 (0.12 to 0.43)" "< 0.001"
+#> [3,] "Treatment"   "1.19 (0.50 to 2.82)" "0.69"
 ```

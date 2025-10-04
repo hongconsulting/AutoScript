@@ -104,9 +104,9 @@
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">trt</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="va">table2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.format.html">AS.format</a></span><span class="op">(</span><span class="va">fit</span>, name <span class="op">=</span> <span class="st">"Treatment"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">table2</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      [,1]        [,2]         [,3]  </span></span>
-<span><span class="co">#&gt; [1,] ""          "HR (95%CI)" "p"   </span></span>
-<span><span class="co">#&gt; [2,] "Treatment" "1 (1 to 1)" "0.92"</span></span></code></pre></div>
+<span><span class="co">#&gt;      [,1]        [,2]                  [,3]  </span></span>
+<span><span class="co">#&gt; [1,] ""          "HR (95%CI)"          "p"   </span></span>
+<span><span class="co">#&gt; [2,] "Treatment" "1.02 (0.71 to 1.45)" "0.92"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example-linear-mixed-effects-regression-table">Example: linear mixed-effects regression table<a class="anchor" aria-label="anchor" href="#example-linear-mixed-effects-regression-table"></a>
@@ -138,10 +138,10 @@
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">landmark</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">trt</span><span class="op">)</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="va">table4</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.format.html">AS.format</a></span><span class="op">(</span><span class="va">fit</span>, name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"(Intercept)"</span>, <span class="st">"Treatment"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">table4</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      [,1]          [,2]         [,3]     </span></span>
-<span><span class="co">#&gt; [1,] ""            "OR (95%CI)" "p"      </span></span>
-<span><span class="co">#&gt; [2,] "(Intercept)" "0 (0 to 0)" "&lt; 0.001"</span></span>
-<span><span class="co">#&gt; [3,] "Treatment"   "1 (1 to 3)" "0.69"</span></span></code></pre></div>
+<span><span class="co">#&gt;      [,1]          [,2]                  [,3]     </span></span>
+<span><span class="co">#&gt; [1,] ""            "OR (95%CI)"          "p"      </span></span>
+<span><span class="co">#&gt; [2,] "(Intercept)" "0.23 (0.12 to 0.43)" "&lt; 0.001"</span></span>
+<span><span class="co">#&gt; [3,] "Treatment"   "1.19 (0.50 to 2.82)" "0.69"</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

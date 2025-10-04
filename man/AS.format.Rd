@@ -7,7 +7,7 @@
 AS.format(
   fit,
   name = NULL,
-  digits.fixed = 0,
+  digits.fixed = 2,
   digits.sig = 2,
   sig.thresh = 0.001
 )

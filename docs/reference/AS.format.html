@@ -41,7 +41,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">AS.format</span><span class="op">(</span></span>
 <span>  <span class="va">fit</span>,</span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  digits.fixed <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  digits.fixed <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  digits.sig <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  sig.thresh <span class="op">=</span> <span class="fl">0.001</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -97,9 +97,9 @@ from restricted maximum likelihood. <em>Biometrics</em>, pp. 983–997.</p></li>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">time</span>, <span class="va">data</span><span class="op">$</span><span class="va">status</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">trt</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">table2</span> <span class="op">&lt;-</span> <span class="fu">AS.format</span><span class="op">(</span><span class="va">fit</span>, name <span class="op">=</span> <span class="st">"Treatment"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">table2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [,1]        [,2]         [,3]  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] ""          "HR (95%CI)" "p"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] "Treatment" "1 (1 to 1)" "0.92"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [,1]        [,2]                  [,3]  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] ""          "HR (95%CI)"          "p"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] "Treatment" "1.02 (0.71 to 1.45)" "0.92"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
