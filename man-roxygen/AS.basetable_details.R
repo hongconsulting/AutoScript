@@ -51,4 +51,5 @@
 #'                               subset.mask = data$celltype != "smallcell")
 #' table1 <- AS.basetable.binary("- Small cell, n (%)", data$celltype == "smallcell", table1,
 #'                               p.values = FALSE)
+#' options(width = 100)
 #' print(table1$table)

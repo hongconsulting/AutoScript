@@ -37,6 +37,7 @@ table1 <- AS.basetable.binary("  - Large cell, n (%)", data$celltype == "large",
                               subset.mask = data$celltype != "smallcell")
 table1 <- AS.basetable.binary("- Small cell, n (%)", data$celltype == "smallcell", table1, 
                               p.values = FALSE)
+options(width = 100)
 print(table1$table)
 #>       [,1]                        [,2]          [,3]          [,4]           [,5]   
 #>  [1,] "Name"                      "Total"       "Control"     "Experimental" "p"    

@@ -11,7 +11,6 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
-options(width = 120)
 ```
 
 # AutoScript
@@ -49,6 +48,7 @@ table1 <- AS.basetable.binary("  - Large cell, n (%)", data$celltype == "large",
                               subset.mask = data$celltype != "smallcell")
 table1 <- AS.basetable.binary("- Small cell, n (%)", data$celltype == "smallcell", table1, 
                               p.values = FALSE)
+options(width = 100)
 print(table1$table)
 ```
 

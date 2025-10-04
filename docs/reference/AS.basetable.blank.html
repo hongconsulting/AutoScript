@@ -115,31 +115,20 @@ ratio tests for dispersion models. <em>International Statistical Review</em>, pp
 <span class="r-in"><span>                              subset.mask <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">celltype</span> <span class="op">!=</span> <span class="st">"smallcell"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">table1</span> <span class="op">&lt;-</span> <span class="fu"><a href="AS.basetable.binary.html">AS.basetable.binary</a></span><span class="op">(</span><span class="st">"- Small cell, n (%)"</span>, <span class="va">data</span><span class="op">$</span><span class="va">celltype</span> <span class="op">==</span> <span class="st">"smallcell"</span>, <span class="va">table1</span>,</span></span>
 <span class="r-in"><span>                              p.values <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">table1</span><span class="op">$</span><span class="va">table</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [,1]                        [,2]          [,3]          [,4]          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] "Name"                      "Total"       "Control"     "Experimental"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] ""                          "n = 137"     "n = 69"      "n = 68"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] "Age (years), mean ± SD"    "58.3 ± 10.5" "57.5 ± 10.8" "59.1 ± 10.3" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] "Time from diagnosis"       "5.8 ± 2.4"   "6.1 ± 2.3"   "5.5 ± 2.5"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] "(months), mean ± SD"       ""            ""            ""            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] "Histology:"                ""            ""            ""            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] "- Non-small cell, n (%)"   "89 (65%)"    "39 (57%)"    "50 (74%)"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] "  - Adenocarcinoma, n (%)" "27 (30%)"    "9 (23%)"     "18 (36%)"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] "  - Squamous, n (%)"       "35 (39%)"    "15 (38%)"    "20 (40%)"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] "  - Large cell, n (%)"     "27 (30%)"    "15 (38%)"    "12 (24%)"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11,] "- Small cell, n (%)"       "48 (35%)"    "30 (43%)"    "18 (26%)"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [,5]   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] "p"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] ""     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] "0.37" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] "0.50" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] ""     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] ""     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] "0.038"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] "0.19" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] "0.88" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] "0.14" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11,] ""     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       [,1]                        [,2]          [,3]          [,4]           [,5]   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] "Name"                      "Total"       "Control"     "Experimental" "p"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] ""                          "n = 137"     "n = 69"      "n = 68"       ""     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] "Age (years), mean ± SD"    "58.3 ± 10.5" "57.5 ± 10.8" "59.1 ± 10.3"  "0.37" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] "Time from diagnosis"       "5.8 ± 2.4"   "6.1 ± 2.3"   "5.5 ± 2.5"    "0.50" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] "(months), mean ± SD"       ""            ""            ""             ""     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] "Histology:"                ""            ""            ""             ""     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] "- Non-small cell, n (%)"   "89 (65%)"    "39 (57%)"    "50 (74%)"     "0.038"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] "  - Adenocarcinoma, n (%)" "27 (30%)"    "9 (23%)"     "18 (36%)"     "0.19" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] "  - Squamous, n (%)"       "35 (39%)"    "15 (38%)"    "20 (40%)"     "0.88" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] "  - Large cell, n (%)"     "27 (30%)"    "15 (38%)"    "12 (24%)"     "0.14" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11,] "- Small cell, n (%)"       "48 (35%)"    "30 (43%)"    "18 (26%)"     ""     </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
