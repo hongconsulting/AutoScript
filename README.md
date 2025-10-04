@@ -24,9 +24,9 @@ library(AutoScript)
 library(survival)
 data <- survival::veteran
 table1 <- AS.basetable.create(group = data$trt - 1, name = c("Control", "Experimental"))
-table1 <- AS.basetable.linear("Age (years), mean \u00B1 SD", data$age, table1, digits.fixed = 1)
+table1 <- AS.basetable.linear("Age (years), mean \u00b1 SD", data$age, table1, digits.fixed = 1)
 table1 <- AS.basetable.loglinear("Time from diagnosis", data$diagtime, table1, digits.fixed = 1)
-table1 <- AS.basetable.blank("(months), mean \u00B1 SD", table1)
+table1 <- AS.basetable.blank("(months), mean \u00b1 SD", table1)
 table1 <- AS.basetable.blank("Histology:", table1)
 table1 <- AS.basetable.binary("- Non-small cell, n (%)", data$celltype != "smallcell", table1)
 table1 <- AS.basetable.binary("  - Adenocarcinoma, n (%)", data$celltype == "adeno", table1, 
@@ -62,9 +62,9 @@ data <- survival::veteran
 fit <- coxph(Surv(time, status) ~ as.factor(trt), data = data)
 table2 <- AS.format(fit, name = "Treatment")
 print(table2)
-#>      [,1]        [,2]                  [,3]  
-#> [1,] ""          "HR (95%CI)"          "p"   
-#> [2,] "Treatment" "1.02 (0.71 to 1.45)" "0.92"
+#>      [,1]        [,2]         [,3]  
+#> [1,] ""          "HR (95%CI)" "p"   
+#> [2,] "Treatment" "1 (1 to 1)" "0.92"
 ```
 
 ## Example: linear mixed-effects regression table
@@ -76,12 +76,12 @@ library(lmerTest, warn.conflicts = FALSE)
 library(pbkrtest)
 data <- lme4::sleepstudy
 fit <- lmer(Reaction ~ Days + (Days | Subject), data = data)
-table3 <- AS.format(fit)
+table3 <- AS.format(fit, digits.fixed = 1)
 print(table3)
-#>      [,1]          [,2]                        [,3]     
-#> [1,] ""            "β (95%CI)"                 "p"      
-#> [2,] "(Intercept)" "251.41 (238.03 to 264.78)" "< 0.001"
-#> [3,] "Days"        "10.47 (7.44 to 13.50)"     "< 0.001"
+#>      [,1]          [,2]                     [,3]     
+#> [1,] ""            "β (95%CI)"              "p"      
+#> [2,] "(Intercept)" "251.4 (238.0 to 264.8)" "< 0.001"
+#> [3,] "Days"        "10.5 (7.4 to 13.5)"     "< 0.001"
 ```
 
 ## Example: logistic regression table
@@ -96,8 +96,8 @@ data$landmark[data$time > 183] <- 1
 fit <- glm(landmark ~ as.factor(trt), family = "binomial", data = data)
 table4 <- AS.format(fit, name = c("(Intercept)", "Treatment"))
 print(table4)
-#>      [,1]          [,2]                  [,3]     
-#> [1,] ""            "OR (95%CI)"          "p"      
-#> [2,] "(Intercept)" "0.23 (0.12 to 0.43)" "< 0.001"
-#> [3,] "Treatment"   "1.19 (0.50 to 2.82)" "0.69"
+#>      [,1]          [,2]         [,3]     
+#> [1,] ""            "OR (95%CI)" "p"      
+#> [2,] "(Intercept)" "0 (0 to 0)" "< 0.001"
+#> [3,] "Treatment"   "1 (1 to 3)" "0.69"
 ```

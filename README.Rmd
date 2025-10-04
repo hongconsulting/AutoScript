@@ -35,9 +35,9 @@ library(AutoScript)
 library(survival)
 data <- survival::veteran
 table1 <- AS.basetable.create(group = data$trt - 1, name = c("Control", "Experimental"))
-table1 <- AS.basetable.linear("Age (years), mean \u00B1 SD", data$age, table1, digits.fixed = 1)
+table1 <- AS.basetable.linear("Age (years), mean \u00b1 SD", data$age, table1, digits.fixed = 1)
 table1 <- AS.basetable.loglinear("Time from diagnosis", data$diagtime, table1, digits.fixed = 1)
-table1 <- AS.basetable.blank("(months), mean \u00B1 SD", table1)
+table1 <- AS.basetable.blank("(months), mean \u00b1 SD", table1)
 table1 <- AS.basetable.blank("Histology:", table1)
 table1 <- AS.basetable.binary("- Non-small cell, n (%)", data$celltype != "smallcell", table1)
 table1 <- AS.basetable.binary("  - Adenocarcinoma, n (%)", data$celltype == "adeno", table1, 
@@ -70,7 +70,7 @@ library(lmerTest, warn.conflicts = FALSE)
 library(pbkrtest)
 data <- lme4::sleepstudy
 fit <- lmer(Reaction ~ Days + (Days | Subject), data = data)
-table3 <- AS.format(fit)
+table3 <- AS.format(fit, digits.fixed = 1)
 print(table3)
 ```
 

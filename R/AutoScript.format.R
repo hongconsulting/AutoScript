@@ -4,6 +4,10 @@
 #' @param fit A fitted object of class \code{coxph}, \code{glm}, \code{glmerMod},
 #' \code{lm}, or \code{lmerModLmerTest}.
 #' @param name Optional string vector of variable names.
+#' @param digits.fixed Number of decimal places for summaries. Default = 2.
+#' @param digits.sig Number of significant figures for \emph{p}-values. Default = 2.
+#' @param sig.thresh Threshold below which \emph{p}-values are displayed as
+#' \code{"< threshold"}. Default = 0.001.
 #' @return A character matrix representing a manuscript-ready table.
 #' @details
 #' \emph{P}-values for \code{lmerModLmerTest} objects are calculated using the
@@ -19,7 +23,7 @@
 #' table2 <- AS.format(fit, name = "Treatment")
 #' print(table2)
 #' @export
-AS.format <- function(fit, name = NULL) {
+AS.format <- function(fit, name = NULL, digits.fixed = 0, digits.sig = 2, sig.thresh = 0.001) {
   # defaults
   b.title <- "\u03b2 (95%CI)"
   f <- function(x) x
@@ -78,8 +82,10 @@ AS.format <- function(fit, name = NULL) {
   output[1, 3] <- "p"
   for (i in 1:length(beta)) {
     output[1 + i, 1] <- name[i]
-    output[1 + i, 2] <- paste0(AS.fixdec(f(beta[i])), " (", AS.fixdec(f(LL[i])),  " to ", AS.fixdec(f(UL[i])), ")")
-    output[1 + i, 3] <- AS.signif(p[i])
+    output[1 + i, 2] <- paste0(AS.fixdec(f(beta[i]), digits = digits.fixed),
+                               " (", AS.fixdec(f(LL[i]), digits = digits.fixed),
+                               " to ", AS.fixdec(f(UL[i]), digits = digits.fixed), ")")
+    output[1 + i, 3] <- AS.signif(p[i], digits = digits.sig, threshold = sig.thresh)
   }
   return(output)
 }

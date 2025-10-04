@@ -4,13 +4,26 @@
 \alias{AS.format}
 \title{Auto-format}
 \usage{
-AS.format(fit, name = NULL)
+AS.format(
+  fit,
+  name = NULL,
+  digits.fixed = 0,
+  digits.sig = 2,
+  sig.thresh = 0.001
+)
 }
 \arguments{
 \item{fit}{A fitted object of class \code{coxph}, \code{glm}, \code{glmerMod},
 \code{lm}, or \code{lmerModLmerTest}.}
 
 \item{name}{Optional string vector of variable names.}
+
+\item{digits.fixed}{Number of decimal places for summaries. Default = 2.}
+
+\item{digits.sig}{Number of significant figures for \emph{p}-values. Default = 2.}
+
+\item{sig.thresh}{Threshold below which \emph{p}-values are displayed as
+\code{"< threshold"}. Default = 0.001.}
 }
 \value{
 A character matrix representing a manuscript-ready table.
