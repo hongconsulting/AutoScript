@@ -1,11 +1,9 @@
-.DS_Store
 .Rbuildignore
 .RData
 .Rhistory
 .Rcheck/
 .Rproj.user/
-*.dll
-*.html
+README.html
 *.o
 *.Rproj
 *.so
