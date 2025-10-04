@@ -20,7 +20,7 @@ Format regression results into manuscript-ready tables.
 }
 \details{
 \emph{P}-values for \code{lmerModLmerTest} objects are calculated using the
-Kenward\eqn{-}Roger method\eqn{^{1}}.
+Kenward–Roger method¹.
 }
 \examples{
 library(AutoScript)
@@ -33,6 +33,6 @@ print(table2)
 \references{
 \enumerate{
 \item Kenward, M.G. and Roger, J.H., 1997. Small sample inference for fixed effects
-from restricted maximum likelihood. \emph{Biometrics}, pp. 983\eqn{-}997.
+from restricted maximum likelihood. \emph{Biometrics}, pp. 983–997.
 }
 }

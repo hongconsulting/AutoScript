@@ -47,16 +47,16 @@ with headers, group sample sizes, and \emph{p}-value columns for 1, 2, 3, or 4 g
 counts and percentages. \emph{P}-values are obtained from logistic regression.
 \item \code{AS.basetable.blank}: adds a blank row with a label, for separating sections.
 \item \code{AS.basetable.HHMM}: adds a row for a time-of-day variable in
-"HH:MM" string format with circular mean \eqn{\pm} circular SD. \emph{P}-values are
-obtained from circular-linear regression\eqn{^{1}}. Likelihood-ratio tests are performed
-using the Cordeiro\eqn{-}Paula\eqn{-}Botter method\eqn{^{2}}.
+"HH:MM" string format with circular mean ± circular SD. \emph{P}-values are
+obtained from circular-linear regression¹. Likelihood-ratio tests are performed
+using the Cordeiro–Paula–Botter method².
 \item \code{AS.basetable.linear}: adds a row for a continuous variable
-with mean \eqn{\pm} SD. \emph{P}-values are obtained from linear regression.
+with mean ± SD. \emph{P}-values are obtained from linear regression.
 \item \code{AS.basetable.loglinear}: adds a row for a log-transformed continuous variable
-with geometric mean \eqn{\pm} geometric SD. \emph{P}-values are obtained from linear
+with geometric mean ± geometric SD. \emph{P}-values are obtained from linear
 regression on the log-transformed outcome.
 \item \code{AS.basetable.TTE}: adds a row for a time-to-event variable,
-with Kaplan\eqn{-}Meier median and 95\% confidence interval. \emph{P}-values are obtained
+with Kaplan–Meier median and 95\% confidence interval. \emph{P}-values are obtained
 from Cox regression.
 }
 The resulting table includes total and group-specific summaries.
@@ -93,8 +93,8 @@ print(table1$table)
 \references{
 \enumerate{
 \item Fisher, N.I. and Lee, A.J., 1992. Regression models for an angular response.
-\emph{Biometrics}, pp. 665\eqn{-}677.
+\emph{Biometrics}, pp. 665–677.
 \item Cordeiro, G.M., Paula, G.A. and Botter, D.A., 1994. Improved likelihood
-ratio tests for dispersion models. \emph{International Statistical Review}, pp. 257\eqn{-}274.
+ratio tests for dispersion models. \emph{International Statistical Review}, pp. 257–274.
 }
 }
