@@ -18,5 +18,5 @@ Suggests:
     survival,
     WHcircular
 URL: https://github.com/hongconsulting/AutoScript,
- https://hongconsulting.github.io/WHcircular
+    https://hongconsulting.github.io/AutoScript
 BugReports: https://github.com/hongconsulting/AutoScript/issues

@@ -8,3 +8,7 @@ README.html
 *.Rproj
 *.so
 *.tar.gz
+.Rproj.user
+.httr-oauth
+.DS_Store
+.quarto
