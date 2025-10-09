@@ -1,0 +1,10 @@
+.Rbuildignore
+.RData
+.Rhistory
+.Rcheck/
+.Rproj.user/
+README.html
+*.o
+*.Rproj
+*.so
+*.tar.gz

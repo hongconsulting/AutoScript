@@ -1,0 +1,162 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# AutoScript
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Automated clinical research manuscript tables.
+
+## Installation
+ 
+You can install the development version of AutoScript from [GitHub](https://github.com/hongconsulting/AutoScript) with:
+
+```r
+remotes::install_github("hongconsulting/AutoScript")
+```
+
+## 1. Baseline characteristics tables
+
+Compared with [other packages offering similar functionality](https://github.com/kaz-yos/tableone?tab=readme-ov-file#similar-or-complementary-projects), **AutoScript** is built on the following principles:
+
+* Fine-grained control through line-by-line construction and `subset.mask`.
+
+* Significance testing via modern regression methods rather than classical (often eponymous) hypothesis tests (**note that significance testing of baseline characteristics is inappropriate for randomized groups and should be interpreted with caution for non-randomized groups**): 
+
+    * Classical tests are rarely indicated as regression methods generally perform the same function while providing additional capabilities. Using classical tests for baseline characteristics and regression methods for the main analyses results in a disjointed *Methods* section.
+
+    * Non-parametric and "exact" methods are rarely indicated as they often needlessly sacrifice power; non-normality is usually better handled through mathematical transformation.
+
+* Non-normality of continuous variables should be decided by the researcher rather than the data. Shapiro–Wilk and similar tests fail to detect non-normality in small samples while detecting clinically trivial non-normality in large samples; *statistical significance* depends on sample size and is distinct from *clinical significance*.
+
+### Example: Veterans' Administration lung cancer study 
+```{r}
+library(AutoScript)
+library(survival)
+data <- survival::veteran
+table1 <- AS.basetable.create(group = data$trt - 1, name = c("Control", "Experimental"))
+table1 <- AS.basetable.linear("Age (years), mean \u00b1 SD", data$age, table1, digits.fixed = 1)
+table1 <- AS.basetable.loglinear("Time from diagnosis", data$diagtime, table1, digits.fixed = 1)
+table1 <- AS.basetable.blank("(months), mean \u00b1 SD", table1)
+table1 <- AS.basetable.blank("Histology:", table1)
+table1 <- AS.basetable.binary("- Non-small cell, n (%)", data$celltype != "smallcell", table1)
+table1 <- AS.basetable.binary("  - Adenocarcinoma, n (%)", data$celltype == "adeno", table1, 
+                              subset.mask = data$celltype != "smallcell")
+table1 <- AS.basetable.binary("  - Squamous, n (%)", data$celltype == "squamous", table1, 
+                              subset.mask = data$celltype != "smallcell")
+table1 <- AS.basetable.binary("  - Large cell, n (%)", data$celltype == "large", table1, 
+                              subset.mask = data$celltype != "smallcell")
+table1 <- AS.basetable.binary("- Small cell, n (%)", data$celltype == "smallcell", table1, 
+                              p.values = FALSE)
+options(width = 100)
+print(table1$table)
+```
+
+### Example: eBird sightings 
+```{r}
+library(AutoScript)
+suppressMessages(library(auk))
+file <- system.file("extdata/ebd-sample.txt", package = "auk")
+data <- utils::read.delim(file)[c("OBSERVATION.COUNT", "COUNTRY", "TIME.OBSERVATIONS.STARTED")]
+data <- data[data$OBSERVATION.COUNT != "X",]
+data$count <- as.numeric(data$OBSERVATION.COUNT)
+data$time <- substr(data$TIME.OBSERVATIONS.STARTED, 1, 5)
+table1 <- AS.basetable.create(group = data$COUNTRY == "United States", name = c("Non-US", "US"))
+table1 <- AS.basetable.HHMM("Start time, mean \u00b1 SD", data$time, table1)
+table1 <- AS.basetable.count("Count, n (mean)", data$count, table1)
+print(table1$table)
+```
+
+## 2. Regression table auto-formatting
+
+### Example: Cox regression
+```{r}
+library(AutoScript)
+library(survival)
+data <- survival::veteran
+fit <- survival::coxph(survival::Surv(time, status) ~ as.factor(trt), data = data)
+print(AS.format(fit, name = "Treatment"))
+```
+
+### Example: heteroscedastic linear regression
+```{r}
+library(AutoScript)
+library(nlme)
+set.seed(24601)
+
+data0 <- data.frame("X" = 1:1000)
+data0$y <- stats::rnorm(1000, mean = data0$X, sd = sqrt(data0$X))
+fit0 <- nlme::gls(y ~ X, data = data0, weights = nlme::varPower(form = ~ X))
+print(AS.format(fit0, hetero.name = "\u03b4"))
+
+data1 <- data.frame("X" = rep(1:4, each = 250))
+data1$y <- stats::rnorm(1000, mean = data1$X, sd = data1$X)
+fit1 <- nlme::gls(y ~ as.factor(X), data = data1, weights = nlme::varIdent(form = ~ 1 | as.factor(X)))
+print(AS.format(fit1, name = c("(Intercept)", paste0("Category ", 2:4)), hetero.name = paste0("Category ", 2:4)))
+```
+
+### Example: linear mixed-effects regression
+```{r}
+library(AutoScript)
+library(lme4, quietly = TRUE, warn.conflicts = FALSE)
+library(lmerTest, warn.conflicts = FALSE)
+library(pbkrtest)
+data <- lme4::sleepstudy
+fit <- lmerTest::lmer(Reaction ~ Days + (Days | Subject), data = data)
+print(AS.format(fit, digits.fixed = 1))
+```
+
+### Example: logistic regression
+```{r}
+library(AutoScript)
+library(survival)
+data <- survival::veteran
+data$landmark <- NA
+data$landmark[data$time <= 183 & data$status == 1] <- 0
+data$landmark[data$time > 183] <- 1
+fit <- stats::glm(landmark ~ as.factor(trt), family = stats::binomial, data = data)
+print(AS.format(fit, name = c("(Intercept)", "Treatment")))
+```
+
+### Example: negative binomial regression
+```{r}
+library(AutoScript)
+library(MASS)
+data <- MASS::epil
+fit <- MASS::glm.nb(y ~ trt, data = data)
+print(AS.format(fit, name = c("(Intercept)", "Treatment")))
+print(AS.dispersion(fit))
+```
+
+### Example: Poisson regression
+```{r}
+library(AutoScript)
+library(MASS)
+data <- MASS::epil
+fit <- stats::glm(y ~ trt, family = stats::poisson, data = data)
+print(AS.format(fit, name = c("(Intercept)", "Treatment")))
+print(AS.dispersion(fit))
+```
+
+## Further Reading
+
+1. Akaike, H., 1974. A new look at the statistical model identification.
+*IEEE Transactions on Automatic Control*, 19(6), pp. 716–723.
+2. Cordeiro, G.M., Paula, G.A. and Botter, D.A., 1994. Improved likelihood
+ratio tests for dispersion models. *International Statistical Review*, pp. 257–274.
+3. Fisher, N.I. and Lee, A.J., 1992. Regression models for an angular response.
+*Biometrics*, pp. 665–677.
+4. Kenward, M.G. and Roger, J.H., 1997. Small sample inference for fixed effects from restricted maximum likelihood. *Biometrics*, pp. 983–997.

@@ -1,0 +1,22 @@
+Package: AutoScript
+Title: Automated manuscript tables
+Version: 0.8.0
+Authors@R: 
+    person("Wei", "Hong", , "wei.hong@hongconsulting.ai", role = c("aut", "cre"))
+Description: Automated table generation for clinical research manuscripts.
+License: GPL-3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Suggests:
+    auk,
+    lme4,
+    lmerTest,
+    MASS,
+    nlme,
+    pbkrtest,
+    survival,
+    WHcircular
+URL: https://github.com/hongconsulting/AutoScript,
+ https://hongconsulting.github.io/WHcircular
+BugReports: https://github.com/hongconsulting/AutoScript/issues
