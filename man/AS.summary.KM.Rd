@@ -18,5 +18,6 @@ A string of the form \code{"median (lower to upper)"}, with \code{"NR"} if not r
 }
 \description{
 Computes a string with the Kaplan–Meier median survival time and a 95\%
-confidence interval based on Greenwood's variance with a log transformation.
+confidence interval based on Greenwood's variance with a complementary log–log
+transformation.
 }

@@ -38,15 +38,17 @@ AS.summary.HHMM <- function(x) {
 
 #' Summarize Kaplan–Meier time-to-event outcome
 #'
-#'Computes a string with the Kaplan–Meier median survival time and a 95%
-#'confidence interval based on Greenwood's variance with a log transformation.
+#' Computes a string with the Kaplan–Meier median survival time and a 95%
+#' confidence interval based on Greenwood's variance with a complementary log–log
+#' transformation.
 #' @param time Follow-up times.
 #' @param status Event indicator (1 = event, 0 = censored).
 #' @param digits.fixed Number of decimal places for the summary. Default = 2.
 #' @return A string of the form `"median (lower to upper)"`, with `"NR"` if not reached.
 #' @export
 AS.summary.KM <- function(time, status, digits.fixed = 2) {
-  KM <- summary(survival::survfit(survival::Surv(time, status) ~ 1))$table
+  KM <- summary(survival::survfit(survival::Surv(time, status) ~ 1,
+                                  conf.type = "log-log"))$table
   output <- paste0(AS.fixdec(KM[7], digits.fixed), " (",
                    AS.fixdec(KM[8], digits.fixed), " to ",
                    AS.fixdec(KM[9], digits.fixed), ")")
