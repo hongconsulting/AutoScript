@@ -1,6 +1,6 @@
 #' Summarize binary variable
 #'
-#' Computes a string with the count and percentage of `1`s.
+#' Computes a string with the count and percentage of 1s.
 #' @param x A binary (0 or 1) numeric or logical vector.
 #' @param digits.fixed Number of decimal places for the percentage. Default = 2.
 #' @return A string of the form `"count (percent%)"`.

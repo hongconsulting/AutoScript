@@ -15,5 +15,5 @@ AS.summary.binary(x, digits.fixed = 0)
 A string of the form \code{"count (percent\%)"}.
 }
 \description{
-Computes a string with the count and percentage of \code{1}s.
+Computes a string with the count and percentage of 1s.
 }

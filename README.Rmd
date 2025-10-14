@@ -153,10 +153,7 @@ print(AS.dispersion(fit))
 
 ## Further Reading
 
-1. Akaike, H., 1974. A new look at the statistical model identification.
-*IEEE Transactions on Automatic Control*, 19(6), pp. 716–723.
-2. Cordeiro, G.M., Paula, G.A. and Botter, D.A., 1994. Improved likelihood
-ratio tests for dispersion models. *International Statistical Review*, pp. 257–274.
-3. Fisher, N.I. and Lee, A.J., 1992. Regression models for an angular response.
-*Biometrics*, pp. 665–677.
+1. Akaike, H., 1974. A new look at the statistical model identification. *IEEE Transactions on Automatic Control*, 19(6), pp. 716–723.
+2. Cordeiro, G.M., Paula, G.A. and Botter, D.A., 1994. Improved likelihood ratio tests for dispersion models. *International Statistical Review*, pp. 257–274.
+3. Fisher, N.I. and Lee, A.J., 1992. Regression models for an angular response. *Biometrics*, pp. 665–677.
 4. Kenward, M.G. and Roger, J.H., 1997. Small sample inference for fixed effects from restricted maximum likelihood. *Biometrics*, pp. 983–997.
