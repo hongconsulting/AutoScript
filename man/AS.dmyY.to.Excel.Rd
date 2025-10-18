@@ -18,9 +18,10 @@ with \code{century - 1}.}
 Numeric vector of serial dates using the Microsoft Excel offset.
 }
 \description{
-Converts string dates that may be in serial (using the Microsoft Excel offset),
-"d/m/y" (e.g., "01/01/00"), or "d/m/Y" format (e.g., "01/01/2000") into numeric
-serial dates. Two-digit years are expanded using a specified century and pivot year.
+Converts string dates that may be in serial (using the Microsoft Excel
+offset), "d/m/y" (e.g., "01/01/00"), or "d/m/Y" format (e.g., "01/01/2000")
+into numeric serial dates. Two-digit years are expanded using a specified
+century and pivot year.
 }
 \examples{
 print(AS.dmyY.to.Excel(c("01/01/00", "01/01/2000", "36526"), 20, 25))

@@ -13,8 +13,8 @@ AS.rowmin(input)
 A numeric vector of row-wise minima.
 }
 \description{
-Computes the minimum value of each row in a matrix or data frame,
-ignoring \code{NA}s. Returns \code{NA} if an entire row is missing.
+Computes the minimum value of each row in a matrix or data frame, ignoring
+\code{NA}s. Returns \code{NA} if an entire row is missing.
 }
 \details{
 An example use case in survival analysis is determining the event date for

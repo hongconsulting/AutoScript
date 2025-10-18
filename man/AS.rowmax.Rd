@@ -13,8 +13,8 @@ AS.rowmax(input)
 A numeric vector of row-wise maxima.
 }
 \description{
-Computes the maximum value of each row in a matrix or data frame,
-ignoring \code{NA}s. Returns \code{NA} if an entire row is missing.
+Computes the maximum value of each row in a matrix or data frame, ignoring
+\code{NA}s. Returns \code{NA} if an entire row is missing.
 }
 \details{
 An example use case in survival analysis is determining the date of last

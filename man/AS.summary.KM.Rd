@@ -9,15 +9,16 @@ AS.summary.KM(time, status, digits.fixed = 2)
 \arguments{
 \item{time}{Follow-up times.}
 
-\item{status}{Event indicator (1 = event, 0 = censored).}
+\item{status}{Event indicator (\code{1} = event, \code{0} = censored).}
 
-\item{digits.fixed}{Number of decimal places for the summary. Default = 2.}
+\item{digits.fixed}{Number of decimal places for the summary. Default = \code{2}.}
 }
 \value{
-A string of the form \code{"median (lower to upper)"}, with \code{"NR"} if not reached.
+A string of the form \code{"median (lower to upper)"} or \code{"NR"} if the
+median is not reached.
 }
 \description{
 Computes a string with the Kaplan–Meier median survival time and a 95\%
-confidence interval based on Greenwood's variance with a complementary log–log
-transformation.
+confidence interval based on Greenwood's variance with a complementary
+log–log transformation.
 }

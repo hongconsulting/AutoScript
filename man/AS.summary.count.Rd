@@ -9,8 +9,8 @@ AS.summary.count(x, digits.fixed = 2)
 \arguments{
 \item{x}{A numeric vector.}
 
-\item{digits.fixed}{Number of decimal places for the mean count per observation.
-Default = 2.}
+\item{digits.fixed}{Number of decimal places for the mean count per
+observation. Default = \code{2}.}
 }
 \value{
 A string of the form \code{"count (mean count per observation)"}.

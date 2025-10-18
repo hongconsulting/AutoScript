@@ -1,43 +1,46 @@
 #' @details
 #' \itemize{
-#'   \item \code{AS.basetable.create}: creates a template table structure
-#'     with headers, group sample sizes, and \emph{p}-value columns for 1, 2, 3, or 4 groups.
-#'   \item \code{AS.basetable.binary}: adds a row for a binary variable with
-#'     counts and percentages. \emph{P}-values are obtained from logistic regression.
-#'   \item \code{AS.basetable.blank}: adds a blank row with a label, for separating sections.
-#'   \item \code{AS.basetable.count}: adds a row for a count variable. \emph{P}-values
-#'   are obtained from Poisson regression or negative binomial regression, whichever
+#'   \item `AS.basetable.create`: creates a template table structure with
+#'   headers, group sample sizes, and *p*-value columns for 1, 2, 3, or 4 groups.
+#'   \item `AS.basetable.binary`: adds a row for a binary variable with counts
+#'   and percentages. *P*-values are obtained from logistic regression.
+#'   \item `AS.basetable.blank`: adds a blank row with a label, for separating
+#'   sections.
+#'   \item `AS.basetable.count`: adds a row for a count variable. *P*-values are
+#'   obtained from Poisson regression or negative binomial regression, whichever
 #'   model yields the lower Akaike information criterion¹.
-#'   \item \code{AS.basetable.HHMM}: adds a row for a time-of-day variable in
-#'   "HH:MM" string format with circular mean ± circular SD. \emph{P}-values are
-#'   obtained from circular-linear regression². Likelihood-ratio tests are performed
+#'   \item `AS.basetable.HHMM`: adds a row for a time-of-day variable in "HH:MM"
+#'   string format with circular mean ± circular SD. *P*-values are obtained
+#'   from circular-linear regression². Likelihood-ratio tests are performed
 #'   using the Cordeiro–Paula–Botter method³.
-#'   \item \code{AS.basetable.linear}: adds a row for a continuous variable
-#'     with mean ± SD. \emph{P}-values are obtained from linear regression.
-#'   \item \code{AS.basetable.loglinear}: adds a row for a log-transformed continuous variable
-#'     with geometric mean ± geometric SD. \emph{P}-values are obtained from linear
-#'     regression on the log-transformed outcome.
-#'   \item \code{AS.basetable.TTE}: adds a row for a time-to-event variable,
-#'     with Kaplan–Meier median and 95% confidence interval. \emph{P}-values are obtained
-#'     from Cox regression.
+#'   \item `AS.basetable.linear`: adds a row for a continuous variable with mean
+#'   ± SD. *P*-values are obtained from linear regression.
+#'   \item `AS.basetable.loglinear`: adds a row for a log-transformed continuous
+#'   variable with geometric mean ± geometric SD. *P*-values are obtained from
+#'   linear regression on the log-transformed outcome.
+#'   \item `AS.basetable.TTE`: adds a row for a time-to-event variable, with
+#'   Kaplan–Meier median and 95% confidence interval. *P*-values are obtained
+#'   from Cox regression.
 #' }
-#' The resulting table includes total and group-specific summaries.
-#' \emph{P}-values are provided but are not always appropriate to report.
-#' With 3 groups, seven possible comparisons are provided:
+#' The resulting table includes total and group-specific summaries. *P*-values
+#' are provided but are not always appropriate to report. With 3 groups, seven
+#' possible comparisons are provided:
 #' \itemize{
-#'   \item Each pairwise comparison: group 0 versus 1, 0 versus 2, and 1 versus 2.
-#'   \item Each group against the combination of the other two: group 0 versus 1 & 2,
-#'   1 versus 0 & 2, 2 versus 0 & 1
+#'   \item Each pairwise comparison: group 0 versus 1, 0 versus 2, and 1 versus
+#'   2.
+#'   \item Each group against the combination of the other two: group 0 versus 1
+#'   & 2, 1 versus 0 & 2, 2 versus 0 & 1.
 #'   \item A global likelihood-ratio test.
 #' }
 #' With 4 groups, only the likelihood-ratio test is provided.
 #' @references
 #' 1. Akaike, H., 1974. A new look at the statistical model identification.
-#' \emph{IEEE Transactions on Automatic Control}, 19(6), pp. 716–723.
-#' 2. Fisher, N.I. and Lee, A.J., 1992. Regression models for an angular response.
-#' \emph{Biometrics}, pp. 665–677.
+#' *IEEE Transactions on Automatic Control*, 19(6), pp. 716–723.
+#' 2. Fisher, N.I. and Lee, A.J., 1992. Regression models for an angular
+#' response. *Biometrics*, pp. 665–677.
 #' 3. Cordeiro, G.M., Paula, G.A. and Botter, D.A., 1994. Improved likelihood
-#' ratio tests for dispersion models. \emph{International Statistical Review}, pp. 257–274.
+#' ratio tests for dispersion models. *International Statistical Review*, pp.
+#' 257–274.
 #' @examples
 #' # See GitHub README for further examples:
 #' # https://github.com/hongconsulting/AutoScript

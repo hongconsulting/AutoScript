@@ -13,12 +13,12 @@ AS.survoutcome(date_start, date_event, date_follow, divisor = 365.2425/12)
 
 \item{date_follow}{Vector of last follow-up dates for censored cases.}
 
-\item{divisor}{Unit conversion factor for time. Default = 365.2425/12.}
+\item{divisor}{Unit conversion factor for time. Default = \code{365.2425/12}.}
 }
 \value{
-A numeric matrix with two columns: survival time and status
-(1 = event, 0 = censored). Cases with missing start dates or with survival
-time ≤ 0 are returned as \code{NA} in both columns.
+A numeric matrix with two columns: survival time and status (\code{1} =
+event, \code{0} = censored). Cases with missing start dates or with survival time
+≤ 0 are returned as \code{NA} in both columns.
 }
 \description{
 Computes event times and statuses from start, event, and review dates.

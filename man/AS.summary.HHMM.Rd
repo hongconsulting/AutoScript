@@ -10,9 +10,9 @@ AS.summary.HHMM(x)
 \item{x}{A string vector of times-of-day in "HH:MM" format.}
 }
 \value{
-A string of the form \verb{"}mean ± SD\verb{"}.
+A string of the form \code{"mean ± SD"}.
 }
 \description{
 Computes a string with the mean and standard deviation in the form
-\verb{"}circular mean ± circular SD\verb{"}.
+\code{"circular mean ± circular SD"}.
 }

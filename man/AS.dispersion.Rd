@@ -13,6 +13,6 @@ AS.dispersion(fit)
 Numeric value of the dispersion estimate.
 }
 \description{
-Computes the ratio of residual deviance to residual degrees of freedom,
-used to assess over-dispersion.
+Computes the ratio of residual deviance to residual degrees of freedom, used
+to assess over-dispersion.
 }

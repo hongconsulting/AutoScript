@@ -17,7 +17,7 @@ All other elements return 0.
 
     <a class="navbar-brand me-2" href="../index.html">AutoScript</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,8 +44,8 @@ All other elements return 0.
 
     <div class="ref-description section level2">
     <p>Converts a string vector to a numeric vector according to the following:</p><ol><li><p>Elements exactly matching any value in <code>missing</code> return <code>NA</code>.</p></li>
-<li><p>Otherwise, elements matching any fixed pattern in <code>pattern</code> return 1.</p></li>
-<li><p>All other elements return 0.</p></li>
+<li><p>Otherwise, elements matching any fixed pattern in <code>pattern</code> return <code>1</code>.</p></li>
+<li><p>All other elements return <code>0</code>.</p></li>
 </ol></div>
 
     <div class="section level2">
@@ -71,7 +71,8 @@ All other elements return 0.
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Numeric vector of 1 (pattern matched), 0 (no match), or <code>NA</code> (missing).</p>
+    <p>Numeric vector of <code>1</code> (pattern matched), <code>0</code> (no match), or <code>NA</code>
+(missing).</p>
     </div>
 
     <div class="section level2">

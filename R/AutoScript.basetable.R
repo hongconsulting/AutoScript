@@ -1,13 +1,13 @@
 #' Baseline characteristics tables: create
 #'
 #' See Details.
-#' @param group Integer vector of group assignments, coded as 0, 1, 2, or 3.
-#' @param name String vector of group names. Default = \code{c("Group 0", "Group 1", "Group 2", "Group 3")}.
+#' @param group Integer vector of group assignments, coded as `0`, `1`, `2`, or `3`.
+#' @param name String vector of group names. Default = `c("Group 0", "Group 1", "Group 2", "Group 3")`.
 #' @return A list with two elements:
 #' \itemize{
-#'   \item \code{group}: an integer vector of group assignments
-#'   \item \code{table}: a character matrix containing column headers and
-#'     sample sizes
+#'   \item `group`: an integer vector of group assignments
+#'   \item `table`: a character matrix containing column headers and sample
+#'   sizes
 #' }
 #' @template AS.basetable_details
 #' @export
@@ -71,7 +71,7 @@ AS.basetable.create <- function(group, name = c("Group 0", "Group 1", "Group 2",
 #'
 #' See Details.
 #' @param name A string giving the variable name to display in the first column.
-#' @param outcome Binary vector (0:1 or logical) of outcome values.
+#' @param outcome Binary vector (`0:1` or logical) of outcome values.
 #' @template AS.basetable_param_0_digits.fixed
 #' @template AS.basetable_return
 #' @template AS.basetable_details
@@ -145,8 +145,8 @@ AS.basetable.binary <- function(name, outcome, basetable, subset.mask = NULL, p.
 #'
 #' See Details.
 #' @param text A string giving the custom text to display in the first column.
-#' @param basetable A list created by \code{AS.basetable.create}, containing the group
-#' assignments and current table structure.
+#' @param basetable A list created by `AS.basetable.create`, containing the
+#' group assignments and current table structure.
 #' @template AS.basetable_return
 #' @template AS.basetable_details
 #' @export
@@ -463,7 +463,8 @@ AS.basetable.loglinear <- function(name, outcome, basetable, subset.mask = NULL,
 #' See Details.
 #' @param name A string giving the variable name to display in the first column.
 #' @param time Numeric vector of follow-up times.
-#' @param status Binary vector indicating event occurrence (1 = event, 0 = censored).
+#' @param status Binary vector indicating event occurrence (`1` = event, `0` =
+#' censored).
 #' @template AS.basetable_param
 #' @template AS.basetable_return
 #' @template AS.basetable_details

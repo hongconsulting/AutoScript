@@ -9,12 +9,12 @@ AS.fixdec(x, digits = 2)
 \arguments{
 \item{x}{A numeric value.}
 
-\item{digits}{Number of decimal places. Default = 2.}
+\item{digits}{Number of decimal places. Default = \code{2}.}
 }
 \value{
 A string representation of \code{x}.
 }
 \description{
-Converts a numeric value to a string with a fixed number of
-decimal places, including trailing zeros. Returns \code{"NaN"} if input is \code{NA}.
+Converts a numeric value to a string with a fixed number of decimal places,
+including trailing zeros. Returns \code{"NaN"} if input is \code{NA}.
 }

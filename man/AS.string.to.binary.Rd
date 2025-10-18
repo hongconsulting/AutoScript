@@ -14,14 +14,15 @@ AS.string.to.binary(input, pattern, missing)
 \item{missing}{String vector of exact values to treat as \code{NA}.}
 }
 \value{
-Numeric vector of 1 (pattern matched), 0 (no match), or \code{NA} (missing).
+Numeric vector of \code{1} (pattern matched), \code{0} (no match), or \code{NA}
+(missing).
 }
 \description{
 Converts a string vector to a numeric vector according to the following:
 \enumerate{
 \item Elements exactly matching any value in \code{missing} return \code{NA}.
-\item Otherwise, elements matching any fixed pattern in \code{pattern} return 1.
-\item All other elements return 0.
+\item Otherwise, elements matching any fixed pattern in \code{pattern} return \code{1}.
+\item All other elements return \code{0}.
 }
 }
 \examples{

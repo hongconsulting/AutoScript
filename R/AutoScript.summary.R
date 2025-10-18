@@ -1,8 +1,8 @@
 #' Summarize binary variable
 #'
-#' Computes a string with the count and percentage of 1s.
-#' @param x A binary (0 or 1) numeric or logical vector.
-#' @param digits.fixed Number of decimal places for the percentage. Default = 2.
+#' Computes a string with the count and percentage of `1`s.
+#' @param x A binary (`0` or `1`) numeric or logical vector.
+#' @param digits.fixed Number of decimal places for the percentage. Default = `2`.
 #' @return A string of the form `"count (percent%)"`.
 #' @export
 AS.summary.binary <- function(x, digits.fixed = 0) {
@@ -13,8 +13,8 @@ AS.summary.binary <- function(x, digits.fixed = 0) {
 #'
 #' Computes a string with the count and mean count per observation.
 #' @param x A numeric vector.
-#' @param digits.fixed Number of decimal places for the mean count per observation.
-#' Default = 2.
+#' @param digits.fixed Number of decimal places for the mean count per
+#' observation. Default = `2`.
 #' @return A string of the form `"count (mean count per observation)"`.
 #' @export
 AS.summary.count <- function(x, digits.fixed = 2) {
@@ -24,9 +24,9 @@ AS.summary.count <- function(x, digits.fixed = 2) {
 #' Summarize time-of-day variable in "HH:MM" format
 #'
 #' Computes a string with the mean and standard deviation in the form
-#' `"`circular mean ± circular SD`"`.
+#' `"circular mean ± circular SD"`.
 #' @param x A string vector of times-of-day in "HH:MM" format.
-#' @return A string of the form `"`mean ± SD`"`.
+#' @return A string of the form `"mean ± SD"`.
 #' @export
 AS.summary.HHMM <- function(x) {
   if (!requireNamespace("WHcircular", quietly = TRUE)) {stop("[AS.summary.HHMM] requires package 'WHcircular'")}
@@ -39,12 +39,13 @@ AS.summary.HHMM <- function(x) {
 #' Summarize Kaplan–Meier time-to-event outcome
 #'
 #' Computes a string with the Kaplan–Meier median survival time and a 95%
-#' confidence interval based on Greenwood's variance with a complementary log–log
-#' transformation.
+#' confidence interval based on Greenwood's variance with a complementary
+#' log–log transformation.
 #' @param time Follow-up times.
-#' @param status Event indicator (1 = event, 0 = censored).
-#' @param digits.fixed Number of decimal places for the summary. Default = 2.
-#' @return A string of the form `"median (lower to upper)"`, with `"NR"` if not reached.
+#' @param status Event indicator (`1` = event, `0` = censored).
+#' @param digits.fixed Number of decimal places for the summary. Default = `2`.
+#' @return A string of the form `"median (lower to upper)"` or `"NR"` if the
+#' median is not reached.
 #' @export
 AS.summary.KM <- function(time, status, digits.fixed = 2) {
   KM <- summary(survival::survfit(survival::Surv(time, status) ~ 1,
@@ -59,10 +60,10 @@ AS.summary.KM <- function(time, status, digits.fixed = 2) {
 #' Summarize continuous variable
 #'
 #' Computes a string with the mean and standard deviation in the form
-#' `"`mean ± SD`"`.
+#' `"mean ± SD"`.
 #' @param x A numeric vector.
-#' @param digits.fixed Number of decimal places. Default = 2.
-#' @return A string of the form `"`mean ± SD`"`.
+#' @param digits.fixed Number of decimal places. Default = `2`.
+#' @return A string of the form `"mean ± SD"`.
 #' @export
 AS.summary.linear <- function(x, digits.fixed = 2) {
   output <- paste0(AS.fixdec(mean(x), digits.fixed), " \u00b1 ", AS.fixdec(stats::sd(x), digits.fixed))
@@ -72,11 +73,11 @@ AS.summary.linear <- function(x, digits.fixed = 2) {
 
 #' Summarize log-transformed continuous variable
 #'
-#' Computes a string with the geometric mean and geometric standard deviation in the form
-#' `"`geometric mean ± geometric SD`"`.
+#' Computes a string with the geometric mean and geometric standard deviation in
+#' the form `"geometric mean ± geometric SD"`.
 #' @param x A numeric vector.
-#' @param digits.fixed Number of decimal places. Default = 2.
-#' @return A string of the form `"`geometric mean ± geometric SD`"`.
+#' @param digits.fixed Number of decimal places. Default = `2`.
+#' @return A string of the form `"geometric mean ± geometric SD"`.
 #' @export
 AS.summary.loglinear <- function(x, digits.fixed = 2) {
   output <- paste0(AS.fixdec(exp(mean(log(x))), digits.fixed), " \u00b1 ", AS.fixdec(exp(stats::sd(log(x))), digits.fixed))

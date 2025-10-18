@@ -7,13 +7,13 @@
 AS.summary.binary(x, digits.fixed = 0)
 }
 \arguments{
-\item{x}{A binary (0 or 1) numeric or logical vector.}
+\item{x}{A binary (\code{0} or \code{1}) numeric or logical vector.}
 
-\item{digits.fixed}{Number of decimal places for the percentage. Default = 2.}
+\item{digits.fixed}{Number of decimal places for the percentage. Default = \code{2}.}
 }
 \value{
 A string of the form \code{"count (percent\%)"}.
 }
 \description{
-Computes a string with the count and percentage of 1s.
+Computes a string with the count and percentage of \code{1}s.
 }

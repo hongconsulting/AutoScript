@@ -9,12 +9,12 @@ AS.summary.linear(x, digits.fixed = 2)
 \arguments{
 \item{x}{A numeric vector.}
 
-\item{digits.fixed}{Number of decimal places. Default = 2.}
+\item{digits.fixed}{Number of decimal places. Default = \code{2}.}
 }
 \value{
-A string of the form \verb{"}mean ± SD\verb{"}.
+A string of the form \code{"mean ± SD"}.
 }
 \description{
 Computes a string with the mean and standard deviation in the form
-\verb{"}mean ± SD\verb{"}.
+\code{"mean ± SD"}.
 }

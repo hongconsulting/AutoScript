@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">AutoScript</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +59,7 @@
 
 
 <dt id="arg-outcome">outcome<a class="anchor" aria-label="anchor" href="#arg-outcome"></a></dt>
-<dd><p>Binary vector (0:1 or logical) of outcome values.</p></dd>
+<dd><p>Binary vector (<code>0:1</code> or logical) of outcome values.</p></dd>
 
 
 <dt id="arg-basetable">basetable<a class="anchor" aria-label="anchor" href="#arg-basetable"></a></dt>
@@ -73,20 +73,21 @@ the analysis to a subset of observations.</p></dd>
 
 
 <dt id="arg-p-values">p.values<a class="anchor" aria-label="anchor" href="#arg-p-values"></a></dt>
-<dd><p>Logical value indicating whether to display <em>p</em>-values in the added row.</p></dd>
+<dd><p>Logical value indicating whether to display <em>p</em>-values in the
+added row.</p></dd>
 
 
 <dt id="arg-digits-fixed">digits.fixed<a class="anchor" aria-label="anchor" href="#arg-digits-fixed"></a></dt>
-<dd><p>Number of decimal places for summaries. Default = 0.</p></dd>
+<dd><p>Number of decimal places for summaries. Default = <code>0</code>.</p></dd>
 
 
 <dt id="arg-digits-sig">digits.sig<a class="anchor" aria-label="anchor" href="#arg-digits-sig"></a></dt>
-<dd><p>Number of significant figures for <em>p</em>-values. Default = 2.</p></dd>
+<dd><p>Number of significant figures for <em>p</em>-values. Default = <code>2</code>.</p></dd>
 
 
 <dt id="arg-sig-thresh">sig.thresh<a class="anchor" aria-label="anchor" href="#arg-sig-thresh"></a></dt>
 <dd><p>Threshold below which <em>p</em>-values are displayed as
-<code>"&lt; threshold"</code>. Default = 0.001.</p></dd>
+<code>"&lt; threshold"</code>. Default = <code>0.001</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -97,31 +98,33 @@ The table itself can be accessed with <code>$table</code>.</p>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
 
-<ul><li><p><code>AS.basetable.create</code>: creates a template table structure
-with headers, group sample sizes, and <em>p</em>-value columns for 1, 2, 3, or 4 groups.</p></li>
-<li><p><code>AS.basetable.binary</code>: adds a row for a binary variable with
-counts and percentages. <em>P</em>-values are obtained from logistic regression.</p></li>
-<li><p><code>AS.basetable.blank</code>: adds a blank row with a label, for separating sections.</p></li>
-<li><p><code>AS.basetable.count</code>: adds a row for a count variable. <em>P</em>-values
-are obtained from Poisson regression or negative binomial regression, whichever
+<ul><li><p><code>AS.basetable.create</code>: creates a template table structure with
+headers, group sample sizes, and <em>p</em>-value columns for 1, 2, 3, or 4 groups.</p></li>
+<li><p><code>AS.basetable.binary</code>: adds a row for a binary variable with counts
+and percentages. <em>P</em>-values are obtained from logistic regression.</p></li>
+<li><p><code>AS.basetable.blank</code>: adds a blank row with a label, for separating
+sections.</p></li>
+<li><p><code>AS.basetable.count</code>: adds a row for a count variable. <em>P</em>-values are
+obtained from Poisson regression or negative binomial regression, whichever
 model yields the lower Akaike information criterion¹.</p></li>
-<li><p><code>AS.basetable.HHMM</code>: adds a row for a time-of-day variable in
-"HH:MM" string format with circular mean ± circular SD. <em>P</em>-values are
-obtained from circular-linear regression². Likelihood-ratio tests are performed
+<li><p><code>AS.basetable.HHMM</code>: adds a row for a time-of-day variable in "HH:MM"
+string format with circular mean ± circular SD. <em>P</em>-values are obtained
+from circular-linear regression². Likelihood-ratio tests are performed
 using the Cordeiro–Paula–Botter method³.</p></li>
-<li><p><code>AS.basetable.linear</code>: adds a row for a continuous variable
-with mean ± SD. <em>P</em>-values are obtained from linear regression.</p></li>
-<li><p><code>AS.basetable.loglinear</code>: adds a row for a log-transformed continuous variable
-with geometric mean ± geometric SD. <em>P</em>-values are obtained from linear
-regression on the log-transformed outcome.</p></li>
-<li><p><code>AS.basetable.TTE</code>: adds a row for a time-to-event variable,
-with Kaplan–Meier median and 95% confidence interval. <em>P</em>-values are obtained
+<li><p><code>AS.basetable.linear</code>: adds a row for a continuous variable with mean
+± SD. <em>P</em>-values are obtained from linear regression.</p></li>
+<li><p><code>AS.basetable.loglinear</code>: adds a row for a log-transformed continuous
+variable with geometric mean ± geometric SD. <em>P</em>-values are obtained from
+linear regression on the log-transformed outcome.</p></li>
+<li><p><code>AS.basetable.TTE</code>: adds a row for a time-to-event variable, with
+Kaplan–Meier median and 95% confidence interval. <em>P</em>-values are obtained
 from Cox regression.</p></li>
-</ul><p>The resulting table includes total and group-specific summaries.
-<em>P</em>-values are provided but are not always appropriate to report.
-With 3 groups, seven possible comparisons are provided:</p><ul><li><p>Each pairwise comparison: group 0 versus 1, 0 versus 2, and 1 versus 2.</p></li>
-<li><p>Each group against the combination of the other two: group 0 versus 1 &amp; 2,
-1 versus 0 &amp; 2, 2 versus 0 &amp; 1</p></li>
+</ul><p>The resulting table includes total and group-specific summaries. <em>P</em>-values
+are provided but are not always appropriate to report. With 3 groups, seven
+possible comparisons are provided:</p><ul><li><p>Each pairwise comparison: group 0 versus 1, 0 versus 2, and 1 versus
+2.</p></li>
+<li><p>Each group against the combination of the other two: group 0 versus 1
+&amp; 2, 1 versus 0 &amp; 2, 2 versus 0 &amp; 1.</p></li>
 <li><p>A global likelihood-ratio test.</p></li>
 </ul><p>With 4 groups, only the likelihood-ratio test is provided.</p>
     </div>
@@ -130,10 +133,11 @@ With 3 groups, seven possible comparisons are provided:</p><ul><li><p>Each pairw
 
 <ol><li><p>Akaike, H., 1974. A new look at the statistical model identification.
 <em>IEEE Transactions on Automatic Control</em>, 19(6), pp. 716–723.</p></li>
-<li><p>Fisher, N.I. and Lee, A.J., 1992. Regression models for an angular response.
-<em>Biometrics</em>, pp. 665–677.</p></li>
+<li><p>Fisher, N.I. and Lee, A.J., 1992. Regression models for an angular
+response. <em>Biometrics</em>, pp. 665–677.</p></li>
 <li><p>Cordeiro, G.M., Paula, G.A. and Botter, D.A., 1994. Improved likelihood
-ratio tests for dispersion models. <em>International Statistical Review</em>, pp. 257–274.</p></li>
+ratio tests for dispersion models. <em>International Statistical Review</em>, pp.
+257–274.</p></li>
 </ol></div>
 
     <div class="section level2">

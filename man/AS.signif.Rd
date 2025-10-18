@@ -9,16 +9,16 @@ AS.signif(x, digits = 2, threshold = 0.001)
 \arguments{
 \item{x}{A numeric value.}
 
-\item{digits}{Number of significant figures. Default = 2.}
+\item{digits}{Number of significant figures. Default = \code{2}.}
 
 \item{threshold}{Lower bound below which values are displayed as
-\code{"< threshold"}. Default = 0.001.}
+\code{"< threshold"}. Default = \code{0.001}.}
 }
 \value{
 A string representation of \code{x}.
 }
 \description{
-Converts a numeric value to a string with the specified number of
-significant figures, including trailing zeros. Values smaller than
-\code{threshold} are displayed as \code{"< threshold"}.
+Converts a numeric value to a string with the specified number of significant
+figures, including trailing zeros. Values smaller than \code{threshold} are
+displayed as \code{"< threshold"}.
 }
