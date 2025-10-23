@@ -150,7 +150,6 @@ AS.string.to.binary <- function(input, pattern, missing) {
   return(output)
 }
 
-
 #' Survival outcomes
 #'
 #' Computes event times and statuses from start, event, and review dates.
