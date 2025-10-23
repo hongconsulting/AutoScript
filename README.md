@@ -6,8 +6,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-Automated table generation and data cleaning tools for clinical research
-manuscripts.
+Automated table generation and data preparation tools for clinical
+research manuscripts.
 
 ## Installation
 
@@ -220,7 +220,7 @@ print(AS.dispersion(fit))
 #> [1] 10.74825
 ```
 
-## 3. Data cleaning tools
+## 3. Data preparation tools
 
 ### Example:
 
