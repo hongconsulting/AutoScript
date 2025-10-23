@@ -220,7 +220,7 @@ print(AS.dispersion(fit))
 #> [1] 10.74825
 ```
 
-## 3. Data cleaning
+## 3. Data cleaning tools
 
 ### Example:
 

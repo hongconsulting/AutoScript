@@ -151,7 +151,7 @@ print(AS.format(fit, name = c("(Intercept)", "Treatment")))
 print(AS.dispersion(fit))
 ```
 
-## 3. Data cleaning
+## 3. Data cleaning tools
 
 ### Example:
 ```{r}
