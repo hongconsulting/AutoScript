@@ -4,12 +4,12 @@
 \alias{AS.delim.replace}
 \title{Replace delimited string elements (case- and whitespace-insensitive)}
 \usage{
-AS.delim.replace(x, pattern, replacement, delimiter = ",")
+AS.delim.replace(x, match, replacement, delimiter = ",")
 }
 \arguments{
 \item{x}{String vector containing delimited strings.}
 
-\item{pattern}{String element to match (case- and whitespace-insensitive).}
+\item{match}{String element to match (case- and whitespace-insensitive).}
 
 \item{replacement}{String element replacement (case- and
 whitespace-insensitive).}
@@ -22,7 +22,8 @@ A string vector with replaced elements.
 \description{
 Splits each string in a string vector by a specified delimiter, trims
 whitespace, converts to lowercase, replaces matching elements with a new
-string element, and rejoins the elements using the same delimiter.
+string element, removes duplicate elements, sorts elements alphabetically,
+and rejoins the elements using the same delimiter.
 }
 \examples{
 treatment <- c("capecitabine",

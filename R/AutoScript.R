@@ -1,6 +1,22 @@
-# AS.contains <- function(x, pattern) {
-#   grepl(pattern, x)
-# }
+
+#' Detect substrings in a string vector (case-insensitive)
+#'
+#' Checks whether each element of a string vector contains any of the specified
+#' substrings using case-insensitive matching.
+#' @param x String vector.
+#' @param match String vector of substrings to look for within each element of
+#' `x`.
+#' @return Logical vector indicating whether each element contains a match.
+#' @export
+AS.contains <- function(x, match) {
+  f <- function(x) {
+    g <- function(match) {
+      return(grepl(tolower(match), tolower(x), fixed = TRUE))
+    }
+    return(any(sapply(match, g)))
+  }
+  return(unname(sapply(x, f)))
+}
 
 #' Dispersion estimate
 #'

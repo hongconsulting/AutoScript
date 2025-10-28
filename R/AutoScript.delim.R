@@ -23,9 +23,10 @@ AS.delim.table <- function(x, delimiter = ",") {
 #'
 #' Splits each string in a string vector by a specified delimiter, trims
 #' whitespace, converts to lowercase, replaces matching elements with a new
-#' string element, and rejoins the elements using the same delimiter.
+#' string element, removes duplicate elements, sorts elements alphabetically,
+#' and rejoins the elements using the same delimiter.
 #' @param x String vector containing delimited strings.
-#' @param pattern String element to match (case- and whitespace-insensitive).
+#' @param match String element to match (case- and whitespace-insensitive).
 #' @param replacement String element replacement (case- and
 #' whitespace-insensitive).
 #' @param delimiter String delimiter. Default = `","`.
@@ -42,11 +43,12 @@ AS.delim.table <- function(x, delimiter = ",") {
 #' treatment <- AS.delim.replace(treatment, "ribociclib", "cdk46i")
 #' print(treatment)
 #' @export
-AS.delim.replace <- function(x, pattern, replacement, delimiter = ",") {
+AS.delim.replace <- function(x, match, replacement, delimiter = ",") {
   f <- function(t) {
     parts <- tolower(trimws(unlist(strsplit(t, delimiter, fixed = TRUE))))
-    parts[parts == tolower(trimws(pattern))] <- tolower(trimws(replacement))
-    paste(parts, collapse = paste0(delimiter, " "))
+    parts[parts == tolower(trimws(match))] <- tolower(trimws(replacement))
+    parts <- sort(unique(parts))
+    return(paste(parts, collapse = paste0(delimiter, " ")))
   }
   return(unname(sapply(x, f)))
 }
