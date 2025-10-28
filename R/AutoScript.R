@@ -1,5 +1,25 @@
+#' Detect if all substrings are contained in each string vector element
+#' (case-insensitive)
+#'
+#' Checks whether each element of a string vector contains all of the specified
+#' substrings using case-insensitive matching.
+#' @param x String vector.
+#' @param match String vector of substrings to look for within each element of
+#' `x`.
+#' @return Logical vector indicating whether each element contains a match.
+#' @export
+AS.contains.AND <- function(x, match) {
+  f <- function(x) {
+    g <- function(match) {
+      return(grepl(tolower(match), tolower(x), fixed = TRUE))
+    }
+    return(all(sapply(match, g)))
+  }
+  return(unname(sapply(x, f)))
+}
 
-#' Detect substrings in a string vector (case-insensitive)
+#' Detect if any substrings are contained in each string vector element
+#' (case-insensitive)
 #'
 #' Checks whether each element of a string vector contains any of the specified
 #' substrings using case-insensitive matching.
@@ -8,7 +28,7 @@
 #' `x`.
 #' @return Logical vector indicating whether each element contains a match.
 #' @export
-AS.contains <- function(x, match) {
+AS.contains.OR <- function(x, match) {
   f <- function(x) {
     g <- function(match) {
       return(grepl(tolower(match), tolower(x), fixed = TRUE))
