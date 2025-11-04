@@ -10,6 +10,7 @@
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.basetable.count.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.basetable.create.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.basetable.linear.html</loc></url>
+<url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.basetable.log1plinear.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.basetable.loglinear.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.contains.AND.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.contains.OR.html</loc></url>
@@ -29,6 +30,8 @@
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.binary.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.count.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.linear.html</loc></url>
+<url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.log1p.html</loc></url>
+<url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.log1plinear.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.loglinear.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.survoutcome.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.write.csv.html</loc></url>

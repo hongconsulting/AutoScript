@@ -71,6 +71,20 @@ AS.summary.linear <- function(x, digits.fixed = 2) {
   return(output)
 }
 
+#' Summarize log1p-transformed continuous variable
+#'
+#' Computes a string with the back-transformed mean and standard deviation from
+#' the log(x + 1) scale in the form `"back-transformed mean ± back-transformed SD"`.
+#' @param x A numeric vector.
+#' @param digits.fixed Number of decimal places. Default = `2`.
+#' @return A string of the form `"back-transformed mean ± back-transformed SD"`.
+#' @export
+AS.summary.log1plinear <- function(x, digits.fixed = 2) {
+  output <- paste0(AS.fixdec(exp(mean(log1p(x))) - 1, digits.fixed), " \u00b1 ", AS.fixdec(exp(stats::sd(log1p(x))), digits.fixed))
+  output <- gsub("-", "\u2212", output)
+  return(output)
+}
+
 #' Summarize log-transformed continuous variable
 #'
 #' Computes a string with the geometric mean and geometric standard deviation in

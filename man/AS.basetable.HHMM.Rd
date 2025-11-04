@@ -58,6 +58,10 @@ from circular-linear regression². Likelihood-ratio tests are performed
 using the Cordeiro–Paula–Botter method³.
 \item \code{AS.basetable.linear}: adds a row for a continuous variable with mean
 ± SD. \emph{P}-values are obtained from linear regression.
+\item \code{AS.basetable.log1plinear}: adds a row for a log1p-transformed
+continuous variable with back-transformed mean ± back-transformed SD.
+\emph{P}-values are obtained from linear regression on the log1p-transformed
+outcome.
 \item \code{AS.basetable.loglinear}: adds a row for a log-transformed continuous
 variable with geometric mean ± geometric SD. \emph{P}-values are obtained from
 linear regression on the log-transformed outcome.

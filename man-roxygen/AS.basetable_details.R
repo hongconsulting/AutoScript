@@ -15,6 +15,10 @@
 #'   using the Cordeiro–Paula–Botter method³.
 #'   \item `AS.basetable.linear`: adds a row for a continuous variable with mean
 #'   ± SD. *P*-values are obtained from linear regression.
+#'   \item `AS.basetable.log1plinear`: adds a row for a log1p-transformed
+#'   continuous variable with back-transformed mean ± back-transformed SD.
+#'   *P*-values are obtained from linear regression on the log1p-transformed
+#'   outcome.
 #'   \item `AS.basetable.loglinear`: adds a row for a log-transformed continuous
 #'   variable with geometric mean ± geometric SD. *P*-values are obtained from
 #'   linear regression on the log-transformed outcome.

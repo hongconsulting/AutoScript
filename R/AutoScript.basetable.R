@@ -412,6 +412,87 @@ AS.basetable.linear <- function(name, outcome, basetable, subset.mask = NULL, p.
   return(output)
 }
 
+#' Baseline characteristics tables: add log1p-linear variable
+#'
+#' See Details.
+#' @param name A string giving the variable name to display in the first column.
+#' @param outcome Numeric vector of continuous outcome values.
+#' @template AS.basetable_param
+#' @template AS.basetable_return
+#' @template AS.basetable_details
+#' @export
+AS.basetable.log1plinear <- function(name, outcome, basetable, subset.mask = NULL, p.values = TRUE,
+                                   digits.fixed = 2, digits.sig = 2, sig.thresh = 0.001) {
+  if (inherits(subset.mask, "character")) {
+    if (length(subset.mask) == 1 & subset.mask[1] == "auto") {
+      subset.mask <- !is.na(outcome)
+    } else {
+      stop("[AS.basetable.log1plinear] invalid subset.mask")
+    }
+  }
+  X <- basetable$group
+  y <- outcome
+  if (!is.null(subset.mask)) {
+    X <- X[subset.mask]
+    y <- y[subset.mask]
+  }
+  if (length(y) != length(X)) {stop("[AS.basetable.log1plinear] inconsistent length")}
+  if (any(is.na(y))) {stop("[AS.basetable.log1plinear] outcome contains NA, use subset.mask")}
+  output <- basetable
+  output$table <- rbind(output$table, rep("", ncol(output$table)))
+  r <- nrow(output$table)
+  if (max(basetable$group) == 0) {
+    output$table[r, 1] <- name
+    output$table[r, 2] <- AS.summary.log1plinear(y, digits.fixed)
+  } else if (max(basetable$group) == 1) {
+    output$table[r, 1] <- name
+    output$table[r, 2] <- AS.summary.log1plinear(y, digits.fixed)
+    output$table[r, 3] <- AS.summary.log1plinear(y[X == 0], digits.fixed)
+    output$table[r, 4] <- AS.summary.log1plinear(y[X == 1], digits.fixed)
+    if (p.values) {
+      fit <- stats::glm(log1p(y) ~ as.factor(X))
+      output$table[r, 5] <- AS.signif(summary(fit)$coefficients[2, 4], digits.sig, sig.thresh)
+    }
+  } else if (max(basetable$group) == 2) {
+    output$table[r, 1] <- name
+    output$table[r, 2] <- AS.summary.log1plinear(y, digits.fixed)
+    output$table[r, 3] <- AS.summary.log1plinear(y[X == 0], digits.fixed)
+    output$table[r, 4] <- AS.summary.log1plinear(y[X == 1], digits.fixed)
+    output$table[r, 5] <- AS.summary.log1plinear(y[X == 2], digits.fixed)
+    if (p.values) {
+      # 0 vs 1, 0 vs 2, 1 vs 2
+      fit0 <- stats::glm(log1p(y) ~ as.factor(X))
+      fit1 <- stats::glm(log1p(y) ~ relevel(as.factor(X), ref = "1"))
+      output$table[r, 6] <- AS.signif(summary(fit0)$coefficients[2, 4], digits.sig, sig.thresh)
+      output$table[r, 7] <- AS.signif(summary(fit0)$coefficients[3, 4], digits.sig, sig.thresh)
+      output$table[r, 8] <- AS.signif(summary(fit1)$coefficients[3, 4], digits.sig, sig.thresh)
+      # 0 vs 12, 1 vs 02, 2 vs 01
+      fit0x <- stats::glm(log1p(y) ~ X != 0)
+      fit1x <- stats::glm(log1p(y) ~ X != 1)
+      fit2x <- stats::glm(log1p(y) ~ X != 2)
+      output$table[r, 9] <- AS.signif(summary(fit0x)$coefficients[2, 4], digits.sig, sig.thresh)
+      output$table[r, 10] <- AS.signif(summary(fit1x)$coefficients[2, 4], digits.sig, sig.thresh)
+      output$table[r, 11] <- AS.signif(summary(fit2x)$coefficients[2, 4], digits.sig, sig.thresh)
+      # LR
+      fitnull <- stats::glm(log1p(y) ~ 1)
+      output$table[r, 12] <- AS.signif(stats::anova(fitnull, fit0, test = "LRT")[2, 5], digits.sig, sig.thresh)
+    }
+  } else if (max(basetable$group) == 3) {
+    output$table[r, 1] <- name
+    output$table[r, 2] <- AS.summary.log1plinear(y, digits.fixed)
+    output$table[r, 3] <- AS.summary.log1plinear(y[X == 0], digits.fixed)
+    output$table[r, 4] <- AS.summary.log1plinear(y[X == 1], digits.fixed)
+    output$table[r, 5] <- AS.summary.log1plinear(y[X == 2], digits.fixed)
+    output$table[r, 6] <- AS.summary.log1plinear(y[X == 3], digits.fixed)
+    if (p.values) {
+      fit0 <- stats::glm(log1p(y) ~ as.factor(X))
+      fitnull <- stats::glm(log1p(y) ~ 1)
+      output$table[r, 7] <- AS.signif(stats::anova(fitnull, fit0, test = "LRT")[2, 5], digits.sig, sig.thresh)
+    }
+  } else {stop("[AS.basetable.log1plinear] must have 1, 2, 3, or 4 groups")}
+  return(output)
+}
+
 #' Baseline characteristics tables: add log-linear variable
 #'
 #' See Details.
@@ -436,8 +517,8 @@ AS.basetable.loglinear <- function(name, outcome, basetable, subset.mask = NULL,
     X <- X[subset.mask]
     y <- y[subset.mask]
   }
-  if (length(y) != length(X)) {stop("[AS.basetable.linear] inconsistent length")}
-  if (any(is.na(y))) {stop("[AS.basetable.linear] outcome contains NA, use subset.mask")}
+  if (length(y) != length(X)) {stop("[AS.basetable.loglinear] inconsistent length")}
+  if (any(is.na(y))) {stop("[AS.basetable.loglinear] outcome contains NA, use subset.mask")}
   output <- basetable
   output$table <- rbind(output$table, rep("", ncol(output$table)))
   r <- nrow(output$table)
