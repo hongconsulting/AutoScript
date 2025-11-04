@@ -78,6 +78,13 @@ AS.basetable.create <- function(group, name = c("Group 0", "Group 1", "Group 2",
 #' @export
 AS.basetable.binary <- function(name, outcome, basetable, subset.mask = NULL, p.values = TRUE,
                                 digits.fixed = 0, digits.sig = 2, sig.thresh = 0.001) {
+  if (inherits(subset.mask, "character")) {
+    if (length(subset.mask) == 1 & subset.mask[1] == "auto") {
+      subset.mask <- !is.na(outcome)
+    } else {
+      stop("[AS.basetable.binary] invalid subset.mask")
+    }
+  }
   X <- basetable$group
   y <- outcome
   if (!is.null(subset.mask)) {
@@ -170,6 +177,13 @@ AS.basetable.blank <- function(text, basetable) {
 #' @export
 AS.basetable.count <- function(name, outcome, basetable, subset.mask = NULL, p.values = TRUE,
                                digits.fixed = 2, digits.sig = 2, sig.thresh = 0.001) {
+  if (inherits(subset.mask, "character")) {
+    if (length(subset.mask) == 1 & subset.mask[1] == "auto") {
+      subset.mask <- !is.na(outcome)
+    } else {
+      stop("[AS.basetable.count] invalid subset.mask")
+    }
+  }
   X <- basetable$group
   y <- outcome
   if (!is.null(subset.mask)) {
@@ -244,6 +258,13 @@ AS.basetable.count <- function(name, outcome, basetable, subset.mask = NULL, p.v
 #' @export
 AS.basetable.HHMM <- function(name, outcome, basetable, subset.mask = NULL, p.values = TRUE,
                               digits.sig = 2, sig.thresh = 0.001) {
+  if (inherits(subset.mask, "character")) {
+    if (length(subset.mask) == 1 & subset.mask[1] == "auto") {
+      subset.mask <- !is.na(outcome)
+    } else {
+      stop("[AS.basetable.HHMM] invalid subset.mask")
+    }
+  }
   if (!requireNamespace("WHcircular", quietly = TRUE)) stop("[AS.basetable.HHMM] requires package 'WHcircular'")
   HHMM.lm.p <- function(y, X.formula) {
     X <- as.matrix(stats::model.matrix(X.formula)[, -1])
@@ -321,6 +342,13 @@ AS.basetable.HHMM <- function(name, outcome, basetable, subset.mask = NULL, p.va
 #' @export
 AS.basetable.linear <- function(name, outcome, basetable, subset.mask = NULL, p.values = TRUE,
                                 digits.fixed = 2, digits.sig = 2, sig.thresh = 0.001) {
+  if (inherits(subset.mask, "character")) {
+    if (length(subset.mask) == 1 & subset.mask[1] == "auto") {
+      subset.mask <- !is.na(outcome)
+    } else {
+      stop("[AS.basetable.linear] invalid subset.mask")
+    }
+  }
   X <- basetable$group
   y <- outcome
   if (!is.null(subset.mask)) {
@@ -395,6 +423,13 @@ AS.basetable.linear <- function(name, outcome, basetable, subset.mask = NULL, p.
 #' @export
 AS.basetable.loglinear <- function(name, outcome, basetable, subset.mask = NULL, p.values = TRUE,
                                    digits.fixed = 2, digits.sig = 2, sig.thresh = 0.001) {
+  if (inherits(subset.mask, "character")) {
+    if (length(subset.mask) == 1 & subset.mask[1] == "auto") {
+      subset.mask <- !is.na(outcome)
+    } else {
+      stop("[AS.basetable.loglinear] invalid subset.mask")
+    }
+  }
   X <- basetable$group
   y <- outcome
   if (!is.null(subset.mask)) {
@@ -471,6 +506,13 @@ AS.basetable.loglinear <- function(name, outcome, basetable, subset.mask = NULL,
 #' @export
 AS.basetable.TTE <- function(name, time, status, basetable, subset.mask = NULL, p.values = TRUE,
                              digits.fixed = 2, digits.sig = 2, sig.thresh = 0.001) {
+  if (inherits(subset.mask, "character")) {
+    if (length(subset.mask) == 1 & subset.mask[1] == "auto") {
+      subset.mask <- !is.na(time) & !is.na(status)
+    } else {
+      stop("[AS.basetable.TTE] invalid subset.mask")
+    }
+  }
   X <- basetable$group
   if (!is.null(subset.mask)) {
     X <- X[subset.mask]

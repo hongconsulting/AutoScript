@@ -282,11 +282,19 @@ print(data1)
 1.  Akaike, H., 1974. A new look at the statistical model
     identification. *IEEE Transactions on Automatic Control*, 19(6),
     pp. 716–723.
-2.  Cordeiro, G.M., Paula, G.A. and Botter, D.A., 1994. Improved
+2.  Brookmeyer, R. and Crowley, J., 1982. A confidence interval for the
+    median survival time. *Biometrics*, pp. 29–41.
+3.  Cordeiro, G.M., Paula, G.A. and Botter, D.A., 1994. Improved
     likelihood ratio tests for dispersion models. *International
     Statistical Review*, pp. 257–274.
-3.  Fisher, N.I. and Lee, A.J., 1992. Regression models for an angular
+4.  Fisher, N.I. and Lee, A.J., 1992. Regression models for an angular
     response. *Biometrics*, pp. 665–677.
-4.  Kenward, M.G. and Roger, J.H., 1997. Small sample inference for
+5.  Greenwood, M., 1926. A report on the natural duration of cancer. In:
+    *Reports on Public Health and Medical Subjects*, 33, pp. 1–26.
+    London: Her Majesty’s Stationery Office, Ministry of Health.
+6.  Kenward, M.G. and Roger, J.H., 1997. Small sample inference for
     fixed effects from restricted maximum likelihood. *Biometrics*,
     pp. 983–997.
+7.  Klein, J.P., Logan, B., Harhoff, M. and Andersen, P.K., 2007.
+    Analyzing survival curves at a fixed point in time. *Statistics in
+    Medicine*, 26(24), pp. 4505–4519.

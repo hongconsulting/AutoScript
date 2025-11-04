@@ -23,8 +23,9 @@ AS.basetable.linear(
 \item{basetable}{A list created by \code{AS.basetable.create}, containing the group
 assignments and current table structure.}
 
-\item{subset.mask}{Optional logical vector used to restrict
-the analysis to a subset of observations.}
+\item{subset.mask}{Optional logical vector used to restrict the analysis to a
+subset of observations. Alternatively, the string \code{"auto"} restricts the
+analysis to the non-missing observations.}
 
 \item{p.values}{Logical value indicating whether to display \emph{p}-values in the
 added row.}
