@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Automated Manuscript Tools">
-<meta name="description" content="Automated table generation and data preparation tools for clinical research manuscripts.">
-<meta property="og:description" content="Automated table generation and data preparation tools for clinical research manuscripts.">
+<meta name="description" content="Automated table generation for clinical research manuscripts.">
+<meta property="og:description" content="Automated table generation for clinical research manuscripts.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">AutoScript</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.12.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.12.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -245,65 +245,6 @@
 <span><span class="co">#&gt; [3,] "Treatment"   "0.93 (0.85 to 1.01)" "0.098"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="reference/AS.dispersion.html">AS.dispersion</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 10.74825</span></span></code></pre></div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="id_3-data-preparation-tools">3. Data preparation tools<a class="anchor" aria-label="anchor" href="#id_3-data-preparation-tools"></a>
-</h2>
-<div class="section level3">
-<h3 id="example">Example:<a class="anchor" aria-label="anchor" href="#example"></a>
-</h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hongconsulting/AutoScript" class="external-link">AutoScript</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">120</span><span class="op">)</span></span>
-<span><span class="va">diagnosis</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"01/01/00"</span>, <span class="st">"01/01/2000"</span>, <span class="st">"36526"</span>, <span class="st">"36526"</span>, <span class="st">"36526"</span><span class="op">)</span></span>
-<span><span class="va">treatment</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"capecitabine"</span>,</span>
-<span>                <span class="st">"LETROZOLE"</span>,</span>
-<span>                <span class="st">"letrozole, palbociclib"</span>,</span>
-<span>                <span class="st">"Letrozole,Ribociclib"</span>,</span>
-<span>                <span class="st">"anastrozole, ribociclib"</span><span class="op">)</span></span>
-<span><span class="va">progression</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"01/01/2001"</span>, <span class="st">"."</span>, <span class="st">"01/01/2001"</span>, <span class="st">""</span>, <span class="cn">NA</span><span class="op">)</span></span>
-<span><span class="va">review1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"01/07/2001"</span>, <span class="st">"01/07/2001"</span>, <span class="st">"01/07/2001"</span>, <span class="st">"01/07/2001"</span>, <span class="st">"01/07/2001"</span><span class="op">)</span></span>
-<span><span class="va">review2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="st">"01/01/2002"</span><span class="op">)</span></span>
-<span><span class="va">death</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"01/01/2002"</span>, <span class="st">"01/01/2002"</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span></span>
-<span><span class="va">data0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"id"</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="st">"diagnosis"</span> <span class="op">=</span> <span class="va">diagnosis</span>, <span class="st">"treatment"</span> <span class="op">=</span> <span class="va">treatment</span>, <span class="st">"progression"</span> <span class="op">=</span> <span class="va">progression</span>, <span class="st">"review1"</span> <span class="op">=</span> <span class="va">review1</span>, <span class="st">"review2"</span> <span class="op">=</span> <span class="va">review2</span>, <span class="st">"death"</span> <span class="op">=</span> <span class="va">death</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">data0</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id  diagnosis               treatment progression    review1    review2      death</span></span>
-<span><span class="co">#&gt; 1  1   01/01/00            capecitabine  01/01/2001 01/07/2001       &lt;NA&gt; 01/01/2002</span></span>
-<span><span class="co">#&gt; 2  2 01/01/2000               LETROZOLE           . 01/07/2001       &lt;NA&gt; 01/01/2002</span></span>
-<span><span class="co">#&gt; 3  3      36526  letrozole, palbociclib  01/01/2001 01/07/2001       &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  4      36526    Letrozole,Ribociclib             01/07/2001       &lt;NA&gt;       &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5  5      36526 anastrozole, ribociclib        &lt;NA&gt; 01/07/2001 01/01/2002       &lt;NA&gt;</span></span>
-<span></span>
-<span><span class="co"># delimited strings</span></span>
-<span><span class="va">data1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"id"</span> <span class="op">=</span> <span class="va">data0</span><span class="op">$</span><span class="va">id</span>, <span class="st">"treatment"</span> <span class="op">=</span> <span class="va">data0</span><span class="op">$</span><span class="va">treatment</span><span class="op">)</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">treatment</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.delim.replace.html">AS.delim.replace</a></span><span class="op">(</span><span class="va">data1</span><span class="op">$</span><span class="va">treatment</span>, <span class="st">"anastrozole"</span>, <span class="st">"ai"</span><span class="op">)</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">treatment</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.delim.replace.html">AS.delim.replace</a></span><span class="op">(</span><span class="va">data1</span><span class="op">$</span><span class="va">treatment</span>, <span class="st">"letrozole"</span>, <span class="st">"ai"</span><span class="op">)</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">treatment</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.delim.replace.html">AS.delim.replace</a></span><span class="op">(</span><span class="va">data1</span><span class="op">$</span><span class="va">treatment</span>, <span class="st">"palbociclib"</span>, <span class="st">"cdk46i"</span><span class="op">)</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">treatment</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.delim.replace.html">AS.delim.replace</a></span><span class="op">(</span><span class="va">data1</span><span class="op">$</span><span class="va">treatment</span>, <span class="st">"ribociclib"</span>, <span class="st">"cdk46i"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Microsoft Excel dates</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">diagnosis</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.dmyY.to.Excel.html">AS.dmyY.to.Excel</a></span><span class="op">(</span><span class="va">data0</span><span class="op">$</span><span class="va">diagnosis</span>, <span class="fl">20</span>, <span class="fl">25</span><span class="op">)</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">progression</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.dmyY.to.Excel.html">AS.dmyY.to.Excel</a></span><span class="op">(</span><span class="va">data0</span><span class="op">$</span><span class="va">progression</span>, <span class="fl">20</span>, <span class="fl">25</span><span class="op">)</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">review1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.dmyY.to.Excel.html">AS.dmyY.to.Excel</a></span><span class="op">(</span><span class="va">data0</span><span class="op">$</span><span class="va">review1</span>, <span class="fl">20</span>, <span class="fl">25</span><span class="op">)</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">review2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.dmyY.to.Excel.html">AS.dmyY.to.Excel</a></span><span class="op">(</span><span class="va">data0</span><span class="op">$</span><span class="va">review2</span>, <span class="fl">20</span>, <span class="fl">25</span><span class="op">)</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">death</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.dmyY.to.Excel.html">AS.dmyY.to.Excel</a></span><span class="op">(</span><span class="va">data0</span><span class="op">$</span><span class="va">death</span>, <span class="fl">20</span>, <span class="fl">25</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># progression-free survival and overall survival</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">PFS</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.rowmin.html">AS.rowmin</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">data1</span><span class="op">$</span><span class="va">progression</span>, <span class="va">data1</span><span class="op">$</span><span class="va">death</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">lastreview</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.rowmax.html">AS.rowmax</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">data1</span><span class="op">$</span><span class="va">review1</span>, <span class="va">data1</span><span class="op">$</span><span class="va">review2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">PFSmonths</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.survoutcome.html">AS.survoutcome</a></span><span class="op">(</span><span class="va">data1</span><span class="op">$</span><span class="va">diagnosis</span>, <span class="va">data1</span><span class="op">$</span><span class="va">PFS</span>, <span class="va">data1</span><span class="op">$</span><span class="va">lastreview</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">PFSstatus</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.survoutcome.html">AS.survoutcome</a></span><span class="op">(</span><span class="va">data1</span><span class="op">$</span><span class="va">diagnosis</span>, <span class="va">data1</span><span class="op">$</span><span class="va">PFS</span>, <span class="va">data1</span><span class="op">$</span><span class="va">lastreview</span><span class="op">)</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">OSmonths</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.survoutcome.html">AS.survoutcome</a></span><span class="op">(</span><span class="va">data1</span><span class="op">$</span><span class="va">diagnosis</span>, <span class="va">data1</span><span class="op">$</span><span class="va">death</span>, <span class="va">data1</span><span class="op">$</span><span class="va">lastreview</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
-<span><span class="va">data1</span><span class="op">$</span><span class="va">OSstatus</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/AS.survoutcome.html">AS.survoutcome</a></span><span class="op">(</span><span class="va">data1</span><span class="op">$</span><span class="va">diagnosis</span>, <span class="va">data1</span><span class="op">$</span><span class="va">death</span>, <span class="va">data1</span><span class="op">$</span><span class="va">lastreview</span><span class="op">)</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">data1</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   id    treatment diagnosis progression review1 review2 death   PFS lastreview PFSmonths PFSstatus OSmonths OSstatus</span></span>
-<span><span class="co">#&gt; 1  1 capecitabine     36526       36892   37073      NA 37257 36892      37073  12.02489         1 24.01692        1</span></span>
-<span><span class="co">#&gt; 2  2           ai     36526          NA   37073      NA 37257 37257      37073  24.01692         1 24.01692        1</span></span>
-<span><span class="co">#&gt; 3  3   ai, cdk46i     36526       36892   37073      NA    NA 36892      37073  12.02489         1 17.97162        0</span></span>
-<span><span class="co">#&gt; 4  4   ai, cdk46i     36526          NA   37073      NA    NA    NA      37073  17.97162         0 17.97162        0</span></span>
-<span><span class="co">#&gt; 5  5   ai, cdk46i     36526          NA   37073   37257    NA    NA      37257  24.01692         0 24.01692        0</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">

@@ -1,10 +1,9 @@
 Package: AutoScript
 Title: Automated Manuscript Tools
-Version: 0.12.0
+Version: 0.12.1
 Authors@R: 
     person("Wei", "Hong", , "wei.hong@hongconsulting.ai", role = c("aut", "cre"))
-Description: Automated table generation and data preparation tools for clinical 
-    research manuscripts.
+Description: Automated table generation for clinical research manuscripts.
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

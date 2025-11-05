@@ -20,5 +20,5 @@ A string representation of \code{x}.
 \description{
 Converts a numeric value to a string with the specified number of significant
 figures, including trailing zeros. Values smaller than \code{threshold} are
-displayed as \code{"< threshold"}.
+displayed as \code{"< threshold"}. Invalid values are displayed as \code{"N/A"}.
 }
