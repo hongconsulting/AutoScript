@@ -6,8 +6,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-Automated table generation and data preparation tools for clinical
-research manuscripts.
+Automated table generation for clinical research manuscripts.
 
 ## Installation
 
