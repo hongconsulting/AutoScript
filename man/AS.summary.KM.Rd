@@ -19,6 +19,18 @@ median is not reached.
 }
 \description{
 Computes a string with the Kaplan–Meier median survival time and a 95\%
-confidence interval based on Greenwood's variance with a complementary
-log–log transformation.
+confidence interval using the Brookmeyer–Crowley¹ method with Greenwood's
+variance² and a complementary log–log transformation³.
+}
+\references{
+\enumerate{
+\item Brookmeyer, R. and Crowley, J., 1982. A confidence interval for the median
+survival time. \emph{Biometrics}, pp. 29–41.
+\item Greenwood, M., 1926. A report on the natural duration of cancer. In:
+\emph{Reports on Public Health and Medical Subjects}, 33, pp. 1–26. London: Her
+Majesty’s Stationery Office, Ministry of Health.
+\item Klein, J.P., Logan, B., Harhoff, M. and Andersen, P.K., 2007. Analyzing
+survival curves at a fixed point in time. \emph{Statistics in Medicine}, 26(24),
+pp. 4505–4519.
+}
 }

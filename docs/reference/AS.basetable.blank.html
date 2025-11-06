@@ -77,16 +77,16 @@ from circular-linear regression². Likelihood-ratio tests are performed
 using the Cordeiro–Paula–Botter method³.</p></li>
 <li><p><code>AS.basetable.linear</code>: adds a row for a continuous variable with mean
 ± SD. <em>P</em>-values are obtained from linear regression.</p></li>
-<li><p><code>AS.basetable.log1plinear</code>: adds a row for a log1p-transformed
+<li><p><code>AS.basetable.log1plinear</code>: adds a row for a log(x + 1)-transformed
 continuous variable with back-transformed mean ± back-transformed SD.
-<em>P</em>-values are obtained from linear regression on the log1p-transformed
-outcome.</p></li>
+<em>P</em>-values are obtained from linear regression on the transformed outcome.</p></li>
 <li><p><code>AS.basetable.loglinear</code>: adds a row for a log-transformed continuous
 variable with geometric mean ± geometric SD. <em>P</em>-values are obtained from
 linear regression on the log-transformed outcome.</p></li>
 <li><p><code>AS.basetable.TTE</code>: adds a row for a time-to-event variable, with
-Kaplan–Meier median and 95% confidence interval. <em>P</em>-values are obtained
-from Cox regression.</p></li>
+Kaplan–Meier median and 95% confidence interval using the
+Brookmeyer–Crowley⁴ method with Greenwood's variance⁵ and a complementary
+log–log transformation⁶. <em>P</em>-values are obtained from Cox regression.</p></li>
 </ul><p>The resulting table includes total and group-specific summaries. <em>P</em>-values
 are provided but are not always appropriate to report. With 3 groups, seven
 possible comparisons are provided:</p><ul><li><p>Each pairwise comparison: group 0 versus 1, 0 versus 2, and 1 versus
@@ -106,6 +106,14 @@ response. <em>Biometrics</em>, pp. 665–677.</p></li>
 <li><p>Cordeiro, G.M., Paula, G.A. and Botter, D.A., 1994. Improved likelihood
 ratio tests for dispersion models. <em>International Statistical Review</em>, pp.
 257–274.</p></li>
+<li><p>Brookmeyer, R. and Crowley, J., 1982. A confidence interval for the median
+survival time. <em>Biometrics</em>, pp. 29–41.</p></li>
+<li><p>Greenwood, M., 1926. A report on the natural duration of cancer. In:
+<em>Reports on Public Health and Medical Subjects</em>, 33, pp. 1–26. London: Her
+Majesty’s Stationery Office, Ministry of Health.</p></li>
+<li><p>Klein, J.P., Logan, B., Harhoff, M. and Andersen, P.K., 2007. Analyzing
+survival curves at a fixed point in time. <em>Statistics in Medicine</em>, 26(24),
+pp. 4505–4519.</p></li>
 </ol></div>
 
     <div class="section level2">

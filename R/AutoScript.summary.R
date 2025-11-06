@@ -39,13 +39,22 @@ AS.summary.HHMM <- function(x) {
 #' Summarize Kaplan–Meier time-to-event outcome
 #'
 #' Computes a string with the Kaplan–Meier median survival time and a 95%
-#' confidence interval based on Greenwood's variance with a complementary
-#' log–log transformation.
+#' confidence interval using the Brookmeyer–Crowley¹ method with Greenwood's
+#' variance² and a complementary log–log transformation³.
 #' @param time Follow-up times.
 #' @param status Event indicator (`1` = event, `0` = censored).
 #' @param digits.fixed Number of decimal places for the summary. Default = `2`.
 #' @return A string of the form `"median (lower to upper)"` or `"NR"` if the
 #' median is not reached.
+#' @references
+#' 1. Brookmeyer, R. and Crowley, J., 1982. A confidence interval for the median
+#' survival time. *Biometrics*, pp. 29–41.
+#' 2. Greenwood, M., 1926. A report on the natural duration of cancer. In:
+#' *Reports on Public Health and Medical Subjects*, 33, pp. 1–26. London: Her
+#' Majesty’s Stationery Office, Ministry of Health.
+#' 3. Klein, J.P., Logan, B., Harhoff, M. and Andersen, P.K., 2007. Analyzing
+#' survival curves at a fixed point in time. *Statistics in Medicine*, 26(24),
+#' pp. 4505–4519.
 #' @export
 AS.summary.KM <- function(time, status, digits.fixed = 2) {
   KM <- summary(survival::survfit(survival::Surv(time, status) ~ 1,

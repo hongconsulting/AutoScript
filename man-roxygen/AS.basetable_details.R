@@ -15,16 +15,16 @@
 #'   using the Cordeiro–Paula–Botter method³.
 #'   \item `AS.basetable.linear`: adds a row for a continuous variable with mean
 #'   ± SD. *P*-values are obtained from linear regression.
-#'   \item `AS.basetable.log1plinear`: adds a row for a log1p-transformed
+#'   \item `AS.basetable.log1plinear`: adds a row for a log(x + 1)-transformed
 #'   continuous variable with back-transformed mean ± back-transformed SD.
-#'   *P*-values are obtained from linear regression on the log1p-transformed
-#'   outcome.
+#'   *P*-values are obtained from linear regression on the transformed outcome.
 #'   \item `AS.basetable.loglinear`: adds a row for a log-transformed continuous
 #'   variable with geometric mean ± geometric SD. *P*-values are obtained from
 #'   linear regression on the log-transformed outcome.
 #'   \item `AS.basetable.TTE`: adds a row for a time-to-event variable, with
-#'   Kaplan–Meier median and 95% confidence interval. *P*-values are obtained
-#'   from Cox regression.
+#'   Kaplan–Meier median and 95% confidence interval using the
+#'   Brookmeyer–Crowley⁴ method with Greenwood's variance⁵ and a complementary
+#'   log–log transformation⁶. *P*-values are obtained from Cox regression.
 #' }
 #' The resulting table includes total and group-specific summaries. *P*-values
 #' are provided but are not always appropriate to report. With 3 groups, seven
@@ -45,6 +45,14 @@
 #' 3. Cordeiro, G.M., Paula, G.A. and Botter, D.A., 1994. Improved likelihood
 #' ratio tests for dispersion models. *International Statistical Review*, pp.
 #' 257–274.
+#' 4. Brookmeyer, R. and Crowley, J., 1982. A confidence interval for the median
+#' survival time. *Biometrics*, pp. 29–41.
+#' 5. Greenwood, M., 1926. A report on the natural duration of cancer. In:
+#' *Reports on Public Health and Medical Subjects*, 33, pp. 1–26. London: Her
+#' Majesty’s Stationery Office, Ministry of Health.
+#' 6. Klein, J.P., Logan, B., Harhoff, M. and Andersen, P.K., 2007. Analyzing
+#' survival curves at a fixed point in time. *Statistics in Medicine*, 26(24),
+#' pp. 4505–4519.
 #' @examples
 #' # See GitHub README for further examples:
 #' # https://github.com/hongconsulting/AutoScript

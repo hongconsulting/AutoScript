@@ -61,16 +61,16 @@ from circular-linear regression². Likelihood-ratio tests are performed
 using the Cordeiro–Paula–Botter method³.
 \item \code{AS.basetable.linear}: adds a row for a continuous variable with mean
 ± SD. \emph{P}-values are obtained from linear regression.
-\item \code{AS.basetable.log1plinear}: adds a row for a log1p-transformed
+\item \code{AS.basetable.log1plinear}: adds a row for a log(x + 1)-transformed
 continuous variable with back-transformed mean ± back-transformed SD.
-\emph{P}-values are obtained from linear regression on the log1p-transformed
-outcome.
+\emph{P}-values are obtained from linear regression on the transformed outcome.
 \item \code{AS.basetable.loglinear}: adds a row for a log-transformed continuous
 variable with geometric mean ± geometric SD. \emph{P}-values are obtained from
 linear regression on the log-transformed outcome.
 \item \code{AS.basetable.TTE}: adds a row for a time-to-event variable, with
-Kaplan–Meier median and 95\% confidence interval. \emph{P}-values are obtained
-from Cox regression.
+Kaplan–Meier median and 95\% confidence interval using the
+Brookmeyer–Crowley⁴ method with Greenwood's variance⁵ and a complementary
+log–log transformation⁶. \emph{P}-values are obtained from Cox regression.
 }
 The resulting table includes total and group-specific summaries. \emph{P}-values
 are provided but are not always appropriate to report. With 3 groups, seven
@@ -116,5 +116,13 @@ response. \emph{Biometrics}, pp. 665–677.
 \item Cordeiro, G.M., Paula, G.A. and Botter, D.A., 1994. Improved likelihood
 ratio tests for dispersion models. \emph{International Statistical Review}, pp.
 257–274.
+\item Brookmeyer, R. and Crowley, J., 1982. A confidence interval for the median
+survival time. \emph{Biometrics}, pp. 29–41.
+\item Greenwood, M., 1926. A report on the natural duration of cancer. In:
+\emph{Reports on Public Health and Medical Subjects}, 33, pp. 1–26. London: Her
+Majesty’s Stationery Office, Ministry of Health.
+\item Klein, J.P., Logan, B., Harhoff, M. and Andersen, P.K., 2007. Analyzing
+survival curves at a fixed point in time. \emph{Statistics in Medicine}, 26(24),
+pp. 4505–4519.
 }
 }
