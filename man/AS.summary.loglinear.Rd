@@ -12,9 +12,9 @@ AS.summary.loglinear(x, digits.fixed = 2)
 \item{digits.fixed}{Number of decimal places. Default = \code{2}.}
 }
 \value{
-A string of the form \code{"geometric mean ± geometric SD"}.
+A string of the form \code{"geometric mean ± SD"}.
 }
 \description{
-Computes a string with the geometric mean and geometric standard deviation in
-the form \code{"geometric mean ± geometric SD"}.
+Computes a string with the geometric mean and standard deviation in the form
+\code{"geometric mean ± SD"}.
 }

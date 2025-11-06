@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">AutoScript</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.12.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.12.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,17 +75,17 @@ sections.</p></li>
 obtained from Poisson regression or negative binomial regression, whichever
 model yields the lower Akaike information criterion¹.</p></li>
 <li><p><code>AS.basetable.HHMM</code>: adds a row for a time-of-day variable in "HH:MM"
-string format with circular mean ± circular SD. <em>P</em>-values are obtained
-from circular-linear regression². Likelihood-ratio tests are performed
-using the Cordeiro–Paula–Botter method³.</p></li>
+string format with circular mean ± SD. <em>P</em>-values are obtained from
+circular-linear regression². Likelihood-ratio tests are performed using the
+Cordeiro–Paula–Botter method³.</p></li>
 <li><p><code>AS.basetable.linear</code>: adds a row for a continuous variable with mean
 ± SD. <em>P</em>-values are obtained from linear regression.</p></li>
 <li><p><code>AS.basetable.log1plinear</code>: adds a row for a log(x + 1)-transformed
-continuous variable with back-transformed mean ± back-transformed SD.
-<em>P</em>-values are obtained from linear regression on the transformed outcome.</p></li>
+continuous variable with back-transformed mean ± SD. <em>P</em>-values are obtained
+from linear regression on the transformed outcome.</p></li>
 <li><p><code>AS.basetable.loglinear</code>: adds a row for a log-transformed continuous
-variable with geometric mean ± geometric SD. <em>P</em>-values are obtained from
-linear regression on the log-transformed outcome.</p></li>
+variable with geometric mean ± SD. <em>P</em>-values are obtained from linear
+regression on the transformed outcome.</p></li>
 <li><p><code>AS.basetable.TTE</code>: adds a row for a time-to-event variable, with
 Kaplan–Meier median and 95% confidence interval using the
 Brookmeyer–Crowley⁴ method with Greenwood's variance⁵ and a complementary
@@ -95,7 +95,7 @@ are provided but are not always appropriate to report. With 3 groups, seven
 possible comparisons are provided:</p><ul><li><p>Each pairwise comparison: group 0 versus 1, 0 versus 2, and 1 versus
 2.</p></li>
 <li><p>Each group against the combination of the other two: group 0 versus 1
-&amp; 2, 1 versus 0 &amp; 2, 2 versus 0 &amp; 1.</p></li>
+and 2, 1 versus 0 and 2, 2 versus 0 and 1.</p></li>
 <li><p>A global likelihood-ratio test.</p></li>
 </ul><p>With 4 groups, only the likelihood-ratio test is provided.</p>
     </div>

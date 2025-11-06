@@ -12,9 +12,9 @@ AS.summary.log1plinear(x, digits.fixed = 2)
 \item{digits.fixed}{Number of decimal places. Default = \code{2}.}
 }
 \value{
-A string of the form \code{"back-transformed mean ± back-transformed SD"}.
+A string of the form \code{"back-transformed mean ± SD"}.
 }
 \description{
 Computes a string with the back-transformed mean and standard deviation from
-the log(x + 1) scale in the form \code{"back-transformed mean ± back-transformed SD"}.
+the log(x + 1) scale in the form \code{"back-transformed mean ± SD"}.
 }

@@ -24,9 +24,9 @@ AS.summary.count <- function(x, digits.fixed = 2) {
 #' Summarize time-of-day variable in "HH:MM" format
 #'
 #' Computes a string with the mean and standard deviation in the form
-#' `"circular mean ± circular SD"`.
+#' `"circular mean ± SD"`.
 #' @param x A string vector of times-of-day in "HH:MM" format.
-#' @return A string of the form `"mean ± SD"`.
+#' @return A string of the form `"circular mean ± SD"`.
 #' @export
 AS.summary.HHMM <- function(x) {
   if (!requireNamespace("WHcircular", quietly = TRUE)) {stop("[AS.summary.HHMM] requires package 'WHcircular'")}
@@ -83,10 +83,10 @@ AS.summary.linear <- function(x, digits.fixed = 2) {
 #' Summarize log1p-transformed continuous variable
 #'
 #' Computes a string with the back-transformed mean and standard deviation from
-#' the log(x + 1) scale in the form `"back-transformed mean ± back-transformed SD"`.
+#' the log(x + 1) scale in the form `"back-transformed mean ± SD"`.
 #' @param x A numeric vector.
 #' @param digits.fixed Number of decimal places. Default = `2`.
-#' @return A string of the form `"back-transformed mean ± back-transformed SD"`.
+#' @return A string of the form `"back-transformed mean ± SD"`.
 #' @export
 AS.summary.log1plinear <- function(x, digits.fixed = 2) {
   output <- paste0(AS.fixdec(exp(mean(log1p(x))) - 1, digits.fixed), " \u00b1 ", AS.fixdec(exp(stats::sd(log1p(x))), digits.fixed))
@@ -96,11 +96,11 @@ AS.summary.log1plinear <- function(x, digits.fixed = 2) {
 
 #' Summarize log-transformed continuous variable
 #'
-#' Computes a string with the geometric mean and geometric standard deviation in
-#' the form `"geometric mean ± geometric SD"`.
+#' Computes a string with the geometric mean and standard deviation in the form
+#' `"geometric mean ± SD"`.
 #' @param x A numeric vector.
 #' @param digits.fixed Number of decimal places. Default = `2`.
-#' @return A string of the form `"geometric mean ± geometric SD"`.
+#' @return A string of the form `"geometric mean ± SD"`.
 #' @export
 AS.summary.loglinear <- function(x, digits.fixed = 2) {
   output <- paste0(AS.fixdec(exp(mean(log(x))), digits.fixed), " \u00b1 ", AS.fixdec(exp(stats::sd(log(x))), digits.fixed))

@@ -37,17 +37,17 @@ sections.
 obtained from Poisson regression or negative binomial regression, whichever
 model yields the lower Akaike information criterion¹.
 \item \code{AS.basetable.HHMM}: adds a row for a time-of-day variable in "HH:MM"
-string format with circular mean ± circular SD. \emph{P}-values are obtained
-from circular-linear regression². Likelihood-ratio tests are performed
-using the Cordeiro–Paula–Botter method³.
+string format with circular mean ± SD. \emph{P}-values are obtained from
+circular-linear regression². Likelihood-ratio tests are performed using the
+Cordeiro–Paula–Botter method³.
 \item \code{AS.basetable.linear}: adds a row for a continuous variable with mean
 ± SD. \emph{P}-values are obtained from linear regression.
 \item \code{AS.basetable.log1plinear}: adds a row for a log(x + 1)-transformed
-continuous variable with back-transformed mean ± back-transformed SD.
-\emph{P}-values are obtained from linear regression on the transformed outcome.
+continuous variable with back-transformed mean ± SD. \emph{P}-values are obtained
+from linear regression on the transformed outcome.
 \item \code{AS.basetable.loglinear}: adds a row for a log-transformed continuous
-variable with geometric mean ± geometric SD. \emph{P}-values are obtained from
-linear regression on the log-transformed outcome.
+variable with geometric mean ± SD. \emph{P}-values are obtained from linear
+regression on the transformed outcome.
 \item \code{AS.basetable.TTE}: adds a row for a time-to-event variable, with
 Kaplan–Meier median and 95\% confidence interval using the
 Brookmeyer–Crowley⁴ method with Greenwood's variance⁵ and a complementary
@@ -60,7 +60,7 @@ possible comparisons are provided:
 \item Each pairwise comparison: group 0 versus 1, 0 versus 2, and 1 versus
 2.
 \item Each group against the combination of the other two: group 0 versus 1
-& 2, 1 versus 0 & 2, 2 versus 0 & 1.
+and 2, 1 versus 0 and 2, 2 versus 0 and 1.
 \item A global likelihood-ratio test.
 }
 With 4 groups, only the likelihood-ratio test is provided.
