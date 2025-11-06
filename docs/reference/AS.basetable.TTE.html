@@ -113,11 +113,11 @@ and percentages. <em>P</em>-values are obtained from logistic regression.</p></l
 sections.</p></li>
 <li><p><code>AS.basetable.count</code>: adds a row for a count variable. <em>P</em>-values are
 obtained from Poisson regression or negative binomial regression, whichever
-model yields the lower Akaike information criterion¹.</p></li>
+model yields the lower Akaike information criterion<sup>1</sup>.</p></li>
 <li><p><code>AS.basetable.HHMM</code>: adds a row for a time-of-day variable in "HH:MM"
 string format with circular mean ± SD. <em>P</em>-values are obtained from
-circular-linear regression². Likelihood-ratio tests are performed using the
-Cordeiro–Paula–Botter method³.</p></li>
+circular-linear regression<sup>2</sup>. Likelihood-ratio tests are performed using the
+Cordeiro–Paula–Botter method<sup>3</sup>.</p></li>
 <li><p><code>AS.basetable.linear</code>: adds a row for a continuous variable with mean
 ± SD. <em>P</em>-values are obtained from linear regression.</p></li>
 <li><p><code>AS.basetable.log1plinear</code>: adds a row for a log(x + 1)-transformed
@@ -128,8 +128,8 @@ variable with geometric mean ± SD. <em>P</em>-values are obtained from linear
 regression on the transformed outcome.</p></li>
 <li><p><code>AS.basetable.TTE</code>: adds a row for a time-to-event variable, with
 Kaplan–Meier median and 95% confidence interval using the
-Brookmeyer–Crowley⁴ method with Greenwood's variance⁵ and a complementary
-log–log transformation⁶. <em>P</em>-values are obtained from Cox regression.</p></li>
+Brookmeyer–Crowley<sup>4</sup> method with Greenwood's variance<sup>5</sup> and a complementary
+log–log transformation<sup>6</sup>. <em>P</em>-values are obtained from Cox regression.</p></li>
 </ul><p>The resulting table includes total and group-specific summaries. <em>P</em>-values
 are provided but are not always appropriate to report. With 3 groups, seven
 possible comparisons are provided:</p><ul><li><p>Each pairwise comparison: group 0 versus 1, 0 versus 2, and 1 versus

@@ -54,11 +54,11 @@ and percentages. \emph{P}-values are obtained from logistic regression.
 sections.
 \item \code{AS.basetable.count}: adds a row for a count variable. \emph{P}-values are
 obtained from Poisson regression or negative binomial regression, whichever
-model yields the lower Akaike information criterion¹.
+model yields the lower Akaike information criterion\ifelse{latex}{\out{$^{1}$}}{\ifelse{html}{\out{<sup>1</sup>}}{^1}}.
 \item \code{AS.basetable.HHMM}: adds a row for a time-of-day variable in "HH:MM"
 string format with circular mean ± SD. \emph{P}-values are obtained from
-circular-linear regression². Likelihood-ratio tests are performed using the
-Cordeiro–Paula–Botter method³.
+circular-linear regression\ifelse{latex}{\out{$^{2}$}}{\ifelse{html}{\out{<sup>2</sup>}}{^2}}. Likelihood-ratio tests are performed using the
+Cordeiro–Paula–Botter method\ifelse{latex}{\out{$^{3}$}}{\ifelse{html}{\out{<sup>3</sup>}}{^3}}.
 \item \code{AS.basetable.linear}: adds a row for a continuous variable with mean
 ± SD. \emph{P}-values are obtained from linear regression.
 \item \code{AS.basetable.log1plinear}: adds a row for a log(x + 1)-transformed
@@ -69,8 +69,8 @@ variable with geometric mean ± SD. \emph{P}-values are obtained from linear
 regression on the transformed outcome.
 \item \code{AS.basetable.TTE}: adds a row for a time-to-event variable, with
 Kaplan–Meier median and 95\% confidence interval using the
-Brookmeyer–Crowley⁴ method with Greenwood's variance⁵ and a complementary
-log–log transformation⁶. \emph{P}-values are obtained from Cox regression.
+Brookmeyer–Crowley\ifelse{latex}{\out{$^{4}$}}{\ifelse{html}{\out{<sup>4</sup>}}{^4}} method with Greenwood's variance\ifelse{latex}{\out{$^{5}$}}{\ifelse{html}{\out{<sup>5</sup>}}{^5}} and a complementary
+log–log transformation\ifelse{latex}{\out{$^{6}$}}{\ifelse{html}{\out{<sup>6</sup>}}{^6}}. \emph{P}-values are obtained from Cox regression.
 }
 The resulting table includes total and group-specific summaries. \emph{P}-values
 are provided but are not always appropriate to report. With 3 groups, seven
