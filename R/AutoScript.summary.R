@@ -2,11 +2,21 @@
 #'
 #' Computes a string with the count and percentage of `1`s.
 #' @param x A binary (`0` or `1`) numeric or logical vector.
-#' @param digits.fixed Number of decimal places for the percentage. Default = `2`.
-#' @return A string of the form `"count (percent%)"`.
+#' @param digits.fixed Number of decimal places for the percentage (and the
+#' weighted count if `weights` are used.). Default = `0`.
+#' @param weights Optional numeric vector of observation weights.
+#' @return A string of the form `"count (percentage%)"`.
 #' @export
-AS.summary.binary <- function(x, digits.fixed = 0) {
-  return(paste0(sum(x), " (", AS.fixdec(100 * mean(x), digits.fixed), "%)"))
+AS.summary.binary <- function(x, digits.fixed = 0, weights = NULL) {
+  if (is.null(weights)) {
+    n <- sum(x)
+    p <- mean(x)
+    return(paste0(AS.fixdec(n, 0), " (", AS.fixdec(100 * p, digits.fixed), "%)"))
+  } else {
+    n <- sum(weights * x)
+    p <- n / sum(weights)
+    return(paste0(AS.fixdec(n, digits.fixed), " (", AS.fixdec(100 * p, digits.fixed), "%)"))
+  }
 }
 
 #' Summarize count variable
@@ -72,10 +82,18 @@ AS.summary.KM <- function(time, status, digits.fixed = 2) {
 #' `"mean ± SD"`.
 #' @param x A numeric vector.
 #' @param digits.fixed Number of decimal places. Default = `2`.
+#' @param weights Optional numeric vector of observation weights.
 #' @return A string of the form `"mean ± SD"`.
 #' @export
-AS.summary.linear <- function(x, digits.fixed = 2) {
-  output <- paste0(AS.fixdec(mean(x), digits.fixed), " \u00b1 ", AS.fixdec(stats::sd(x), digits.fixed))
+AS.summary.linear <- function(x, digits.fixed = 2, weights = NULL) {
+  if (is.null(weights)) {
+    m <- mean(x)
+    s <- stats::sd(x)
+  } else {
+    m <- sum(weights * x) / sum(weights)
+    s <- sqrt(sum(weights * (x - m)^2) / sum(weights))
+  }
+  output <- paste0(AS.fixdec(m, digits.fixed), " \u00b1 ", AS.fixdec(s, digits.fixed))
   output <- gsub("-", "\u2212", output)
   return(output)
 }

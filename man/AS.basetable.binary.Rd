@@ -12,7 +12,8 @@ AS.basetable.binary(
   p.values = TRUE,
   digits.fixed = 0,
   digits.sig = 2,
-  sig.thresh = 0.001
+  sig.thresh = 0.001,
+  weights = NULL
 )
 }
 \arguments{
@@ -36,6 +37,8 @@ added row.}
 
 \item{sig.thresh}{Threshold below which \emph{p}-values are displayed as
 \code{"< threshold"}. Default = \code{0.001}.}
+
+\item{weights}{Optional numeric vector of observation weights.}
 }
 \value{
 An updated baseline table list with a new row summarizing the added variable.

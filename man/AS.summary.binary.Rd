@@ -4,15 +4,18 @@
 \alias{AS.summary.binary}
 \title{Summarize binary variable}
 \usage{
-AS.summary.binary(x, digits.fixed = 0)
+AS.summary.binary(x, digits.fixed = 0, weights = NULL)
 }
 \arguments{
 \item{x}{A binary (\code{0} or \code{1}) numeric or logical vector.}
 
-\item{digits.fixed}{Number of decimal places for the percentage. Default = \code{2}.}
+\item{digits.fixed}{Number of decimal places for the percentage (and the
+weighted count if \code{weights} are used.). Default = \code{0}.}
+
+\item{weights}{Optional numeric vector of observation weights.}
 }
 \value{
-A string of the form \code{"count (percent\%)"}.
+A string of the form \code{"count (percentage\%)"}.
 }
 \description{
 Computes a string with the count and percentage of \code{1}s.

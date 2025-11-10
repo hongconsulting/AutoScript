@@ -18,7 +18,7 @@ AS.dispersion <- function(fit) {
 #' @return A string representation of `x`.
 #' @export
 AS.fixdec <- function(x, digits = 2) {
-  if (!inherits(x, "numeric") | is.na(x)) return("N/A")
+  if (!is.numeric(x) | is.na(x)) return("N/A")
   output <- formatC(x, format = "f", digits = max(0, digits), flag = "#")
   return(sub("\\.$", "", output))
 }
@@ -35,7 +35,7 @@ AS.fixdec <- function(x, digits = 2) {
 #' @return A string representation of `x`.
 #' @export
 AS.signif <- function(x, digits = 2, threshold = 0.001) {
-  if (!inherits(x, "numeric") | is.na(x)) return("N/A")
+  if (!is.numeric(x) | is.na(x)) return("N/A")
   if (x < threshold) {return(paste0("< ", toString(threshold)))}
   output <- formatC(signif(x, digits), format = "fg", digits = digits, flag = "#")
   output[x == 0] <- paste0("0.", strrep("0", digits - 1)) # 0.00

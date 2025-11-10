@@ -39,7 +39,7 @@ added row.}
 \item{digits.sig}{Number of significant figures for \emph{p}-values. Default = \code{2}.}
 
 \item{sig.thresh}{Threshold below which \emph{p}-values are displayed as
-\code{"< threshold"}. Default = 0.001.}
+\code{"< threshold"}. Default = \code{0.001}.}
 }
 \value{
 An updated baseline table list with a new row summarizing the added variable.

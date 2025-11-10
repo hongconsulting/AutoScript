@@ -4,12 +4,14 @@
 \alias{AS.summary.linear}
 \title{Summarize continuous variable}
 \usage{
-AS.summary.linear(x, digits.fixed = 2)
+AS.summary.linear(x, digits.fixed = 2, weights = NULL)
 }
 \arguments{
 \item{x}{A numeric vector.}
 
 \item{digits.fixed}{Number of decimal places. Default = \code{2}.}
+
+\item{weights}{Optional numeric vector of observation weights.}
 }
 \value{
 A string of the form \code{"mean ± SD"}.

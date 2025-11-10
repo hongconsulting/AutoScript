@@ -8,4 +8,4 @@
 #' @param digits.fixed Number of decimal places for summaries. Default = `2`.
 #' @param digits.sig Number of significant figures for *p*-values. Default = `2`.
 #' @param sig.thresh Threshold below which *p*-values are displayed as
-#' `"< threshold"`. Default = 0.001.
+#' `"< threshold"`. Default = `0.001`.
