@@ -2,9 +2,11 @@
 #'
 #' See Details.
 #' @param group Integer vector of group assignments, coded as `0`, `1`, `2`, or `3`.
-#' @param name String vector of group names. Default = `c("Group 0", "Group 1", "Group 2", "Group 3")`.
+#' @param name String vector of group names. Default =
+#' `c("Group 0", "Group 1", "Group 2", "Group 3")`.
 #' @param weights Optional numeric vector of observation weights.
-#' @param digits Number of decimal places for weighted sample sizes if `weights` are used. Default = `1`.
+#' @param digits.fixed Number of decimal places for weighted sample sizes if
+#' `weights` are used. Default = `1`.
 #' @return A list with two elements:
 #' \itemize{
 #'   \item `group`: an integer vector of group assignments
@@ -14,7 +16,7 @@
 #' @template AS.basetable_details
 #' @export
 AS.basetable.create <- function (group, name = c("Group 0", "Group 1", "Group 2", "Group 3"),
-                                 weights = NULL, digits = 1) {
+                                 weights = NULL, digits.fixed = 1) {
   output <- list()
   output$group <- group
   if (is.null(weights)) {

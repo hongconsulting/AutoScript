@@ -8,17 +8,19 @@ AS.basetable.create(
   group,
   name = c("Group 0", "Group 1", "Group 2", "Group 3"),
   weights = NULL,
-  digits = 1
+  digits.fixed = 1
 )
 }
 \arguments{
 \item{group}{Integer vector of group assignments, coded as \code{0}, \code{1}, \code{2}, or \code{3}.}
 
-\item{name}{String vector of group names. Default = \code{c("Group 0", "Group 1", "Group 2", "Group 3")}.}
+\item{name}{String vector of group names. Default =
+\code{c("Group 0", "Group 1", "Group 2", "Group 3")}.}
 
 \item{weights}{Optional numeric vector of observation weights.}
 
-\item{digits}{Number of decimal places for weighted sample sizes if \code{weights} are used. Default = \code{1}.}
+\item{digits.fixed}{Number of decimal places for weighted sample sizes if
+\code{weights} are used. Default = \code{1}.}
 }
 \value{
 A list with two elements:
