@@ -234,9 +234,14 @@ print(AS.dispersion(fit))
 5.  Greenwood, M., 1926. A report on the natural duration of cancer. In:
     *Reports on Public Health and Medical Subjects*, 33, pp. 1–26.
     London: Her Majesty’s Stationery Office, Ministry of Health.
-6.  Kenward, M.G. and Roger, J.H., 1997. Small sample inference for
+6.  Huber, P., 1967. The behavior of maximum likelihood estimates under
+    nonstandard conditions. In: *Proceedings of the fifth Berkeley
+    symposium on mathematical statistics and probability*, 1(1),
+    pp. 221–233. Berkeley: University of California Press.
+7.  Kenward, M.G. and Roger, J.H., 1997. Small sample inference for
     fixed effects from restricted maximum likelihood. *Biometrics*,
     pp. 983–997.
-7.  Klein, J.P., Logan, B., Harhoff, M. and Andersen, P.K., 2007.
+8.  Klein, J.P., Logan, B., Harhoff, M. and Andersen, P.K., 2007.
     Analyzing survival curves at a fixed point in time. *Statistics in
     Medicine*, 26(24), pp. 4505–4519.
+9.  

@@ -50,7 +50,8 @@ AS.summary.HHMM <- function(x) {
 #'
 #' Computes a string with the Kaplan–Meier median survival time and a 95%
 #' confidence interval using the Brookmeyer–Crowley¹ method with Greenwood's
-#' variance² and a complementary log–log transformation³.
+#' variance² and a complementary log–log transformation³. Observations with
+#' non-positive are excluded.
 #' @param time Follow-up times.
 #' @param status Event indicator (`1` = event, `0` = censored).
 #' @param digits.fixed Number of decimal places for the summary. Default = `2`.
@@ -67,7 +68,7 @@ AS.summary.HHMM <- function(x) {
 #' pp. 4505–4519.
 #' @export
 AS.summary.KM <- function(time, status, digits.fixed = 2) {
-  KM <- summary(survival::survfit(survival::Surv(time, status) ~ 1,
+  KM <- summary(survival::survfit(survival::Surv(time[time > 0], status[time > 0]) ~ 1,
                                   conf.type = "log-log"))$table
   output <- paste0(AS.fixdec(KM[7], digits.fixed), " (",
                    AS.fixdec(KM[8], digits.fixed), " to ",

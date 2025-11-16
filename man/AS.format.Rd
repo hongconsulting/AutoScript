@@ -14,19 +14,20 @@ AS.format(
 )
 }
 \arguments{
-\item{fit}{A fitted object of class \code{coxph}, \code{glm}, \code{glmerMod},
-\code{gls}, \code{lm}, or \code{lmerModLmerTest}.}
+\item{fit}{A fitted object of class \code{coxph}, \code{glm}, \code{glmerMod}, \code{gls}, \code{lm},
+or \code{lmerModLmerTest}.}
 
 \item{name}{Optional string vector of coefficient names.}
 
-\item{hetero.name}{Optional string vector of heteroscedasticity parameter names.}
+\item{hetero.name}{Optional string vector of heteroscedasticity parameter
+names.}
 
-\item{digits.fixed}{Number of decimal places for summaries. Default = 2.}
+\item{digits.fixed}{Number of decimal places for summaries. Default = \code{2}.}
 
-\item{digits.sig}{Number of significant figures for \emph{p}-values. Default = 2.}
+\item{digits.sig}{Number of significant figures for \code{p}-values. Default = \code{2}.}
 
-\item{sig.thresh}{Threshold below which \emph{p}-values are displayed as
-\code{"< threshold"}. Default = 0.001.}
+\item{sig.thresh}{Threshold below which \code{p}-values are displayed as
+\code{"< threshold"}. Default = \code{0.001}.}
 }
 \value{
 A character matrix representing a manuscript-ready table.
@@ -35,8 +36,10 @@ A character matrix representing a manuscript-ready table.
 Format regression results into manuscript-ready tables.
 }
 \details{
-\emph{P}-values for \code{lmerModLmerTest} objects are calculated using the
-Kenward–Roger method¹.
+\emph{P}-values for \code{coxph} objects are calculated using the Huber–White sandwich
+estimator\ifelse{latex}{\out{$^{1,2}$}}{\ifelse{html}{\out{<sup>1,2</sup>}}{\out{^{1,2}}}} if \code{weights} are used.
+\emph{P}-values for \code{lmerModLmerTest} objects are calculated using the Kenward–Roger
+method\ifelse{latex}{\out{$^{3}$}}{\ifelse{html}{\out{<sup>3</sup>}}{^3}}.
 }
 \examples{
 # See GitHub README for further examples:
@@ -49,6 +52,13 @@ print(AS.format(fit, name = "Treatment"))
 }
 \references{
 \enumerate{
+\item Huber, P., 1967. The behavior of maximum likelihood estimates under
+nonstandard conditions. In: \emph{Proceedings of the fifth Berkeley symposium on
+mathematical statistics and probability}, 1(1), pp. 221–233. Berkeley:
+University of California Press.
+\item White, H., 1980. A heteroskedasticity-consistent covariance matrix
+estimator and a direct test for heteroskedasticity.
+\emph{Econometrica: Journal of the Econometric Society}, pp. 817–838.
 \item Kenward, M.G. and Roger, J.H., 1997. Small sample inference for fixed effects
 from restricted maximum likelihood. \emph{Biometrics}, pp. 983–997.
 }

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">AutoScript</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.13.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.13.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,8 +53,8 @@
 
 
 <dl><dt id="arg-fit">fit<a class="anchor" aria-label="anchor" href="#arg-fit"></a></dt>
-<dd><p>A fitted object of class <code>coxph</code>, <code>glm</code>, <code>glmerMod</code>,
-<code>gls</code>, <code>lm</code>, or <code>lmerModLmerTest</code>.</p></dd>
+<dd><p>A fitted object of class <code>coxph</code>, <code>glm</code>, <code>glmerMod</code>, <code>gls</code>, <code>lm</code>,
+or <code>lmerModLmerTest</code>.</p></dd>
 
 
 <dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
@@ -62,20 +62,21 @@
 
 
 <dt id="arg-hetero-name">hetero.name<a class="anchor" aria-label="anchor" href="#arg-hetero-name"></a></dt>
-<dd><p>Optional string vector of heteroscedasticity parameter names.</p></dd>
+<dd><p>Optional string vector of heteroscedasticity parameter
+names.</p></dd>
 
 
 <dt id="arg-digits-fixed">digits.fixed<a class="anchor" aria-label="anchor" href="#arg-digits-fixed"></a></dt>
-<dd><p>Number of decimal places for summaries. Default = 2.</p></dd>
+<dd><p>Number of decimal places for summaries. Default = <code>2</code>.</p></dd>
 
 
 <dt id="arg-digits-sig">digits.sig<a class="anchor" aria-label="anchor" href="#arg-digits-sig"></a></dt>
-<dd><p>Number of significant figures for <em>p</em>-values. Default = 2.</p></dd>
+<dd><p>Number of significant figures for <code>p</code>-values. Default = <code>2</code>.</p></dd>
 
 
 <dt id="arg-sig-thresh">sig.thresh<a class="anchor" aria-label="anchor" href="#arg-sig-thresh"></a></dt>
-<dd><p>Threshold below which <em>p</em>-values are displayed as
-<code>"&lt; threshold"</code>. Default = 0.001.</p></dd>
+<dd><p>Threshold below which <code>p</code>-values are displayed as
+<code>"&lt; threshold"</code>. Default = <code>0.001</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -84,13 +85,22 @@
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><em>P</em>-values for <code>lmerModLmerTest</code> objects are calculated using the
-Kenward–Roger method¹.</p>
+    <p><em>P</em>-values for <code>coxph</code> objects are calculated using the Huber–White sandwich
+estimator<sup>1,2</sup> if <code>weights</code> are used.
+<em>P</em>-values for <code>lmerModLmerTest</code> objects are calculated using the Kenward–Roger
+method<sup>3</sup>.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
 
-<ol><li><p>Kenward, M.G. and Roger, J.H., 1997. Small sample inference for fixed effects
+<ol><li><p>Huber, P., 1967. The behavior of maximum likelihood estimates under
+nonstandard conditions. In: <em>Proceedings of the fifth Berkeley symposium on
+mathematical statistics and probability</em>, 1(1), pp. 221–233. Berkeley:
+University of California Press.</p></li>
+<li><p>White, H., 1980. A heteroskedasticity-consistent covariance matrix
+estimator and a direct test for heteroskedasticity.
+<em>Econometrica: Journal of the Econometric Society</em>, pp. 817–838.</p></li>
+<li><p>Kenward, M.G. and Roger, J.H., 1997. Small sample inference for fixed effects
 from restricted maximum likelihood. <em>Biometrics</em>, pp. 983–997.</p></li>
 </ol></div>
 

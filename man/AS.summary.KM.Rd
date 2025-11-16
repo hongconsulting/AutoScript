@@ -20,7 +20,8 @@ median is not reached.
 \description{
 Computes a string with the Kaplan–Meier median survival time and a 95\%
 confidence interval using the Brookmeyer–Crowley¹ method with Greenwood's
-variance² and a complementary log–log transformation³.
+variance² and a complementary log–log transformation³. Observations with
+non-positive are excluded.
 }
 \references{
 \enumerate{
