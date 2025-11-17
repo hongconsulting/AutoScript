@@ -244,4 +244,6 @@ print(AS.dispersion(fit))
 8.  Klein, J.P., Logan, B., Harhoff, M. and Andersen, P.K., 2007.
     Analyzing survival curves at a fixed point in time. *Statistics in
     Medicine*, 26(24), pp. 4505–4519.
-9.  
+9.  White, H., 1980. A heteroskedasticity-consistent covariance matrix
+    estimator and a direct test for heteroskedasticity. *Econometrica:
+    Journal of the Econometric Society*, pp. 817–838.

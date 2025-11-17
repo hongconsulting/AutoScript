@@ -7,13 +7,13 @@
 #' @param hetero.name Optional string vector of heteroscedasticity parameter
 #' names.
 #' @param digits.fixed Number of decimal places for summaries. Default = `2`.
-#' @param digits.sig Number of significant figures for `p`-values. Default = `2`.
-#' @param sig.thresh Threshold below which `p`-values are displayed as
+#' @param digits.sig Number of significant figures for *p*-values. Default = `2`.
+#' @param sig.thresh Threshold below which *p*-values are displayed as
 #' `"< threshold"`. Default = `0.001`.
 #' @return A character matrix representing a manuscript-ready table.
 #' @details
-#' *P*-values for `coxph` objects are calculated using the Huber–White sandwich
-#' estimator\ifelse{latex}{\out{$^{1,2}$}}{\ifelse{html}{\out{<sup>1,2</sup>}}{\out{^{1,2}}}} if `weights` are used.
+#' *P*-values for `coxph` objects if `weights` are used are calculated using the
+#' Huber–White sandwich estimator\ifelse{latex}{\out{$^{1,2}$}}{\ifelse{html}{\out{<sup>1,2</sup>}}{\out{^{1,2}}}} .
 #' *P*-values for `lmerModLmerTest` objects are calculated using the Kenward–Roger
 #' method\ifelse{latex}{\out{$^{3}$}}{\ifelse{html}{\out{<sup>3</sup>}}{^3}}.
 #' @references
@@ -22,8 +22,8 @@
 #' mathematical statistics and probability*, 1(1), pp. 221–233. Berkeley:
 #' University of California Press.
 #' 2. White, H., 1980. A heteroskedasticity-consistent covariance matrix
-#' estimator and a direct test for heteroskedasticity.
-#' *Econometrica: Journal of the Econometric Society*, pp. 817–838.
+#' estimator and a direct test for heteroskedasticity. *Econometrica: Journal of
+#' the Econometric Society*, pp. 817–838.
 #' 3. Kenward, M.G. and Roger, J.H., 1997. Small sample inference for fixed effects
 #' from restricted maximum likelihood. *Biometrics*, pp. 983–997.
 #' @examples
