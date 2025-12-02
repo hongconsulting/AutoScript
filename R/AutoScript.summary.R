@@ -8,7 +8,7 @@
 #' @return A string of the form `"count (percentage%)"`.
 #' @export
 AS.summary.binary <- function(x, digits.fixed = 0, weights = NULL) {
-  if (is.null(weights)) {
+  if (is.null(weights) | all(weights == 1)) {
     n <- sum(x)
     p <- mean(x)
     return(paste0(AS.fixdec(n, 0), " (", AS.fixdec(100 * p, digits.fixed), "%)"))
