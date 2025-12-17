@@ -1,8 +1,8 @@
 #' Regression table auto-formatting
 #'
 #' Format regression results into manuscript-ready tables.
-#' @param fit A fitted object of class `coxph`, `glm`, `glmerMod`, `gls`, `lm`,
-#' or `lmerModLmerTest`.
+#' @param fit A fitted object of class `coxme`, `coxph`, `glm`, `glmerMod`, `gls`,
+#' `lm`, or `lmerModLmerTest`.
 #' @param name Optional string vector of coefficient names.
 #' @param hetero.name Optional string vector of heteroscedasticity parameter
 #' names.
@@ -40,7 +40,11 @@ AS.format <- function(fit, name = NULL, hetero.name = NULL, digits.fixed = 2, di
   b.title <- "\u03b2 (95%CI)"
   f <- function(x) x
   # main
-  if (inherits(fit, "coxph")) {
+  if (inherits(fit, "coxme")) {
+    summ.col <- c(1, 3, 5)
+    b.title <- "HR (95%CI)"
+    f <- exp
+  } else if (inherits(fit, "coxph")) {
     if (is.null(fit$weights)) {
       summ.col <- c(1, 3, 5)
     } else {

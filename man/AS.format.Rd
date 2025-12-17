@@ -14,8 +14,8 @@ AS.format(
 )
 }
 \arguments{
-\item{fit}{A fitted object of class \code{coxph}, \code{glm}, \code{glmerMod}, \code{gls}, \code{lm},
-or \code{lmerModLmerTest}.}
+\item{fit}{A fitted object of class \code{coxme}, \code{coxph}, \code{glm}, \code{glmerMod}, \code{gls},
+\code{lm}, or \code{lmerModLmerTest}.}
 
 \item{name}{Optional string vector of coefficient names.}
 
