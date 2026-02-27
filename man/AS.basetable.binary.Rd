@@ -36,7 +36,8 @@ added row.}
 \item{digits.sig}{Number of significant figures for \emph{p}-values. Default = \code{2}.}
 
 \item{sig.thresh}{Threshold below which \emph{p}-values are displayed as
-\code{"< threshold"}. Default = \code{0.001}.}
+\code{"< threshold"} and values larger than \code{1 - threshold} are displayed as
+\code{"> 1 - threshold"}. Default = \code{0.001}.}
 
 \item{weights}{Optional numeric vector of observation weights.}
 }

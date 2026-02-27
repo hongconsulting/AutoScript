@@ -27,16 +27,19 @@ AS.fixdec <- function(x, digits = 2) {
 #'
 #' Converts a numeric value to a string with the specified number of significant
 #' figures, including trailing zeros. Values smaller than `threshold` are
-#' displayed as `"< threshold"`. Invalid values are displayed as `"N/A"`.
+#' displayed as `"< threshold"` and values larger than `1 - threshold` are displayed
+#' as `"> 1 - threshold"`. Invalid values are displayed as `"N/A"`.
 #' @param x A numeric value.
 #' @param digits Number of significant figures. Default = `2`.
 #' @param threshold Lower bound below which values are displayed as
-#' `"< threshold"`. Default = `0.001`.
+#' `"< threshold"` and values larger than `1 - threshold` are displayed as
+#' `"> 1 - threshold"`. Default = `0.001`.
 #' @return A string representation of `x`.
 #' @export
 AS.signif <- function(x, digits = 2, threshold = 0.001) {
   if (!is.numeric(x) | is.na(x)) return("N/A")
   if (x < threshold) {return(paste0("< ", toString(threshold)))}
+  if (x > 1 - threshold) return(paste0("> ", toString(1 - threshold)))
   output <- formatC(signif(x, digits), format = "fg", digits = digits, flag = "#")
   output[x == 0] <- paste0("0.", strrep("0", digits - 1)) # 0.00
   return( sub("\\.$", "", output)) # 0.

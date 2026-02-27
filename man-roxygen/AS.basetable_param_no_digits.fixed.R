@@ -7,4 +7,5 @@
 #' added row.
 #' @param digits.sig Number of significant figures for *p*-values. Default = `2`.
 #' @param sig.thresh Threshold below which *p*-values are displayed as
-#' `"< threshold"`. Default = `0.001`.
+#' `"< threshold"` and values larger than `1 - threshold` are displayed as
+#' `"> 1 - threshold"`. Default = `0.001`.
