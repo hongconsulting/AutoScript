@@ -6,7 +6,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-Automated table generation for clinical research manuscripts.
+Automated generation of tables and figures for clinical research
+manuscripts.
 
 ## Installation
 
