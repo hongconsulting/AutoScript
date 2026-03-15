@@ -23,6 +23,29 @@ AS.fixdec <- function(x, digits = 2) {
   return(sub("\\.$", "", output))
 }
 
+#' Save PNG
+#'
+#' Saves a plot to a PNG file using the Cairo graphics device for consistent
+#' font rendering.
+#' @param g A plot object to be saved.
+#' @param path File path of the output.
+#' @param width Width of the output image.
+#' @param height Height of the output image.
+#' @param units Units for `width` and `height`. Can be `"cm"`, `"in"` (inches,
+#' the default), `"mm"`, or `"px"` (pixels).
+#' @param res Nominal resolution in pixels per inch. Default = `300`.
+#' @return The value returned by `grDevices::dev.off()`.
+#' @details
+#' Requires Cairo support in the current R build. If Cairo is not available
+#' (`capabilities("cairo") == FALSE`), the function stops with an error.
+#' @export
+AS.save.png <- function(g, path, width = 6, height = 5, units = "in", res = 300) {
+  if (!capabilities("cairo")) stop("[OR.save.png] Cairo unavailable")
+  grDevices::png(path, width = width, height = height, units = units, res = res, type = "cairo")
+  print(g)
+  invisible(grDevices::dev.off())
+}
+
 #' Significant figures
 #'
 #' Converts a numeric value to a string with the specified number of significant
