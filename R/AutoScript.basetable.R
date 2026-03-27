@@ -579,19 +579,20 @@ AS.basetable.loglinear <- function(name, outcome, basetable, subset.mask = NULL,
       # 0 vs 1, 0 vs 2, 1 vs 2
       fit0 <- stats::glm(log(y) ~ as.factor(X))
       fit1 <- stats::glm(log(y) ~ relevel(as.factor(X), ref = "1"))
-      output$table[r, 6] <- AS.signif(summary(fit0)$coefficients[2, 4], digits.sig, sig.thresh)
-      output$table[r, 7] <- AS.signif(summary(fit0)$coefficients[3, 4], digits.sig, sig.thresh)
-      output$table[r, 8] <- AS.signif(summary(fit1)$coefficients[3, 4], digits.sig, sig.thresh)
+      #HERE
+      output$table[r, 6] <- AS.signif(AS.trycatch(summary(fit0)$coefficients["as.factor(X)1", "Pr(>|t|)"]), digits.sig, sig.thresh)
+      output$table[r, 7] <- AS.signif(AS.trycatch(summary(fit0)$coefficients["as.factor(X)2", "Pr(>|t|)"]), digits.sig, sig.thresh)
+      output$table[r, 8] <- AS.signif(AS.trycatch(summary(fit1)$coefficients["as.factor(X)2", "Pr(>|t|)"]), digits.sig, sig.thresh)
       # 0 vs 12, 1 vs 02, 2 vs 01
       fit0x <- stats::glm(log(y) ~ X != 0)
       fit1x <- stats::glm(log(y) ~ X != 1)
       fit2x <- stats::glm(log(y) ~ X != 2)
-      output$table[r, 9] <- AS.signif(summary(fit0x)$coefficients[2, 4], digits.sig, sig.thresh)
-      output$table[r, 10] <- AS.signif(summary(fit1x)$coefficients[2, 4], digits.sig, sig.thresh)
-      output$table[r, 11] <- AS.signif(summary(fit2x)$coefficients[2, 4], digits.sig, sig.thresh)
+      output$table[r, 9] <- AS.signif(AS.trycatch(summary(fit0x)$coefficients[2, 4]), digits.sig, sig.thresh)
+      output$table[r, 10] <- AS.signif(AS.trycatch(summary(fit1x)$coefficients[2, 4]), digits.sig, sig.thresh)
+      output$table[r, 11] <- AS.signif(AS.trycatch(summary(fit2x)$coefficients[2, 4]), digits.sig, sig.thresh)
       # LR
       fitnull <- stats::glm(log(y) ~ 1)
-      output$table[r, 12] <- AS.signif(stats::anova(fitnull, fit0, test = "LRT")[2, 5], digits.sig, sig.thresh)
+      output$table[r, 12] <- AS.signif(AS.trycatch(stats::anova(fitnull, fit0, test = "LRT")[2, 5]), digits.sig, sig.thresh)
     }
   } else if (max(basetable$group) == 3) {
     output$table[r, 1] <- name
