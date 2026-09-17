@@ -77,7 +77,7 @@ AS.summary.KM <- function(time, status, digits.fixed = 2) {
   return(output)
 }
 
-#' Summarize continuous variable
+#' Summarize continuous variable (mean and SD)
 #'
 #' Computes a string with the mean and standard deviation in the form
 #' `"mean ± SD"`.
@@ -96,6 +96,33 @@ AS.summary.linear <- function(x, digits.fixed = 2, weights = NULL) {
   }
   output <- paste0(AS.fixdec(m, digits.fixed), " \u00b1 ", AS.fixdec(s, digits.fixed))
   output <- gsub("-", "\u2212", output)
+  return(output)
+}
+
+#' Summarize continuous variable (mean and range)
+#'
+#' Computes a string with the mean and range in the form
+#' `"mean (min to max)"`.
+#' @param x A numeric vector.
+#' @param digits.fixed Number of decimal places. Default = `0`.
+#' @param weights Optional numeric vector of observation weights. Affects the
+#'   mean only; observations of zero weight are dropped before the range.
+#' @return A string of the form `"mean (min to max)"`.
+#' @export
+AS.summary.linear.range <- function(x, digits.fixed = 0, weights = NULL) {
+  if (is.null(weights)) {
+    m <- mean(x)
+  } else {
+    m <- sum(weights * x) / sum(weights)
+    # zero-weight observations contribute nothing to the mean, so exclude them from the range
+    x <- x[weights != 0]
+  }
+  r <- range(x)
+  output <- paste0(
+    AS.fixdec(m, digits.fixed), " (",
+    AS.fixdec(r[1], digits.fixed), " to ", AS.fixdec(r[2], digits.fixed), ")"
+  )
+  output <- gsub("-", "\u2212", output, fixed = TRUE)
   return(output)
 }
 

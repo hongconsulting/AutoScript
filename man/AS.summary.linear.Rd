@@ -2,7 +2,7 @@
 % Please edit documentation in R/AutoScript.summary.R
 \name{AS.summary.linear}
 \alias{AS.summary.linear}
-\title{Summarize continuous variable}
+\title{Summarize continuous variable (mean and SD)}
 \usage{
 AS.summary.linear(x, digits.fixed = 2, weights = NULL)
 }

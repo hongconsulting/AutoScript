@@ -1,3 +1,33 @@
+#' Darken color
+#'
+#' Alpha-composites a color over a black background (`alpha * color + (1 -
+#' alpha) * black`).
+#' @param color A color, as accepted by `grDevices::col2rgb()`.
+#' @param alpha Alpha value of `color` in the composite, from `0` (fully
+#' transparent, returns black) to `1` (fully opaque, returns `color`
+#' unchanged). Default = `0.5`.
+#' @return A hex color string.
+#' @export
+AS.color.darken <- function(color, alpha = 0.5) {
+  rgb_val <- grDevices::col2rgb(color) / 255
+  return(grDevices::rgb(t(rgb_val * alpha), maxColorValue = 1))
+}
+
+#' Lighten color
+#'
+#' Alpha-composites a color over a white background (`alpha * color + (1 -
+#' alpha) * white`).
+#' @param color A color, as accepted by `grDevices::col2rgb()`.
+#' @param alpha Alpha value of `color` in the composite, from `0` (fully
+#' transparent, returns white) to `1` (fully opaque, returns `color`
+#' unchanged). Default = `0.5`.
+#' @return A hex color string.
+#' @export
+AS.color.lighten <- function(color, alpha = 0.5) {
+  rgb_val <- grDevices::col2rgb(color) / 255
+  return(grDevices::rgb(t(rgb_val * alpha + (1 - alpha)), maxColorValue = 1))
+}
+
 #' Dispersion estimate
 #'
 #' Computes the ratio of residual deviance to residual degrees of freedom, used
@@ -21,6 +51,18 @@ AS.fixdec <- function(x, digits = 2) {
   if (!is.numeric(x) | is.na(x)) return("N/A")
   output <- formatC(x, format = "f", digits = max(0, digits), flag = "#")
   return(sub("\\.$", "", output))
+}
+
+#' Interleave vectors
+#'
+#' Combines two vectors by alternating their elements, starting with `a`.
+#' @param a A vector.
+#' @param b A vector, recycled against `a` if shorter.
+#' @return A vector of length `2 * length(a)` with elements from `a` and `b`
+#' alternating.
+#' @export
+AS.interleave <- function(a, b) {
+  return(c(rbind(a, b)))
 }
 
 #' Save PNG

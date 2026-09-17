@@ -12,6 +12,8 @@
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.basetable.linear.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.basetable.log1plinear.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.basetable.loglinear.html</loc></url>
+<url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.color.darken.html</loc></url>
+<url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.color.lighten.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.contains.AND.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.contains.OR.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.contains.html</loc></url>
@@ -21,6 +23,7 @@
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.dmyY.to.Excel.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.fixdec.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.format.html</loc></url>
+<url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.interleave.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.rowmax.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.rowmin.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.save.png.html</loc></url>
@@ -31,6 +34,7 @@
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.binary.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.count.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.linear.html</loc></url>
+<url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.linear.range.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.log1p.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.log1plinear.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.loglinear.html</loc></url>
