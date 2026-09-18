@@ -7,14 +7,15 @@
 AS.fixdec(x, digits = 2)
 }
 \arguments{
-\item{x}{A numeric value.}
+\item{x}{A numeric vector.}
 
 \item{digits}{Number of decimal places. Default = \code{2}.}
 }
 \value{
-A string representation of \code{x}.
+A string vector representation of \code{x}.
 }
 \description{
-Converts a numeric value to a string with a fixed number of decimal places,
-including trailing zeros. Invalid values are displayed as \code{"N/A"}.
+Converts a numeric vector to strings with a fixed number of decimal places,
+including trailing zeros. Invalid values are displayed as \code{"N/A"}. Negative
+numbers are represented using true minus signs (\verb{\\u2212}) instead of hyphens.
 }

@@ -134,7 +134,7 @@ fit0 <- nlme::gls(y ~ X, data = data0, weights = nlme::varPower(form = ~ X))
 print(AS.format(fit0, hetero.name = "\u03b4"))
 #>      [,1]                  [,2]                    [,3]     
 #> [1,] ""                    "β (95%CI)"             "p"      
-#> [2,] "(Intercept)"         "-0.58 (-1.31 to 0.15)" "0.12"   
+#> [2,] "(Intercept)"         "−0.58 (−1.31 to 0.15)" "0.12"   
 #> [3,] "X"                   "1.00 (1.00 to 1.01)"   "< 0.001"
 #> [4,] "Heteroscedasticity:" "θ (95%CI)"             ""       
 #> [5,] "δ"                   "0.53 (0.49 to 0.58)"   ""

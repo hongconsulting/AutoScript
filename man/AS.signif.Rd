@@ -7,7 +7,7 @@
 AS.signif(x, digits = 2, threshold = 0.001)
 }
 \arguments{
-\item{x}{A numeric value.}
+\item{x}{A numeric vector.}
 
 \item{digits}{Number of significant figures. Default = \code{2}.}
 
@@ -16,11 +16,12 @@ AS.signif(x, digits = 2, threshold = 0.001)
 \code{"> 1 - threshold"}. Default = \code{0.001}.}
 }
 \value{
-A string representation of \code{x}.
+A string vector representation of \code{x}.
 }
 \description{
 Converts a numeric value to a string with the specified number of significant
 figures, including trailing zeros. Values smaller than \code{threshold} are
 displayed as \code{"< threshold"} and values larger than \code{1 - threshold} are displayed
-as \code{"> 1 - threshold"}. Invalid values are displayed as \code{"N/A"}.
+as \code{"> 1 - threshold"}. Invalid values are displayed as \code{"N/A"}. Negative
+numbers are represented using true minus signs (\verb{\\u2212}) instead of hyphens.
 }

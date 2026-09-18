@@ -41,16 +41,20 @@ AS.dispersion <- function(fit) {
 
 #' Fixed decimal places
 #'
-#' Converts a numeric value to a string with a fixed number of decimal places,
-#' including trailing zeros. Invalid values are displayed as `"N/A"`.
-#' @param x A numeric value.
+#' Converts a numeric vector to strings with a fixed number of decimal places,
+#' including trailing zeros. Invalid values are displayed as `"N/A"`. Negative
+#' numbers are represented using true minus signs (`\u2212`) instead of hyphens.
+#' @param x A numeric vector.
 #' @param digits Number of decimal places. Default = `2`.
-#' @return A string representation of `x`.
+#' @return A string vector representation of `x`.
 #' @export
 AS.fixdec <- function(x, digits = 2) {
-  if (!is.numeric(x) | is.na(x)) return("N/A")
+  if (!is.numeric(x)) return(rep("N/A", length(x)))
   output <- formatC(x, format = "f", digits = max(0, digits), flag = "#")
-  return(sub("\\.$", "", output))
+  output <- sub("\\.$", "", output)
+  output <- gsub("-", "\u2212", output, fixed = TRUE)
+  output[is.na(x)] <- "N/A"
+  return(output)
 }
 
 #' Interleave vectors
@@ -93,21 +97,25 @@ AS.save.png <- function(g, path, width = 6, height = 5, units = "in", res = 300)
 #' Converts a numeric value to a string with the specified number of significant
 #' figures, including trailing zeros. Values smaller than `threshold` are
 #' displayed as `"< threshold"` and values larger than `1 - threshold` are displayed
-#' as `"> 1 - threshold"`. Invalid values are displayed as `"N/A"`.
-#' @param x A numeric value.
+#' as `"> 1 - threshold"`. Invalid values are displayed as `"N/A"`. Negative
+#' numbers are represented using true minus signs (`\u2212`) instead of hyphens.
+#' @param x A numeric vector.
 #' @param digits Number of significant figures. Default = `2`.
 #' @param threshold Lower bound below which values are displayed as
 #' `"< threshold"` and values larger than `1 - threshold` are displayed as
 #' `"> 1 - threshold"`. Default = `0.001`.
-#' @return A string representation of `x`.
+#' @return A string vector representation of `x`.
 #' @export
 AS.signif <- function(x, digits = 2, threshold = 0.001) {
-  if (!is.numeric(x) | is.na(x)) return("N/A")
-  if (x < threshold) {return(paste0("< ", toString(threshold)))}
-  if (x > 1 - threshold) return(paste0("> ", toString(1 - threshold)))
+  if (!is.numeric(x)) return(rep("N/A", length(x)))
   output <- formatC(signif(x, digits), format = "fg", digits = digits, flag = "#")
-  output[x == 0] <- paste0("0.", strrep("0", digits - 1)) # 0.00
-  return( sub("\\.$", "", output)) # 0.
+  output <- sub("\\.$", "", output)
+  output[which(x == 0)] <- paste0("0.", strrep("0", digits - 1))
+  output[which(x < threshold)] <- paste0("< ", toString(threshold))
+  output[which(x > 1 - threshold)] <- paste0("> ", toString(1 - threshold))
+  output <- gsub("-", "\u2212", output, fixed = TRUE)
+  output[is.na(x)] <- "N/A"
+  return(output)
 }
 
 AS.trycatch <- function(expr) {
