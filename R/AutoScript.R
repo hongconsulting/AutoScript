@@ -1,3 +1,16 @@
+#' Add alpha to color
+#'
+#' Sets the alpha channel of a color, discarding any existing alpha.
+#' @param col A color, as accepted by `grDevices::col2rgb()`.
+#' @param alpha Alpha value of the returned color, from `0` (fully
+#' transparent) to `1` (fully opaque). Default = `0.5`.
+#' @return A hex color string (`#RRGGBBAA`).
+#' @export
+AS.color.alpha <- function(col, alpha = 0.5) {
+  rgb <- grDevices::col2rgb(col)
+  grDevices::rgb(rgb[1, ], rgb[2, ], rgb[3, ], alpha = alpha * 255, maxColorValue = 255)
+}
+
 #' Darken color
 #'
 #' Alpha-composites a color over a black background (`alpha * color + (1 -
