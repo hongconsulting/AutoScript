@@ -20,7 +20,7 @@ Moves the legend of a plot into a separate column of fixed relative width,
 so that panel widths do not depend on legend label lengths.
 }
 \details{
-The legend is identified as the first non-empty grob whose gtable
+The legend is identified as the first non-empty \code{grob} whose \code{gtable}
 layout name begins with \code{"guide-box"}. If legends occupy several positions,
 only the first is moved.
 }

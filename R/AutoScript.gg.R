@@ -5,7 +5,7 @@
 #' @param g A `ggplot` object, or a `patchwork` object whose first plot holds
 #' the legend.
 #' @param legend.prop Proportion of the total width given to the legend. Default = `0.2`.
-#' @details The legend is identified as the first non-empty grob whose gtable
+#' @details The legend is identified as the first non-empty `grob` whose `gtable`
 #' layout name begins with `"guide-box"`. If legends occupy several positions,
 #' only the first is moved.
 #' @return A `patchwork` object, or the input unchanged if it has no legend.
