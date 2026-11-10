@@ -1,3 +1,32 @@
+#' Fix the width of a ggplot legend
+#'
+#' Moves the legend of a plot into a separate column of fixed relative width,
+#' so that panel widths do not depend on legend label lengths.
+#' @param g A `ggplot` object, or a `patchwork` object whose first plot holds
+#' the legend.
+#' @param legend.prop Proportion of the total width given to the legend. Default = `0.2`.
+#' @details The legend is identified as the first non-empty grob whose gtable
+#' layout name begins with `"guide-box"`. If legends occupy several positions,
+#' only the first is moved.
+#' @return A `patchwork` object, or the input unchanged if it has no legend.
+#' @export
+ggfixlegendwidth <- function(g, legend.prop = 0.2) {
+  is.patchwork <- inherits(g, "patchwork")
+  gt <- ggplotGrob(if (is.patchwork) g[[1]] else g)
+  k <- which(grepl("^guide-box", gt$layout$name) &
+               !vapply(gt$grobs, inherits, logical(1), "zeroGrob"))
+  if (length(k) == 0) return(g)
+  leg <- gt$grobs[[k[1]]]
+  if (is.patchwork) {
+    g[[1]] <- g[[1]] + theme(legend.position = "none")
+  } else {
+    g <- g + theme(legend.position = "none")
+  }
+  patchwork::wrap_plots(g,
+                        patchwork::wrap_elements(full = leg),
+                        widths = c(1-legend.prop, legend.prop))
+}
+
 #' Plot observed and fitted proportions over time
 #'
 #' Fits a logistic regression assuming a linear effect of time on the log-odds
