@@ -153,3 +153,45 @@ AS.summary.loglinear <- function(x, digits.fixed = 2) {
   output <- gsub("-", "\u2212", output)
   return(output)
 }
+
+#' Summarize continuous variable (median and IQR)
+#'
+#' Computes a string with the median and interquartile range in the form
+#' `"median (Q1 to Q3)"`. Quantiles interpolate linearly between observations
+#' placed at their midpoint cumulative weights, which reduces to
+#' `stats::quantile()` type 7 when weights are equal.
+#'
+#' Note that medians usually sacrifice precision solving a problem that does not
+#' exist: by the central limit theorem, the sample mean is approximately normally
+#' distributed even when the variable is not. Where non-normality does matter,
+#' an appropriate transformation (e.g. `AS.summary.loglinear`) usually restores
+#' approximate normality, after which the back-transformed mean is more precise.
+#' @param x A numeric vector.
+#' @param digits.fixed Number of decimal places. Default = `2`.
+#' @param weights Optional numeric vector of observation weights. Observations
+#'   of zero weight are dropped.
+#' @return A string of the form `"median (Q1 to Q3)"`.
+#' @export
+AS.summary.medianIQR <- function(x, digits.fixed = 2, weights = NULL) {
+  if (is.null(weights)) weights <- rep(1, length(x))
+  # zero-weight observations contribute nothing, so drop them before sorting
+  x <- x[weights != 0]
+  weights <- weights[weights != 0]
+  o <- order(x)
+  x <- x[o]
+  weights <- weights[o]
+  if (length(x) == 1) {
+    q <- rep(x, 3)
+  } else {
+    # midpoint cumulative weights, rescaled so the smallest observation is at 0 and the largest at 1
+    p <- cumsum(weights) - weights / 2
+    p <- (p - p[1]) / (p[length(p)] - p[1])
+    q <- stats::approx(p, x, xout = c(0.25, 0.5, 0.75))$y
+  }
+  output <- paste0(
+    AS.fixdec(q[2], digits.fixed), " (",
+    AS.fixdec(q[1], digits.fixed), " to ", AS.fixdec(q[3], digits.fixed), ")"
+  )
+  output <- gsub("-", "−", output, fixed = TRUE)
+  return(output)
+}

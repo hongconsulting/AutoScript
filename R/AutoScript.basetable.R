@@ -610,6 +610,77 @@ AS.basetable.loglinear <- function(name, outcome, basetable, subset.mask = NULL,
   return(output)
 }
 
+#' Baseline characteristics tables: add median and IQR variable
+#'
+#' See Details. *P*-values are not calculated; contrary to popular misconception,
+#' the Mann–Whitney *U* test is not a test of medians¹.
+#'
+#' Note that medians usually sacrifice precision (and power) solving a problem
+#' that does not exist: by the central limit theorem, the sample mean is
+#' approximately normally distributed even when the variable is not. Where
+#' non-normality does matter, an appropriate transformation (e.g.
+#' `AS.basetable.loglinear`) usually restores approximate normality, after which
+#' the back-transformed mean is more precise (and a comparison of transformed
+#' means offers more power).
+#' @param name A string giving the variable name to display in the first column.
+#' @param outcome Numeric vector of continuous outcome values.
+#' @param basetable A list created by `AS.basetable.create`, containing the
+#' group assignments and current table structure.
+#' @param subset.mask Optional logical vector used to restrict the analysis to a
+#' subset of observations. Alternatively, the string `"auto"` restricts the
+#' analysis to the non-missing observations.
+#' @param digits.fixed Number of decimal places for summaries. Default = `0`.
+#' @param weights Optional numeric vector of observation weights.
+#' @template AS.basetable_return
+#' @template AS.basetable_details
+#' @references
+#' 1. Divine, G.W., Norton, H.J., Barón, A.E. and Juarez-Colunga, E., 2018. The
+#' Wilcoxon–Mann–Whitney procedure fails as a test of medians. *The American
+#' Statistician*, 72(3), pp. 278–286.
+#' @export
+AS.basetable.medIQR <- function(name, outcome, basetable, subset.mask = NULL,
+                                digits.fixed = 0, weights = NULL) {
+  if (inherits(subset.mask, "character")) {
+    if (length(subset.mask) == 1 & subset.mask[1] == "auto") {
+      subset.mask <- !is.na(outcome)
+    } else {
+      stop("[AS.basetable.medIQR] invalid subset.mask")
+    }
+  }
+  if (is.null(weights)) {
+    w <- rep(1, length(outcome))
+  } else {
+    w <- weights
+  }
+  X <- basetable$group
+  y <- outcome
+  if (!is.null(subset.mask)) {
+    w <- w[subset.mask]
+    X <- X[subset.mask]
+    y <- y[subset.mask]
+  }
+  if (length(w) != length(X) | length(y) != length(X)) {
+    stop("[AS.basetable.medIQR] inconsistent length")
+  }
+  if (sum(is.na(y)) > 0) {
+    stop("[AS.basetable.medIQR] outcome contains NA, use subset.mask")
+  }
+  if (max(basetable$group) > 3) {
+    stop("[AS.basetable.medIQR] must have 1, 2, 3, or 4 groups")
+  }
+  output <- basetable
+  output$table <- rbind(output$table, rep("", ncol(output$table))) # p-value columns are left blank
+  r <- nrow(output$table)
+  output$table[r, 1] <- name
+  output$table[r, 2] <- AS.summary.medianIQR(y, digits.fixed, weights = w)
+  if (max(basetable$group) > 0) {
+    for (g in 0:max(basetable$group)) {
+      output$table[r, g + 3] <- AS.summary.medianIQR(y[X == g], digits.fixed, weights = w[X == g])
+    }
+  }
+  return(output)
+}
+
 #' Baseline characteristics tables: add time-to-event
 #'
 #' See Details.

@@ -139,3 +139,37 @@ AS.format <- function(fit, name = NULL, hetero.name = NULL, digits.fixed = 2, di
   }
   return(output)
 }
+
+#' Format estimate
+#'
+#' Computes a string with an estimate, 95% confidence interval, and *p*-value.
+#' The confidence interval is either supplied directly or computed from the
+#' standard error.
+#' @param est Estimate, on the log scale if `exp = TRUE`.
+#' @param SE Optional standard error, on the same scale as `est`.
+#' @param LL Optional lower 95% confidence limit, on the same scale as `est`.
+#' @param UL Optional upper 95% confidence limit, on the same scale as `est`.
+#' @param p *P*-value.
+#' @param exp Logical; if `TRUE`, `est`, `LL`, and `UL` are exponentiated.
+#' Default = `FALSE`.
+#' @param name A string displayed before the estimate. Default = `"HR"`.
+#' @return A string of the form `"name est (95%CI LL–UL), p = p"`.
+#' @export
+AS.format.estimate <- function(est, SE = NULL, p, exp = FALSE, name = "HR", LL = NULL, UL = NULL) {
+  if (!is.null(SE)) {
+    if (!is.null(LL) | !is.null(UL)) stop("[AS.format.estimate] supply either LL and UL, or SE, not both")
+    LL <- est - stats::qnorm(0.975) * SE
+    UL <- est + stats::qnorm(0.975) * SE
+  } else if (is.null(LL) | is.null(UL)) {
+    stop("[AS.format.estimate] supply either LL and UL, or SE")
+  }
+  if (exp) {
+    est <- exp(est)
+    LL <- exp(LL)
+    UL <- exp(UL)
+  }
+  return(paste0(name, " ",  sprintf("%.2f", est),
+                " (95%CI ", sprintf("%.2f", LL),
+                "\u2013",   sprintf("%.2f", UL), "), ",
+                "\U0001D45D = ", AS.signif(p)))
+}

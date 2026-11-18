@@ -12,6 +12,7 @@
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.basetable.linear.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.basetable.log1plinear.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.basetable.loglinear.html</loc></url>
+<url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.basetable.medIQR.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.color.alpha.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.color.darken.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.color.lighten.html</loc></url>
@@ -23,6 +24,7 @@
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.dispersion.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.dmyY.to.Excel.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.fixdec.html</loc></url>
+<url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.format.estimate.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.format.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.interleave.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.rowmax.html</loc></url>
@@ -39,6 +41,7 @@
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.log1p.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.log1plinear.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.loglinear.html</loc></url>
+<url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.summary.medianIQR.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.survoutcome.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/AS.write.csv.html</loc></url>
 <url><loc>https://hongconsulting.github.io/AutoScript/reference/ggfixlegendwidth.html</loc></url>
