@@ -611,7 +611,7 @@ AS.basetable.loglinear <- function(name, outcome, basetable, subset.mask = NULL,
 }
 
 #' Baseline characteristics tables: add median and IQR variable
-#'
+#' @description
 #' See Details. *P*-values are not calculated; contrary to popular misconception,
 #' the Mann–Whitney *U* test is not a test of medians¹.
 #'
@@ -672,10 +672,10 @@ AS.basetable.medIQR <- function(name, outcome, basetable, subset.mask = NULL,
   output$table <- rbind(output$table, rep("", ncol(output$table))) # p-value columns are left blank
   r <- nrow(output$table)
   output$table[r, 1] <- name
-  output$table[r, 2] <- AS.summary.medianIQR(y, digits.fixed, weights = w)
+  output$table[r, 2] <- AS.summary.medIQR(y, digits.fixed, weights = w)
   if (max(basetable$group) > 0) {
     for (g in 0:max(basetable$group)) {
-      output$table[r, g + 3] <- AS.summary.medianIQR(y[X == g], digits.fixed, weights = w[X == g])
+      output$table[r, g + 3] <- AS.summary.medIQR(y[X == g], digits.fixed, weights = w[X == g])
     }
   }
   return(output)

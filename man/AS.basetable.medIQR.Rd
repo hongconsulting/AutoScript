@@ -36,8 +36,7 @@ The table itself can be accessed with \verb{$table}.
 \description{
 See Details. \emph{P}-values are not calculated; contrary to popular misconception,
 the Mann–Whitney \emph{U} test is not a test of medians¹.
-}
-\details{
+
 Note that medians usually sacrifice precision (and power) solving a problem
 that does not exist: by the central limit theorem, the sample mean is
 approximately normally distributed even when the variable is not. Where
@@ -45,7 +44,8 @@ non-normality does matter, an appropriate transformation (e.g.
 \code{AS.basetable.loglinear}) usually restores approximate normality, after which
 the back-transformed mean is more precise (and a comparison of transformed
 means offers more power).
-
+}
+\details{
 \itemize{
 \item \code{AS.basetable.create}: creates a template table structure with
 headers, group sample sizes, and \emph{p}-value columns for 1, 2, 3, or 4 groups.

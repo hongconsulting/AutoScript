@@ -155,11 +155,11 @@ AS.summary.loglinear <- function(x, digits.fixed = 2) {
 }
 
 #' Summarize continuous variable (median and IQR)
-#'
+#' @description
 #' Computes a string with the median and interquartile range in the form
 #' `"median (Q1 to Q3)"`. Quantiles interpolate linearly between observations
 #' placed at their midpoint cumulative weights, which reduces to
-#' `stats::quantile()` type 7 when weights are equal.
+#' `stats::quantile(type = 7)` when weights are equal.
 #'
 #' Note that medians usually sacrifice precision solving a problem that does not
 #' exist: by the central limit theorem, the sample mean is approximately normally
@@ -172,7 +172,7 @@ AS.summary.loglinear <- function(x, digits.fixed = 2) {
 #'   of zero weight are dropped.
 #' @return A string of the form `"median (Q1 to Q3)"`.
 #' @export
-AS.summary.medianIQR <- function(x, digits.fixed = 2, weights = NULL) {
+AS.summary.medIQR <- function(x, digits.fixed = 2, weights = NULL) {
   if (is.null(weights)) weights <- rep(1, length(x))
   # zero-weight observations contribute nothing, so drop them before sorting
   x <- x[weights != 0]
